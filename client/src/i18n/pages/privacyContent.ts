@@ -52,7 +52,7 @@ const CONTENT: Record<Locale, PrivacyContent> = {
       },
       {
         title: "6. Contact Us",
-        paragraphs: ["Questions about this policy? Contact info@bizhkex.hk or +852 3565 3138."],
+        paragraphs: ["Questions about this policy? Contact info@bizhkex.com or +852 3565 3138."],
       },
       {
         title: "7. Your Rights",
@@ -110,7 +110,7 @@ const CONTENT: Record<Locale, PrivacyContent> = {
       },
       {
         title: "6. 聯絡我們",
-        paragraphs: ["如對本政策有疑問，請電郵至 info@bizhkex.hk 或致電 +852 3565 3138。"],
+        paragraphs: ["如對本政策有疑問，請電郵至 info@bizhkex.com 或致電 +852 3565 3138。"],
       },
       {
         title: "7. 你的權利",

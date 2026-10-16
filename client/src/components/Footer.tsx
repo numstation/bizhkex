@@ -74,8 +74,8 @@ export default function Footer({ variant = "light" }: FooterProps) {
                 <a href="tel:+85235653138" className="block hover:text-white transition-colors">
                   +852 3565 3138
                 </a>
-                <a href="mailto:info@bizhkex.hk" className="block hover:text-white transition-colors">
-                  info@bizhkex.hk
+                <a href="mailto:info@bizhkex.com" className="block hover:text-white transition-colors">
+                  info@bizhkex.com
                 </a>
               </div>
             </div>
@@ -108,13 +108,13 @@ export default function Footer({ variant = "light" }: FooterProps) {
                 +852 3565 3138
               </a>
               <a
-                href="mailto:info@bizhkex.hk"
+                href="mailto:info@bizhkex.com"
                 className="flex items-center gap-3 text-emerald-200/70 hover:text-white transition-colors text-sm group"
               >
                 <span className="w-8 h-8 rounded-lg bg-emerald-900/60 flex items-center justify-center group-hover:bg-emerald-800 transition-colors">
                   <Mail className="w-4 h-4" />
                 </span>
-                info@bizhkex.hk
+                info@bizhkex.com
               </a>
               <div className="flex items-center gap-3 text-emerald-200/70 text-sm">
                 <span className="w-8 h-8 rounded-lg bg-emerald-900/60 flex items-center justify-center">

@@ -50,7 +50,7 @@ const CONTENT: Record<Locale, ProviderPitchContent> = {
     reviewTitle: "點解唔會即時上架？",
     reviewBody:
       "草稿、估算租金同 AI 整理文案只供內部覆核。未核准的內容不會進入辦公室或生意轉讓的公開列表，以免訪客見到未核實的盤。",
-    contact: "想先傾？WhatsApp +852 3565 3138 或電郵 info@bizhkex.hk。",
+    contact: "想先傾？WhatsApp +852 3565 3138 或電郵 info@bizhkex.com。",
   },
   en: {
     kicker: "List your centre",
@@ -85,7 +85,7 @@ const CONTENT: Record<Locale, ProviderPitchContent> = {
     reviewTitle: "Why it does not go live immediately",
     reviewBody:
       "Draft copy, estimated rents and generated text stay with the review team. Unapproved material is not added to the public office or business-transfer lists.",
-    contact: "Prefer to talk first? WhatsApp +852 3565 3138 or email info@bizhkex.hk.",
+    contact: "Prefer to talk first? WhatsApp +852 3565 3138 or email info@bizhkex.com.",
   },
 };
 

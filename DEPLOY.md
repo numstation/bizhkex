@@ -22,7 +22,7 @@ For a first demo deploy:
 | --- | --- |
 | `NODE_ENV` | `production` (`pnpm start` also sets this) |
 | `JWT_SECRET` | Long random string you generate in Railway. Required for session cookies. |
-| `INQUIRY_NOTIFY_EMAIL` | `info@bizhkex.hk` |
+| `INQUIRY_NOTIFY_EMAIL` | `info@bizhkex.com` |
 | `DATABASE_URL` | Optional. When unset, public office and business pages use the built-in demo catalogue. |
 
 Leave OAuth, Forge, and analytics keys empty until those services are connected. Vite reads `VITE_*` at **build** time, so set any public client keys before the Docker build, then redeploy.
@@ -33,4 +33,4 @@ Add Railway’s MySQL plugin when you want a real database. Copy its connection 
 
 ## 5. Custom domain
 
-In Railway networking, add `bizhkex.hk`. Point the domain’s DNS at the target Railway shows. Railway issues TLS after DNS verifies. Do that in the DNS host; this repo does not change DNS records.
+In Railway networking, add `bizhkex.com`. Point the domain’s DNS at the target Railway shows. Railway issues TLS after DNS verifies. Do that in the DNS host; this repo does not change DNS records.

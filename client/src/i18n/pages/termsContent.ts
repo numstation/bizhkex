@@ -69,7 +69,7 @@ const CONTENT: Record<Locale, TermsContent> = {
       },
       {
         title: "9. Contact Information",
-        paragraphs: ["If you have any questions about these Terms of Service, please contact us at info@bizhkex.hk or +852 3565 3138."],
+        paragraphs: ["If you have any questions about these Terms of Service, please contact us at info@bizhkex.com or +852 3565 3138."],
       },
     ],
   },
@@ -135,7 +135,7 @@ const CONTENT: Record<Locale, TermsContent> = {
       },
       {
         title: "9. 聯絡方式",
-        paragraphs: ["如對本服務條款有任何疑問，請電郵至 info@bizhkex.hk 或致電 +852 3565 3138。"],
+        paragraphs: ["如對本服務條款有任何疑問，請電郵至 info@bizhkex.com 或致電 +852 3565 3138。"],
       },
     ],
   },

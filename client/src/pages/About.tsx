@@ -78,14 +78,14 @@ export default function About() {
             <h2 className="text-3xl font-bold mb-4">{c.contactTitle}</h2>
             <p className="text-emerald-200/80 mb-8">{c.contactSubtitle}</p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center text-emerald-100">
-              <a href="mailto:info@bizhkex.hk" className="hover:text-white transition-colors">
-                info@bizhkex.hk
+              <a href="mailto:info@bizhkex.com" className="hover:text-white transition-colors">
+                info@bizhkex.com
               </a>
               <a href="tel:+85235653138" className="hover:text-white transition-colors">
                 +852 3565 3138
               </a>
-              <a href="mailto:providers@bizhkex.hk" className="hover:text-white transition-colors">
-                providers@bizhkex.hk
+              <a href="mailto:providers@bizhkex.com" className="hover:text-white transition-colors">
+                providers@bizhkex.com
               </a>
             </div>
           </div>
