@@ -19,6 +19,8 @@ export type DemoOffice = {
   latitude: number;
   longitude: number;
   thumbnailUrl: string;
+  /** Public gallery paths, manifest order. First item is the card thumbnail when set. */
+  photoUrls?: string[];
   rating: number;
   reviewCount: number;
   basePrice: number;
@@ -362,12 +364,23 @@ export const DEMO_OFFICES: DemoOffice[] = [
     providerId: 1,
     name: "北角 AIA Tower 商務中心",
     description:
-      "BizHKEx 自家營運中心，地址為北角電氣道 183 號 AIA Tower。現時房間已全部租出，歡迎登記候補。實景相片同正式租金尚未上載（頁面已標示），請用 WhatsApp 向團隊確認空置及報價。設施清單是待核實占位，日後可直接換成真實相片同價錢。",
+      "BizHKEx 自家營運中心，地址為北角電氣道 183 號 AIA Tower。現時房間已全部租出，歡迎登記候補。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 向團隊查詢候補及報價。",
     districtId: 14,
     address: "AIA Tower, 183 Electric Road, North Point, Hong Kong",
     latitude: 22.2908,
     longitude: 114.2002,
-    thumbnailUrl: "",
+    thumbnailUrl: "/offices/aia/01-exterior.jpg",
+    photoUrls: [
+      "/offices/aia/01-exterior.jpg",
+      "/offices/aia/02-reception.jpg",
+      "/offices/aia/03-lobby.jpg",
+      "/offices/aia/04-room-a.jpg",
+      "/offices/aia/05-room-b.jpg",
+      "/offices/aia/06-room-c.jpg",
+      "/offices/aia/07-room-d.jpg",
+      "/offices/aia/08-room-f.jpg",
+      "/offices/aia/09-hot-desk.jpg",
+    ],
     rating: 0,
     reviewCount: 0,
     basePrice: 0,
@@ -377,7 +390,7 @@ export const DEMO_OFFICES: DemoOffice[] = [
     inventoryKind: "operator",
     isFeatured: 1,
     isVerified: 1,
-    awaitingPhotos: 1,
+    awaitingPhotos: 0,
     priceOnRequest: 1,
     featuredOrder: 1,
     occupancyNote: "現已全部租出，可登記候補",
@@ -389,12 +402,24 @@ export const DEMO_OFFICES: DemoOffice[] = [
     providerId: 1,
     name: "觀塘 APM 商務中心",
     description:
-      "BizHKEx 自家營運中心，位於觀塘 APM（創紀之城五期，觀塘道 418 號）。現時出租率約 35–40%，仍有房間可查詢。實景相片同正式租金尚未上載（頁面已標示），請用 WhatsApp 索取現時空置及報價。此為真實中心資料占位，日後可直接換上相片同價錢。",
+      "BizHKEx 自家營運中心，位於觀塘 APM（創紀之城五期，觀塘道 418 號）。現時出租率約 35–40%，仍有房間可查詢。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 索取現時空置及報價。",
     districtId: 11,
     address: "APM, Millennium City 5, 418 Kwun Tong Road, Kwun Tong, Hong Kong",
     latitude: 22.3122,
     longitude: 114.2253,
-    thumbnailUrl: "",
+    thumbnailUrl: "/offices/apm/01-reception.jpg",
+    photoUrls: [
+      "/offices/apm/01-reception.jpg",
+      "/offices/apm/02-reception-2.jpg",
+      "/offices/apm/03-meeting-1.jpg",
+      "/offices/apm/04-meeting-2.jpg",
+      "/offices/apm/05-meeting-3.jpg",
+      "/offices/apm/06-pantry.jpg",
+      "/offices/apm/07-room-6-8.jpg",
+      "/offices/apm/08-room-10.jpg",
+      "/offices/apm/09-room-1-3.jpg",
+      "/offices/apm/10-room-3-6.jpg",
+    ],
     rating: 0,
     reviewCount: 0,
     basePrice: 0,
@@ -404,7 +429,7 @@ export const DEMO_OFFICES: DemoOffice[] = [
     inventoryKind: "operator",
     isFeatured: 1,
     isVerified: 1,
-    awaitingPhotos: 1,
+    awaitingPhotos: 0,
     priceOnRequest: 1,
     featuredOrder: 2,
     occupancyNote: "現時出租率約 35–40%，仍有房間可查詢",
@@ -440,6 +465,19 @@ export function paginateDemoOffices<T>(items: T[], limit?: number, offset?: numb
 
 export function getDemoOfficeById(id: number): DemoOffice | undefined {
   return DEMO_OFFICES.find((office) => office.id === id);
+}
+
+/** Gallery rows for operator centres when officePhotos has no database rows yet. */
+export function getDemoOfficePhotoRecords(officeId: number) {
+  const office = getDemoOfficeById(officeId);
+  const urls = office?.photoUrls ?? [];
+  return urls.map((photoUrl, index) => ({
+    id: officeId * 100 + index + 1,
+    officeId,
+    photoUrl,
+    displayOrder: index,
+    createdAt: office?.createdAt ?? "2026-03-01T00:00:00.000Z",
+  }));
 }
 
 export function getDemoPricingByOfficeId(officeId: number): DemoPricingPackage[] {

@@ -101,13 +101,13 @@ const OFFICE_EN: Record<
   101: {
     name: "AIA Tower Serviced Centre, North Point",
     description:
-      "A real centre operated by BizHKEx at AIA Tower, 183 Electric Road, North Point. The rooms are fully let — join the waitlist. Real photos and confirmed prices are not on the site yet. WhatsApp the team for availability and a quote. The amenity list is a placeholder you can replace when the real pack is ready.",
+      "A real centre operated by BizHKEx at AIA Tower, 183 Electric Road, North Point. The rooms are fully let — join the waitlist. Photos on this page are from the centre. Confirmed prices are not published yet — WhatsApp the team for the waitlist and a quote.",
     occupancyNote: "Fully let — waitlist open",
   },
   102: {
     name: "APM Serviced Centre, Kwun Tong",
     description:
-      "A real centre operated by BizHKEx at APM, Millennium City 5, 418 Kwun Tong Road. About 35–40% occupied, with rooms still available to enquire. Real photos and confirmed prices are not on the site yet. WhatsApp the team for current availability and a quote. Swap in photos and prices on this same listing when they are ready.",
+      "A real centre operated by BizHKEx at APM, Millennium City 5, 418 Kwun Tong Road. About 35–40% occupied, with rooms still available to enquire. Photos on this page are from the centre. Confirmed prices are not published yet — WhatsApp the team for availability and a quote.",
     occupancyNote: "About 35–40% occupied — rooms available to enquire",
   },
 };

@@ -171,7 +171,7 @@ export const zh: Translations = {
     emptyWhatsapp: "WhatsApp 查詢",
     whatsappQuery: "你好，我想透過 BizHKEx 搵辦公室，請提供報價。",
     featuredTitle: "由 BizHKEx 營運",
-    featuredSubtitle: "我哋團隊實際營運的中心。真實相片同確認租金準備好就會換上。",
+    featuredSubtitle: "我哋團隊實際營運的中心，頁面用中心實景。確認租金準備好就會換上。",
     sampleTitle: "示範盤源",
     sampleSubtitle: "招募其他商務中心期間，用樣本盤源令市場睇落有貨。呢啲並非 BizHKEx 營運的房間。",
     listCentreCta: "中心營運商上架",

@@ -18,6 +18,7 @@ import {
   DEMO_DISTRICTS,
   DEMO_OFFICES,
   getDemoOfficeById,
+  getDemoOfficePhotoRecords,
   getDemoPricingByOfficeId,
   paginateDemoOffices,
   searchDemoOffices,
@@ -824,8 +825,9 @@ export async function deletePricingPackage(packageId: number) {
 
 // Get office photos
 export async function getOfficePhotos(officeId: number) {
+  const demoPhotos = getDemoOfficePhotoRecords(officeId);
   const db = await getDb();
-  if (!db) return [];
+  if (!db) return demoPhotos;
 
   try {
     const { officePhotos } = await import("../drizzle/schema");
@@ -837,10 +839,10 @@ export async function getOfficePhotos(officeId: number) {
       .where(eq(officePhotos.officeId, officeId))
       .orderBy(officePhotos.displayOrder);
 
-    return result;
+    return result.length > 0 ? result : demoPhotos;
   } catch (error) {
     console.error("[Database] Error getting office photos:", error);
-    return [];
+    return demoPhotos;
   }
 }
 

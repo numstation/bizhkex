@@ -175,7 +175,7 @@ export const en: Translations = {
     emptyWhatsapp: "WhatsApp us",
     whatsappQuery: "Hi BizHKEx — I'd like help finding an office. Please send options.",
     featuredTitle: "Operated by BizHKEx",
-    featuredSubtitle: "Real centres run by our team. Photos and confirmed prices are added as soon as they are ready.",
+    featuredSubtitle: "Real centres run by our team, with photos from the floors. Confirmed prices are added when they are ready.",
     sampleTitle: "Sample listings",
     sampleSubtitle:
       "Placeholder inventory so the marketplace is browsable while we recruit other serviced-centre operators. These are not BizHKEx-operated rooms.",

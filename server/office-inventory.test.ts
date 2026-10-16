@@ -18,8 +18,16 @@ describe("operator showcase inventory", () => {
     expect(samples.some((office) => office.name.includes("APM"))).toBe(false);
     const apm = DEMO_OFFICES.find((office) => office.id === 102);
     expect(apm?.name).toContain("APM");
-    expect(apm?.awaitingPhotos).toBe(1);
+    expect(apm?.awaitingPhotos).toBe(0);
     expect(apm?.priceOnRequest).toBe(1);
+    expect(apm?.thumbnailUrl).toBe("/offices/apm/01-reception.jpg");
+    expect(apm?.photoUrls).toHaveLength(10);
+    expect(apm?.photoUrls?.[0]).toBe(apm?.thumbnailUrl);
+    const aia = DEMO_OFFICES.find((office) => office.id === 101);
+    expect(aia?.awaitingPhotos).toBe(0);
+    expect(aia?.priceOnRequest).toBe(1);
+    expect(aia?.thumbnailUrl).toBe("/offices/aia/01-exterior.jpg");
+    expect(aia?.photoUrls).toHaveLength(9);
     expect(getOfficeInventory(apm ?? {}).showReviews).toBe(false);
   });
 
