@@ -49,11 +49,15 @@ export async function requestProviderLoginLink(
 ): Promise<{ sent: boolean; devLoginUrl?: string }> {
   const normalizedEmail = email.trim().toLowerCase();
   const provider = await db.getProviderByEmail(normalizedEmail);
-  const registration = provider ? null : await db.getVendorRegistrationByEmail(normalizedEmail);
+  const registration = await db.getVendorRegistrationByEmail(normalizedEmail);
   const devRegistered = isDevRegisteredVendorEmail(normalizedEmail);
 
   if (!provider && !registration && !devRegistered) {
     throw new Error("EMAIL_NOT_REGISTERED");
+  }
+
+  if (!provider && (registration?.status !== "approved" || (!registration && devRegistered))) {
+    throw new Error("REGISTRATION_PENDING");
   }
 
   const token = await signProviderLoginToken(normalizedEmail);
@@ -75,7 +79,11 @@ export async function requestProviderLoginLink(
 export async function completeProviderLogin(email: string, displayName?: string | null) {
   const normalizedEmail = email.toLowerCase().trim();
   const provider = await db.getProviderByEmail(normalizedEmail);
-  const registration = provider ? null : await db.getVendorRegistrationByEmail(normalizedEmail);
+  const registration = await db.getVendorRegistrationByEmail(normalizedEmail);
+
+  if (!provider && registration?.status !== "approved") {
+    throw new Error("REGISTRATION_PENDING");
+  }
 
   await db.ensureProviderForVendor({
     email: normalizedEmail,
@@ -127,6 +135,14 @@ export function registerProviderAuthRoutes(app: import("express").Express) {
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
       res.redirect(302, "/provider-dashboard");
     } catch (error) {
+      if (error instanceof Error && error.message === "REGISTRATION_PENDING") {
+        res
+          .status(403)
+          .send(
+            "This registration is still in the review queue and has not been published. Dashboard access opens after BizHKEx approves the centre."
+          );
+        return;
+      }
       console.error("[ProviderAuth] Verify login failed:", error);
       res.status(500).send("Unable to complete login. Please try again.");
     }

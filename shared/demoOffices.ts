@@ -1,3 +1,5 @@
+import { sortPublicOffices } from "./officeInventory";
+
 export type DemoDistrict = {
   id: number;
   name: string;
@@ -17,12 +19,22 @@ export type DemoOffice = {
   latitude: number;
   longitude: number;
   thumbnailUrl: string;
+  /** Public gallery paths, manifest order. First item is the card thumbnail when set. */
+  photoUrls?: string[];
   rating: number;
   reviewCount: number;
   basePrice: number;
   amenitiesJson: string[];
   isPromoted: number;
   discountPercentage: number;
+  /** operator = BizHKEx centre, partner = approved third-party, sample = placeholder inventory */
+  inventoryKind?: "operator" | "partner" | "sample";
+  isFeatured?: number;
+  isVerified?: number;
+  awaitingPhotos?: number;
+  priceOnRequest?: number;
+  featuredOrder?: number;
+  occupancyNote?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -57,6 +69,7 @@ export const DEMO_DISTRICTS: DemoDistrict[] = [
   { id: 11, name: "觀塘", region: "kowloon", displayOrder: 11, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
   { id: 12, name: "沙田", region: "new_territories", displayOrder: 12, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
   { id: 13, name: "荃灣", region: "new_territories", displayOrder: 13, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
+  { id: 14, name: "北角", region: "hong_kong_island", displayOrder: 6, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
 ];
 
 export const DEMO_OFFICES: DemoOffice[] = [
@@ -253,10 +266,10 @@ export const DEMO_OFFICES: DemoOffice[] = [
   {
     id: 11,
     providerId: 4,
-    name: "觀塘 APM 商務中心",
-    description: "觀塘核心地段，APM 商場上蓋。靈活辦公方案，適合成長型企業及電商團隊。",
+    name: "觀塘創紀之城示範工位",
+    description: "示範盤源，用來展示觀塘一帶共享空間版面。並非 BizHKEx 營運的 APM 中心；租金、相片及評分均為樣本，請以上方「由 BizHKEx 營運」的真實中心為準。",
     districtId: 11,
-    address: "418 Kwun Tong Road, Kwun Tong, Hong Kong",
+    address: "1 Kwun Tong Road, Kwun Tong, Hong Kong",
     latitude: 22.312,
     longitude: 114.225,
     thumbnailUrl: `${IMG}/office-13-kowloon-bay-ZSVxXnF3SoGyTPRRzJdhj9.webp`,
@@ -264,8 +277,9 @@ export const DEMO_OFFICES: DemoOffice[] = [
     reviewCount: 84,
     basePrice: 2600,
     amenitiesJson: ["高速 WiFi", "會議室", "打印服務", "茶水間", "停車場"],
-    isPromoted: 1,
-    discountPercentage: 10,
+    isPromoted: 0,
+    discountPercentage: 0,
+    inventoryKind: "sample",
     createdAt: "2026-01-30T00:00:00.000Z",
     updatedAt: "2026-01-30T00:00:00.000Z",
   },
@@ -345,6 +359,83 @@ export const DEMO_OFFICES: DemoOffice[] = [
     createdAt: "2026-02-07T00:00:00.000Z",
     updatedAt: "2026-02-07T00:00:00.000Z",
   },
+  {
+    id: 101,
+    providerId: 1,
+    name: "北角 AIA Tower 商務中心",
+    description:
+      "BizHKEx 自家營運中心，地址為北角電氣道 183 號 AIA Tower。現時房間已全部租出，歡迎登記候補。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 向團隊查詢候補及報價。",
+    districtId: 14,
+    address: "AIA Tower, 183 Electric Road, North Point, Hong Kong",
+    latitude: 22.2908,
+    longitude: 114.2002,
+    thumbnailUrl: "/offices/aia/01-exterior.jpg",
+    photoUrls: [
+      "/offices/aia/01-exterior.jpg",
+      "/offices/aia/02-reception.jpg",
+      "/offices/aia/03-lobby.jpg",
+      "/offices/aia/04-room-a.jpg",
+      "/offices/aia/05-room-b.jpg",
+      "/offices/aia/06-room-c.jpg",
+      "/offices/aia/07-room-d.jpg",
+      "/offices/aia/08-room-f.jpg",
+      "/offices/aia/09-hot-desk.jpg",
+    ],
+    rating: 0,
+    reviewCount: 0,
+    basePrice: 0,
+    amenitiesJson: ["接待服務", "會議室", "高速 WiFi"],
+    isPromoted: 0,
+    discountPercentage: 0,
+    inventoryKind: "operator",
+    isFeatured: 1,
+    isVerified: 1,
+    awaitingPhotos: 0,
+    priceOnRequest: 1,
+    featuredOrder: 1,
+    occupancyNote: "現已全部租出，可登記候補",
+    createdAt: "2026-03-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z",
+  },
+  {
+    id: 102,
+    providerId: 1,
+    name: "觀塘 APM 商務中心",
+    description:
+      "BizHKEx 自家營運中心，位於觀塘 APM（創紀之城五期，觀塘道 418 號）。現時出租率約 35–40%，仍有房間可查詢。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 索取現時空置及報價。",
+    districtId: 11,
+    address: "APM, Millennium City 5, 418 Kwun Tong Road, Kwun Tong, Hong Kong",
+    latitude: 22.3122,
+    longitude: 114.2253,
+    thumbnailUrl: "/offices/apm/01-reception.jpg",
+    photoUrls: [
+      "/offices/apm/01-reception.jpg",
+      "/offices/apm/02-reception-2.jpg",
+      "/offices/apm/03-meeting-1.jpg",
+      "/offices/apm/04-meeting-2.jpg",
+      "/offices/apm/05-meeting-3.jpg",
+      "/offices/apm/06-pantry.jpg",
+      "/offices/apm/07-room-6-8.jpg",
+      "/offices/apm/08-room-10.jpg",
+      "/offices/apm/09-room-1-3.jpg",
+      "/offices/apm/10-room-3-6.jpg",
+    ],
+    rating: 0,
+    reviewCount: 0,
+    basePrice: 0,
+    amenitiesJson: ["接待服務", "會議室", "高速 WiFi"],
+    isPromoted: 0,
+    discountPercentage: 0,
+    inventoryKind: "operator",
+    isFeatured: 1,
+    isVerified: 1,
+    awaitingPhotos: 0,
+    priceOnRequest: 1,
+    featuredOrder: 2,
+    occupancyNote: "現時出租率約 35–40%，仍有房間可查詢",
+    createdAt: "2026-03-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z",
+  },
 ];
 
 export const DEMO_PRICING_PACKAGES: DemoPricingPackage[] = [
@@ -363,18 +454,7 @@ export function sortDemoOffices(
   sortBy?: string,
   sortOrder?: "asc" | "desc"
 ): DemoOffice[] {
-  const sorted = [...offices];
-  const desc = sortOrder === "desc";
-
-  if (sortBy === "price") {
-    sorted.sort((a, b) => (desc ? b.basePrice - a.basePrice : a.basePrice - b.basePrice));
-  } else if (sortBy === "rating") {
-    sorted.sort((a, b) => b.rating - a.rating);
-  } else if (sortBy === "reviews") {
-    sorted.sort((a, b) => b.reviewCount - a.reviewCount);
-  }
-
-  return sorted;
+  return sortPublicOffices(offices, sortBy, sortOrder);
 }
 
 export function paginateDemoOffices<T>(items: T[], limit?: number, offset?: number): T[] {
@@ -387,12 +467,25 @@ export function getDemoOfficeById(id: number): DemoOffice | undefined {
   return DEMO_OFFICES.find((office) => office.id === id);
 }
 
+/** Gallery rows for operator centres when officePhotos has no database rows yet. */
+export function getDemoOfficePhotoRecords(officeId: number) {
+  const office = getDemoOfficeById(officeId);
+  const urls = office?.photoUrls ?? [];
+  return urls.map((photoUrl, index) => ({
+    id: officeId * 100 + index + 1,
+    officeId,
+    photoUrl,
+    displayOrder: index,
+    createdAt: office?.createdAt ?? "2026-03-01T00:00:00.000Z",
+  }));
+}
+
 export function getDemoPricingByOfficeId(officeId: number): DemoPricingPackage[] {
   const packages = DEMO_PRICING_PACKAGES.filter((pkg) => pkg.officeId === officeId);
   if (packages.length > 0) return packages;
 
   const office = getDemoOfficeById(officeId);
-  if (!office) return [];
+  if (!office || office.priceOnRequest) return [];
 
   return [
     {

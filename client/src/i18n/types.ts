@@ -7,6 +7,7 @@ export type Translations = {
   meta: {
     siteName: string;
     tagline: string;
+    documentTitle: string;
   };
   nav: {
     findOffices: string;
@@ -30,6 +31,10 @@ export type Translations = {
     officesCardTitle: string;
     officesCardDesc: string;
     officesCardCta: string;
+    partnerTitle: string;
+    partnerBody: string;
+    partnerCommission: string;
+    partnerCta: string;
     businessCardTitle: string;
     businessCardDesc: string;
     businessCardCta: string;
@@ -39,7 +44,6 @@ export type Translations = {
     targetDistrict: string;
     estimatedSaving: string;
     savingHint: string;
-    tickerTitle: string;
     value1Title: string;
     value1Desc: string;
     value2Title: string;
@@ -70,9 +74,9 @@ export type Translations = {
     ctaSubtitle: string;
     ctaOffices: string;
     ctaBusiness: string;
+    ctaProvider: string;
     teamOptions: Record<string, string>;
     districtOptions: Record<string, string>;
-    ticker: Array<{ label: string; value: string; change: string }>;
     fallbackFaqs: Array<{ question: string; answer: string }>;
     leadWhatsApp: (
       district: string,
@@ -121,7 +125,20 @@ export type Translations = {
     emptyTitle: string;
     emptyWhatsapp: string;
     whatsappQuery: string;
+    featuredTitle: string;
+    featuredSubtitle: string;
+    sampleTitle: string;
+    sampleSubtitle: string;
+    listCentreCta: string;
     regions: Record<string, string>;
+  };
+  trust: {
+    operatedBy: string;
+    sampleBadge: string;
+    awaitingPhotos: string;
+    priceOnRequest: string;
+    sampleNotice: string;
+    amenityPlaceholder: string;
   };
   business: {
     kicker: string;
@@ -147,6 +164,10 @@ export type Translations = {
     empty: string;
     months: string;
     footerNote: string;
+    sampleBadge: string;
+    sellTitle: string;
+    sellBody: string;
+    sellCta: string;
     cta: string;
     viewDetails: string;
     newListing: string;
@@ -212,6 +233,7 @@ export type Translations = {
     getInTouch: string;
     notFound: string;
     loading: string;
+    reviews: string;
   };
   footer: {
     tagline: string;

@@ -6,7 +6,8 @@ import Footer from "@/components/Footer";
 import BusinessListingCard from "@/components/BusinessListingCard";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePublicTheme } from "@/hooks/usePublicTheme";
-import { BookOpen, TrendingUp, ArrowRight } from "lucide-react";
+import { BookOpen, TrendingUp, ArrowRight, Store } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const INDUSTRIES = ["All", "F&B", "Education", "E-commerce", "Beauty", "Services"] as const;
 
@@ -157,10 +158,30 @@ export default function BusinessMarketplace() {
             </div>
           </div>
 
+          <div className={`${theme.savingsHighlight} p-4 md:p-5 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}>
+            <div className="flex items-start gap-3">
+              <Store className={`w-6 h-6 ${theme.accent} shrink-0 mt-0.5`} />
+              <div>
+                <p className={`font-semibold ${theme.heading}`}>{t.business.sellTitle}</p>
+                <p className={`text-sm ${theme.muted}`}>{t.business.sellBody}</p>
+              </div>
+            </div>
+            <Link href={path("/provider-signup")}>
+              <Button className="bg-emerald-600 hover:bg-emerald-500 font-bold">
+                {t.business.sellCta}
+              </Button>
+            </Link>
+          </div>
+
           {isLoading ? (
             <div className={`text-center py-16 ${theme.muted}`}>{t.business.loading}</div>
           ) : filteredListings.length === 0 ? (
-            <div className={`text-center py-16 ${theme.muted}`}>{t.business.empty}</div>
+            <div className={`text-center py-16 ${theme.muted}`}>
+              <p className="mb-4">{t.business.empty}</p>
+              <Link href={path("/provider-signup")}>
+                <Button className="bg-emerald-600 hover:bg-emerald-500">{t.business.sellCta}</Button>
+              </Link>
+            </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {filteredListings.map((listing) => (

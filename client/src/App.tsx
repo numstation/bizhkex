@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import ProviderPortal from "@/pages/ProviderPortal";
 import ProviderSignup from "@/pages/ProviderSignup";
+import ProviderPitch from "@/pages/ProviderPitch";
 import ProviderDashboard from "@/pages/ProviderDashboard";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
@@ -40,6 +41,7 @@ function LocalizedPublicRoutes() {
     { path: "/privacy", component: Privacy },
     { path: "/knowledge-hub", component: KnowledgeHub },
     { path: "/article/:slug", component: ArticleDetail },
+    { path: "/providers", component: ProviderPitch },
     { path: "/provider-signup", component: ProviderSignup },
     { path: "/provider", component: ProviderPortal },
   ];
@@ -89,6 +91,9 @@ function Router() {
       </Route>
       <Route path="/knowledge-hub">
         <LocaleRedirect to="/knowledge-hub" />
+      </Route>
+      <Route path="/providers">
+        <LocaleRedirect to="/providers" />
       </Route>
       <Route path="/provider-signup">
         <LocaleRedirect to="/provider-signup" />

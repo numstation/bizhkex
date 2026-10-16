@@ -18,11 +18,13 @@ import {
   DEMO_DISTRICTS,
   DEMO_OFFICES,
   getDemoOfficeById,
+  getDemoOfficePhotoRecords,
   getDemoPricingByOfficeId,
   paginateDemoOffices,
   searchDemoOffices,
   sortDemoOffices,
 } from "../shared/demoOffices";
+import { mergeOperatorShowcase, sortPublicOffices } from "../shared/officeInventory";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -125,6 +127,17 @@ export async function getUserByEmail(email: string) {
 }
 
 // Office queries
+function publicOfficePage(
+  rows: any[],
+  sortBy?: string,
+  sortOrder?: "asc" | "desc",
+  limit?: number,
+  offset?: number
+) {
+  const merged = mergeOperatorShowcase(rows, DEMO_OFFICES);
+  return paginateDemoOffices(sortPublicOffices(merged, sortBy, sortOrder), limit, offset);
+}
+
 export async function getOffices(limit?: number, offset?: number, sortBy?: string, sortOrder?: 'asc' | 'desc') {
   const db = await getDb();
   if (!db) {
@@ -132,38 +145,12 @@ export async function getOffices(limit?: number, offset?: number, sortBy?: strin
   }
 
   try {
-    let query: any = db.select().from(offices);
-
-    if (sortBy) {
-      const isDesc = sortOrder === 'desc';
-      switch (sortBy) {
-        case 'price':
-          query = isDesc ? query.orderBy(desc(offices.basePrice)) : query.orderBy(offices.basePrice);
-          break;
-        case 'rating':
-          query = query.orderBy(desc(offices.rating));
-          break;
-        case 'reviews':
-          query = query.orderBy(desc(offices.reviewCount));
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (limit) {
-      query = query.limit(limit);
-    }
-    if (offset) {
-      query = query.offset(offset);
-    }
-
-    const rows = await query;
+    const rows = await db.select().from(offices);
     if (rows.length === 0) {
       return paginateDemoOffices(sortDemoOffices(DEMO_OFFICES, sortBy, sortOrder), limit, offset);
     }
 
-    return rows;
+    return publicOfficePage(rows, sortBy, sortOrder, limit, offset);
   } catch (error) {
     console.warn("[Database] Failed to fetch offices, using demo data:", error);
     return paginateDemoOffices(sortDemoOffices(DEMO_OFFICES, sortBy, sortOrder), limit, offset);
@@ -206,31 +193,22 @@ export async function searchOffices(keyword?: string, districtId?: number, sortB
   } else {
     query = db.select().from(offices);
   }
-  
-  // Apply sorting
-  if (sortBy) {
-    const isDesc = sortOrder === 'desc';
-    switch (sortBy) {
-      case 'price':
-        query = isDesc ? query.orderBy(desc(offices.basePrice)) : query.orderBy(offices.basePrice);
-        break;
-      case 'rating':
-        query = query.orderBy(desc(offices.rating));
-        break;
-      case 'reviews':
-        query = query.orderBy(desc(offices.reviewCount));
-        break;
-      default:
-        break;
-    }
-  }
 
   try {
     const rows = await query;
     if (rows.length === 0) {
       return searchDemoOffices(keyword, districtId, sortBy, sortOrder);
     }
-    return rows;
+    const merged = mergeOperatorShowcase(rows, DEMO_OFFICES);
+    const filtered = merged.filter((office) => {
+      const matchesKeyword =
+        !keyword ||
+        String(office.name ?? "").toLowerCase().includes(keyword.toLowerCase()) ||
+        String((office as { address?: string }).address ?? "").toLowerCase().includes(keyword.toLowerCase());
+      const matchesDistrict = !districtId || office.districtId === districtId;
+      return matchesKeyword && matchesDistrict;
+    });
+    return sortPublicOffices(filtered, sortBy, sortOrder);
   } catch (error) {
     console.warn("[Database] Failed to search offices, using demo data:", error);
     return searchDemoOffices(keyword, districtId, sortBy, sortOrder);
@@ -239,29 +217,26 @@ export async function searchOffices(keyword?: string, districtId?: number, sortB
 
 export async function getOfficesByDistrict(districtId: number, sortBy?: string, sortOrder?: 'asc' | 'desc') {
   const db = await getDb();
-  if (!db) return [];
-
-  let query: any = db.select().from(offices).where(eq(offices.districtId, districtId));
-  
-  // Apply sorting
-  if (sortBy) {
-    const isDesc = sortOrder === 'desc';
-    switch (sortBy) {
-      case 'price':
-        query = isDesc ? query.orderBy(desc(offices.basePrice)) : query.orderBy(offices.basePrice);
-        break;
-      case 'rating':
-        query = query.orderBy(desc(offices.rating));
-        break;
-      case 'reviews':
-        query = query.orderBy(desc(offices.reviewCount));
-        break;
-      default:
-        break;
-    }
+  if (!db) {
+    return sortDemoOffices(
+      DEMO_OFFICES.filter((office) => office.districtId === districtId),
+      sortBy,
+      sortOrder
+    );
   }
-  
-  return query;
+
+  try {
+    const rows = await db.select().from(offices).where(eq(offices.districtId, districtId));
+    const merged = mergeOperatorShowcase(rows, DEMO_OFFICES).filter((office) => office.districtId === districtId);
+    return sortPublicOffices(merged, sortBy, sortOrder);
+  } catch (error) {
+    console.warn("[Database] Failed to fetch offices by district, using demo data:", error);
+    return sortDemoOffices(
+      DEMO_OFFICES.filter((office) => office.districtId === districtId),
+      sortBy,
+      sortOrder
+    );
+  }
 }
 
 export async function getOfficesByProvider(providerId: number) {
@@ -451,14 +426,14 @@ export async function createVendorRegistration(input: {
     locale: input.locale,
   });
 
-  await ensureProviderForVendor({
-    email: normalizedEmail,
-    name: input.name,
-    phone: input.phone,
-    contactName: input.contactName,
-  });
-
   return normalizedEmail;
+}
+
+/** Pending or rejected intake rows must not publish live inventory. Legacy providers with no intake row are unchanged. */
+export async function isVendorPublishBlocked(email: string): Promise<boolean> {
+  const registration = await getVendorRegistrationByEmail(email);
+  if (!registration) return false;
+  return registration.status !== "approved";
 }
 
 export async function getVendorRegistrationByEmail(email: string) {
@@ -553,11 +528,16 @@ export async function createOffice(data: any) {
     name: data.name,
     address: data.address,
     districtId: data.districtId,
-    providerId: 1, // Default provider for now
+    providerId: data.providerId || 1,
     basePrice: data.basePrice.toString(),
     rating: data.rating.toString(),
     reviewCount: data.reviewCount,
     description: data.description,
+    inventoryKind: data.inventoryKind ?? "sample",
+    isFeatured: data.isFeatured ? 1 : 0,
+    isVerified: data.isVerified ? 1 : 0,
+    awaitingPhotos: data.awaitingPhotos ? 1 : 0,
+    priceOnRequest: data.priceOnRequest ? 1 : 0,
     amenitiesJson: data.amenities ? JSON.parse(`["${data.amenities.split(',').join('","')}"]`) : null,
     thumbnailUrl: data.thumbnailUrl,
   });
@@ -845,8 +825,9 @@ export async function deletePricingPackage(packageId: number) {
 
 // Get office photos
 export async function getOfficePhotos(officeId: number) {
+  const demoPhotos = getDemoOfficePhotoRecords(officeId);
   const db = await getDb();
-  if (!db) return [];
+  if (!db) return demoPhotos;
 
   try {
     const { officePhotos } = await import("../drizzle/schema");
@@ -858,10 +839,10 @@ export async function getOfficePhotos(officeId: number) {
       .where(eq(officePhotos.officeId, officeId))
       .orderBy(officePhotos.displayOrder);
 
-    return result;
+    return result.length > 0 ? result : demoPhotos;
   } catch (error) {
     console.error("[Database] Error getting office photos:", error);
-    return [];
+    return demoPhotos;
   }
 }
 

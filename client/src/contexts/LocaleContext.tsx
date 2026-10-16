@@ -46,6 +46,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-Hant" : "en";
+    document.title = getTranslations(locale).meta.documentTitle;
   }, [locale]);
 
   const value = useMemo(

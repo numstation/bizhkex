@@ -84,7 +84,7 @@ export default function SiteNav({
           </a>
           <LanguageSwitcher theme={surface} />
           <ThemeToggle theme={surface} />
-          <Link href={path("/provider-signup")}>
+          <Link href={path("/providers")}>
             <span
               className={
                 isDark
@@ -99,7 +99,7 @@ export default function SiteNav({
         <div className="md:hidden flex items-center gap-2">
           <ThemeToggle theme={surface} />
           <LanguageSwitcher theme={surface} />
-          <Link href={path("/provider-signup")}>
+          <Link href={path("/providers")}>
             <span className="text-xs font-medium text-gray-400 hover:text-emerald-400 px-2 cursor-pointer">
               {t.nav.providerSignup}
             </span>

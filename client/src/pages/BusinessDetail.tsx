@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
-import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing } from "@shared/businessListings";
+import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing, isSampleBusinessListing, publicBusinessBadges } from "@shared/businessListings";
 import { getBusinessImageUrl } from "@shared/businessImages";
 import { localizeBusinessListing } from "@shared/businessLocalization";
 import SiteNav from "@/components/SiteNav";
@@ -97,6 +97,8 @@ export default function BusinessDetail() {
   }
 
   const item = localizeBusinessListing(listing, locale);
+  const badges = publicBusinessBadges(item);
+  const isSample = isSampleBusinessListing(item);
   const monthlyProfit = getMonthlyProfit(item);
   const profitMargin = item.turnover > 0 ? Math.round((item.netProfit / item.turnover) * 100) : 0;
   const rentRatio = item.turnover > 0 ? Math.round(((item.monthlyRent * 12) / item.turnover) * 100) : 0;
@@ -173,8 +175,11 @@ export default function BusinessDetail() {
               </div>
             ))}
           </div>
+          {isSample && (
+            <p className={`text-sm mt-4 ${theme.muted}`}>{t.trust.sampleNotice}</p>
+          )}
           <div className="flex flex-wrap gap-2 mt-4">
-            {item.badges.map((badge) => (
+            {badges.map((badge) => (
               <span
                 key={badge}
                 className="px-2.5 py-1 rounded-full text-[11px] bg-emerald-100 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/20"

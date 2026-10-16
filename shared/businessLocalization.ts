@@ -12,7 +12,7 @@ const LISTING_EN: Record<
       "Mall coffee shop in a prime Mong Kok location, well-maintained fit-out, ready to operate. Brand established 3+ years with loyal customers. HQ provides supply chain and marketing support. Food factory licence held.",
     transferReason: "Owner unable to manage daily operations due to family and work commitments.",
     shopType: "Mall shop",
-    badges: ["Verified financials", "Ready to transfer"],
+    badges: ["Ready to transfer"],
   },
   2: {
     title: "Causeway Bay Tuition Centre with Student List",

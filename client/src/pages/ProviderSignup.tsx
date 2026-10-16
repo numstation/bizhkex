@@ -411,7 +411,9 @@ export default function ProviderSignup() {
                       <img src={photoUrls[0]} alt="" className="w-full h-full object-cover" />
                     </div>
                   )}
-                  <p className="text-xs text-emerald-400 font-mono mb-2">AI-GENERATED PREVIEW</p>
+                  <p className="text-xs font-semibold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-lg px-3 py-2 mb-4">
+                    {c.previewDraftNotice}
+                  </p>
                   <h3 className="text-xl font-bold mb-3">{generated.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed mb-6">{generated.description}</p>
 
@@ -423,10 +425,6 @@ export default function ProviderSignup() {
                           HK${generated.basePrice.toLocaleString()}
                           <span className="text-sm text-gray-500">/mo</span>
                         </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Rating</p>
-                        <p className="text-2xl font-bold">{generated.rating.toFixed(1)}</p>
                       </div>
                       <div className="col-span-2">
                         <p className="text-xs text-gray-500 mb-2">{c.previewAmenities}</p>

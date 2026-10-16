@@ -33,18 +33,24 @@ export default function ProviderPortal() {
 
     try {
       const result = await requestLogin.mutateAsync({ email });
-      if (result.devLoginUrl) {
-        toast.success(
-          locale === "zh"
-            ? "開發模式：登入連結已輸出到伺服器 console"
-            : "Dev mode: login link logged to server console"
-        );
+      if (import.meta.env.DEV && result.devLoginUrl) {
         console.info("[BizHKEx] Dev login link:", result.devLoginUrl);
-      } else {
+      }
+      if (result.sent) {
         toast.success(
           locale === "zh"
             ? "登入連結已發送到你的電郵，請查收（包括垃圾郵件）。"
             : "Login link sent — check your inbox (and spam folder)."
+        );
+      } else if (import.meta.env.DEV) {
+        toast.message(
+          locale === "zh"
+            ? "此環境未寄出電郵，請查看伺服器日誌。"
+            : "Email was not sent in this environment. Check the server log."
+        );
+      } else {
+        toast.error(
+          locale === "zh" ? "暫時未能寄出登入電郵，請稍後再試。" : "We could not send the login email. Please try again."
         );
       }
     } catch (error) {
@@ -54,12 +60,17 @@ export default function ProviderPortal() {
           : locale === "zh"
             ? "出錯了，請稍後再試。"
             : "Something went wrong. Please try again.";
+      const pending = message.includes("REGISTRATION_PENDING");
       toast.error(
-        message.includes("not registered")
+        pending
           ? locale === "zh"
-            ? "此電郵尚未登記，請先完成業主登記流程。"
-            : "This email is not registered yet. Please complete vendor registration first."
-          : message
+            ? "登記仍在審核隊列，尚未上架，暫時未能登入後台。"
+            : "Your registration is still in the review queue and is not live, so dashboard login is closed until approval."
+          : message.includes("not registered")
+            ? locale === "zh"
+              ? "此電郵尚未登記，請先完成業主登記流程。"
+              : "This email is not registered yet. Please complete vendor registration first."
+            : message
       );
     }
   };

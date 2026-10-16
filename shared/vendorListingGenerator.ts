@@ -17,8 +17,9 @@ export type GeneratedOfficeListing = {
   address: string;
   basePrice: number;
   amenities: string[];
-  rating: number;
   highlights: string[];
+  /** Draft only. Never treated as a live public listing. */
+  publishStatus: "draft";
 };
 
 export type GeneratedBusinessListing = {
@@ -33,6 +34,8 @@ export type GeneratedBusinessListing = {
   paybackPeriod: number;
   areaSqft: number;
   badges: string[];
+  /** Draft only. Never treated as a live public listing. */
+  publishStatus: "draft";
 };
 
 export type GeneratedListing = GeneratedOfficeListing | GeneratedBusinessListing;
@@ -103,15 +106,15 @@ export function generateVendorListing(intake: VendorIntake): GeneratedListing {
         ? `${intake.name} — Flexible Workspace, ${intake.district}`
         : `${intake.name} — ${intake.district}靈活商務空間`,
       description: isEn
-        ? `AI-enriched profile: ${intake.summary.trim()} Premium serviced workspace in ${intake.district} with flexible terms, utilities included and move-in ready setup.`
-        : `AI 智能整理：${intake.summary.trim()} 位於${intake.district}的優質商務空間，彈性租約、包水電及即租即用配套。`,
+        ? `Draft for review only — not published. ${intake.summary.trim()} Suggested copy for a workspace in ${intake.district}. Prices below are estimates until BizHKEx confirms them.`
+        : `僅供審核的草稿，尚未上架。${intake.summary.trim()} 以下為${intake.district}空間的建議文案，租金為估算，須經 BizHKEx 確認後先會公開。`,
       address: isEn ? `${intake.district}, Hong Kong` : `香港${intake.district}`,
       basePrice: price,
       amenities,
-      rating: 4.2 + (seed % 8) / 10,
       highlights: isEn
-        ? ["Zero commission listing", "AI-optimised pricing band", "Inquiry routing enabled"]
-        : ["0% 佣金刊登", "AI 定價區間建議", "詢盤自動分流"],
+        ? ["Draft — not live", "Success commission 5–10% after approval", "Team review required"]
+        : ["草稿，未上架", "審核通過後成功佣金 5–10%", "須經團隊覆核"],
+      publishStatus: "draft",
     };
   }
 
@@ -128,8 +131,8 @@ export function generateVendorListing(intake: VendorIntake): GeneratedListing {
       ? `${intake.name} — ${industry} Transfer, ${intake.district}`
       : `${intake.name} — ${intake.district}${industry}頂讓`,
     description: isEn
-      ? `AI-enriched transfer brief: ${intake.summary.trim()} Curated ${industry.toLowerCase()} opportunity in ${intake.district} with pre-verified financial snapshot.`
-      : `AI 智能整理：${intake.summary.trim()} ${intake.district}${industry}頂讓項目，附財務摘要及回本期估算。`,
+      ? `Draft for review only — not published. ${intake.summary.trim()} Figures below are estimates, not verified financials.`
+      : `僅供審核的草稿，尚未上架。${intake.summary.trim()} 以下數字為估算，並非已核實財報。`,
     transferReason: isEn
       ? "Owner restructuring — seeking qualified buyer for smooth handover."
       : "東主業務重組，希望交接予合適買家。",
@@ -139,8 +142,7 @@ export function generateVendorListing(intake: VendorIntake): GeneratedListing {
     monthlyRent,
     paybackPeriod: payback,
     areaSqft: 200 + (seed % 12) * 50,
-    badges: isEn
-      ? ["AI-verified snapshot", "Ready for inquiry", industry]
-      : ["AI 財務快照", "可即查詢", industry],
+    badges: [industry],
+    publishStatus: "draft",
   };
 }

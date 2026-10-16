@@ -68,7 +68,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
       },
       {
         q: "財務數字可靠嗎？",
-        a: "所有項目附 AI 整理及團隊初步核實快照；正式交易前仍建議自行盡職審查。",
+        a: "目前市場上的項目多數是示範資料，數字未經核實。正式交易前請索取真實資料並自行盡職審查。",
       },
       {
         q: "可以只買設備或牌照嗎？",
@@ -130,7 +130,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
       },
       {
         q: "How reliable are the financial figures?",
-        a: "Listings include AI-enriched and team-verified snapshots; full due diligence is recommended before closing.",
+        a: "Most listings on the marketplace are samples. Figures are not verified accounts. Request a real pack and do your own due diligence before closing.",
       },
       {
         q: "Can I buy equipment or licence only?",

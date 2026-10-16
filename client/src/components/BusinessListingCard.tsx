@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { MapPin, ChevronRight } from "lucide-react";
-import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing, type BusinessListing } from "@shared/businessListings";
+import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing, isSampleBusinessListing, publicBusinessBadges, type BusinessListing } from "@shared/businessListings";
 import { getBusinessImageUrl } from "@shared/businessImages";
 import { localizeBusinessListing } from "@shared/businessLocalization";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -17,6 +17,7 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
   const monthlyProfit = getMonthlyProfit(item);
   const isNew = isNewBusinessListing(listing.createdAt);
   const imageUrl = getBusinessImageUrl(listing);
+  const isSample = isSampleBusinessListing(item);
 
   return (
     <Link href={path(`/business/${listing.id}`)}>
@@ -40,6 +41,11 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
             <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-600/90 text-white">
               {item.industry}
             </span>
+            {isSample && (
+              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-black/55 text-white">
+                {t.business.sampleBadge}
+              </span>
+            )}
           </div>
           <span className="absolute bottom-3 left-3 text-[10px] font-mono text-white/90 bg-black/40 px-2 py-0.5 rounded">
             {formatBusinessCode(listing.id)}
