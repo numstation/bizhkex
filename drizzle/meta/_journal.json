@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1773828216778,
+      "tag": "0000_outgoing_junta",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1773899464784,
+      "tag": "0001_silly_natasha_romanoff",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1776139175344,
+      "tag": "0002_cold_silver_fox",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1776149592213,
+      "tag": "0003_dear_steve_rogers",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1776244812624,
+      "tag": "0004_skinny_hitman",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1778474280635,
+      "tag": "0005_simple_pete_wisdom",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1779083164777,
+      "tag": "0006_outgoing_oracle",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1779091440322,
+      "tag": "0007_ordinary_darkstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1779100000000,
+      "tag": "0008_business_listings",
+      "breakpoints": true
+    }
+  ]
+}
