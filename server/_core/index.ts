@@ -52,15 +52,22 @@ async function startServer() {
     serveStatic(app);
   }
 
-  const preferredPort = parseInt(process.env.PORT || "3000");
-  const port = await findAvailablePort(preferredPort);
+  const preferredPort = Number.parseInt(process.env.PORT || "3000", 10);
+  if (!Number.isFinite(preferredPort) || preferredPort <= 0) {
+    throw new Error("PORT must be a positive integer");
+  }
+
+  // Railway (and other hosts) route to the exact PORT they assign. Do not scan for another port in production.
+  const host = "0.0.0.0";
+  const port =
+    process.env.NODE_ENV === "production" ? preferredPort : await findAvailablePort(preferredPort);
 
   if (port !== preferredPort) {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
 
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+  server.listen(port, host, () => {
+    console.log(`Server running on http://${host}:${port}/`);
   });
 }
 

@@ -1,0 +1,10 @@
+# Prefer the root Dockerfile over Nixpacks so the pnpm frozen install is the build.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
