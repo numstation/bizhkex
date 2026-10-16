@@ -4,13 +4,14 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Star, MapPin, Phone } from "lucide-react";
+import { Star, MapPin, Phone, ImageOff } from "lucide-react";
 import { toast } from "sonner";
 import Footer from "@/components/Footer";
 import SiteNav from "@/components/SiteNav";
 import { useWhatsApp } from "@/contexts/WhatsAppContext";
 import { useLocale } from "@/contexts/LocaleContext";
 import { localizeOffice } from "@shared/officeLocalization";
+import { getOfficeInventory } from "@shared/officeInventory";
 import { ImageGallery } from "@/components/ImageGallery";
 import { DeskTypePricing, AmenityList } from "@/components/DeskTypePricing";
 import { PromotionBadge } from "@/components/PromotionBadge";
@@ -104,6 +105,8 @@ export default function OfficeDetail() {
   );
   const amenities = Array.isArray(displayOffice.amenitiesJson) ? displayOffice.amenitiesJson : [];
   const pricing = office.pricing || [];
+  const meta = getOfficeInventory(office);
+  const showPromo = !meta.isSample && office.isPromoted === 1;
 
   return (
     <div className="min-h-screen bg-white">
@@ -121,8 +124,9 @@ export default function OfficeDetail() {
             />
           </div>
         ) : (
-          <div className="h-80 md:h-96 bg-gray-100 flex items-center justify-center">
-            <p className="text-gray-400">No image available</p>
+          <div className="h-80 md:h-96 bg-gray-100 flex flex-col items-center justify-center gap-3 px-6 text-center">
+            <ImageOff className="w-10 h-10 text-gray-400" />
+            <p className="text-gray-600 font-medium">{t.trust.awaitingPhotos}</p>
           </div>
         )}
       </div>
@@ -131,9 +135,28 @@ export default function OfficeDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
           <div className="lg:col-span-2 space-y-10">
             <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {meta.isOperatorOwned && (
+                  <span className="px-2.5 py-1 rounded text-xs font-bold bg-emerald-600 text-white">
+                    {t.trust.operatedBy}
+                  </span>
+                )}
+                {meta.isSample && (
+                  <span className="px-2.5 py-1 rounded text-xs font-semibold bg-gray-200 text-gray-700">
+                    {t.trust.sampleBadge}
+                  </span>
+                )}
+                {meta.awaitingPhotos && (
+                  <span className="px-2.5 py-1 rounded text-xs font-semibold bg-amber-100 text-amber-800">
+                    {t.trust.awaitingPhotos}
+                  </span>
+                )}
+              </div>
               <div className="flex items-start justify-between gap-4">
                 <h1 className="text-3xl md:text-4xl font-black text-gray-900">{displayOffice.name}</h1>
-                <PromotionBadge isPromoted={office.isPromoted === 1} discountPercentage={Number(office.discountPercentage) || 0} />
+                {showPromo && (
+                  <PromotionBadge isPromoted discountPercentage={Number(office.discountPercentage) || 0} />
+                )}
               </div>
 
               <div className="flex items-center gap-2 text-gray-600">
@@ -141,24 +164,39 @@ export default function OfficeDetail() {
                 <span>{office.address}</span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className={
-                        i < Math.floor(Number(office.rating))
-                          ? "fill-amber-400 text-amber-400"
-                          : "text-gray-300"
-                      }
-                    />
-                  ))}
+              {displayOffice.occupancyNote && (
+                <p className="text-sm text-gray-700">{displayOffice.occupancyNote}</p>
+              )}
+
+              {meta.isSample && <p className="text-sm text-gray-500">{t.trust.sampleNotice}</p>}
+
+              {meta.showReviews && (
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className={
+                          i < Math.floor(Number(office.rating))
+                            ? "fill-amber-400 text-amber-400"
+                            : "text-gray-300"
+                        }
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-600">
+                    {office.rating} ({office.reviewCount} {t.officeDetail.reviews})
+                  </span>
                 </div>
-                <span className="text-sm text-gray-600">
-                  {office.rating} ({office.reviewCount} reviews)
-                </span>
-              </div>
+              )}
+
+              {meta.priceOnRequest && (
+                <p className="text-lg font-bold text-emerald-700">{t.trust.priceOnRequest}</p>
+              )}
+              {meta.awaitingPhotos && (
+                <p className="text-sm text-gray-500">{t.trust.amenityPlaceholder}</p>
+              )}
             </div>
 
             {displayOffice.description && (

@@ -18,6 +18,9 @@ export type BusinessListing = {
   shopType: string;
   operationMode: string;
   transferType: string;
+  /** Live rows may show verified-finance badges. Sample rows must not. */
+  listingKind?: "sample" | "live";
+  financialsVerified?: boolean;
 };
 
 /** Listings created within the last N days show a "new" badge (BossIDEA-style). */
@@ -29,6 +32,18 @@ export function isNewBusinessListing(createdAt: string, days = 14): boolean {
 
 export function formatBusinessCode(id: number): string {
   return `BIZ-${String(id).padStart(3, "0")}`;
+}
+
+const VERIFIED_FINANCE_BADGE = /已驗證財報|verified financial|ai-verified|ai 財務|pre-verified/i;
+
+export function isSampleBusinessListing(listing: Pick<BusinessListing, "listingKind" | "financialsVerified">): boolean {
+  return listing.listingKind !== "live" && !listing.financialsVerified;
+}
+
+/** Trust badges that claim verified financials only render for rows explicitly marked verified. */
+export function publicBusinessBadges(listing: Pick<BusinessListing, "badges" | "financialsVerified">): string[] {
+  if (listing.financialsVerified) return listing.badges;
+  return listing.badges.filter((badge) => !VERIFIED_FINANCE_BADGE.test(badge));
 }
 
 export function getMonthlyProfit(listing: BusinessListing): number {
@@ -45,7 +60,9 @@ export const DEMO_BUSINESS_LISTINGS: BusinessListing[] = [
     netProfit: 320000,
     paybackPeriod: 14,
     askingPrice: 480000,
-    badges: ["已驗證財報", "可即頂讓"],
+    badges: ["可即頂讓"],
+    listingKind: "sample",
+    financialsVerified: false,
     createdAt: "2026-06-01T00:00:00.000Z",
     monthlyRent: 28000,
     areaSqft: 450,

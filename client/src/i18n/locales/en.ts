@@ -4,13 +4,14 @@ export const en: Translations = {
   meta: {
     siteName: "BizHKEx",
     tagline: "PropTech & Business Advisory Platform",
+    documentTitle: "BizHKEx — Hong Kong Office Matching & Business Transfer",
   },
   nav: {
     findOffices: "Find Offices",
     businessTrading: "Business Trading",
     howItWorks: "How It Works",
     faq: "FAQ",
-    providerSignup: "Vendor Register",
+    providerSignup: "List your centre",
     browse: "Browse",
     backHome: "Back to Home",
     knowledgeHub: "Knowledge Hub",
@@ -26,8 +27,14 @@ export const en: Translations = {
     heroSubtitle:
       "0% commission office matching · Curated business transfers · AI savings insights · Dedicated WhatsApp support",
     officesCardTitle: "Serviced Offices",
-    officesCardDesc: "100+ premium workspaces across Hong Kong from HK$2,100/month. Zero commission.",
+    officesCardDesc:
+      "BizHKEx-operated centres shown first, with sample listings while we recruit more partners. Tenants pay 0%.",
     officesCardCta: "Browse listings",
+    partnerTitle: "List your centre",
+    partnerBody:
+      "BizHKEx matches tenants to serviced centres. We operate our own floors and recruit partner centres so the marketplace can grow.",
+    partnerCommission: "Success commission 5–10%. No fee until a deal completes.",
+    partnerCta: "List your centre",
     businessCardTitle: "Business Transfer",
     businessCardDesc: "F&B, education, e-commerce and more — with financial summaries and payback periods.",
     businessCardCta: "Enter marketplace",
@@ -37,9 +44,8 @@ export const en: Translations = {
     targetDistrict: "Target district",
     estimatedSaving: "Est. monthly savings",
     savingHint: "vs. traditional leases — average 40% OPEX reduction",
-    tickerTitle: "Live Market Ticker",
     value1Title: "True 0% Commission",
-    value1Desc: "Free matching for tenants. We earn from landlords, not your commission.",
+    value1Desc: "Tenants pay nothing. Partner centres pay a 5–10% success fee when a deal completes.",
     value2Title: "Flexible Terms",
     value2Desc: "Monthly, quarterly or annual — scale up or down without long lock-ins.",
     value3Title: "Move-In Ready",
@@ -58,7 +64,7 @@ export const en: Translations = {
     leadTrustPoints: [
       "Dedicated WhatsApp reply within 5 minutes",
       "0% commission — free matching for tenants",
-      "100+ curated serviced offices across HK",
+      "Operator centres first, plus sample listings while partner centres join",
     ],
     howTitle: "How it works",
     step1Title: "Share your requirements",
@@ -72,6 +78,7 @@ export const en: Translations = {
     ctaSubtitle: "Office matching · Business transfer · 0% commission · Free WhatsApp advisory",
     ctaOffices: "Find Offices",
     ctaBusiness: "Browse transfers",
+    ctaProvider: "List your centre",
     teamOptions: {
       "1-2": "1–2 people",
       "3-5": "3–5 people",
@@ -84,12 +91,6 @@ export const en: Translations = {
       tst: "Tsim Sha Tsui",
       kwuntong: "Kwun Tong / Kowloon Bay",
     },
-    ticker: [
-      { label: "Central serviced office", value: "HK$4,200/mo", change: "-12%" },
-      { label: "Kwun Tong coworking", value: "HK$2,800/mo", change: "-18%" },
-      { label: "Mong Kok transfer", value: "HK$480K", change: "14-mo payback" },
-      { label: "Causeway Bay tuition centre", value: "HK$620K", change: "Stable cash flow" },
-    ],
     fallbackFaqs: [
       {
         question: "What is BizHKEx?",
@@ -98,7 +99,8 @@ export const en: Translations = {
       },
       {
         question: "Do you charge commission?",
-        answer: "Tenants pay nothing. We are compensated by landlords and sellers on successful deals.",
+        answer:
+          "Tenants and buyers pay nothing. Workspace operators and sellers pay a success commission of 5–10% when a deal completes.",
       },
       {
         question: "How do I request financial reports for transfers?",
@@ -112,7 +114,7 @@ export const en: Translations = {
       {
         question: "Can I list my serviced office or business for free?",
         answer:
-          'Yes — use "Vendor Register" to submit basic details. Our AI generates a professional listing preview; our team reviews and publishes it on the platform.',
+          'Yes. Open "List your centre", then submit details for review. A draft may be prepared for our team, but it stays off the public site until we approve it. Success commission is 5–10%.',
       },
       {
         question: "What's the difference between a business transfer and a franchise?",
@@ -172,11 +174,25 @@ export const en: Translations = {
     emptyTitle: "No offices match your criteria",
     emptyWhatsapp: "WhatsApp us",
     whatsappQuery: "Hi BizHKEx — I'd like help finding an office. Please send options.",
+    featuredTitle: "Operated by BizHKEx",
+    featuredSubtitle: "Real centres run by our team. Photos and confirmed prices are added as soon as they are ready.",
+    sampleTitle: "Sample listings",
+    sampleSubtitle:
+      "Placeholder inventory so the marketplace is browsable while we recruit other serviced-centre operators. These are not BizHKEx-operated rooms.",
+    listCentreCta: "List your centre",
     regions: {
       hong_kong_island: "Hong Kong Island",
       kowloon: "Kowloon",
       new_territories: "New Territories",
     },
+  },
+  trust: {
+    operatedBy: "Operated by BizHKEx",
+    sampleBadge: "Sample listing",
+    awaitingPhotos: "Awaiting real photos",
+    priceOnRequest: "Price on request",
+    sampleNotice: "Sample listing for layout only. Figures and photos are not a live centre.",
+    amenityPlaceholder: "Amenity list is a placeholder until the operator confirms it.",
   },
   business: {
     kicker: "Business Transfer",
@@ -184,8 +200,8 @@ export const en: Translations = {
     subtitle:
       "Curated Hong Kong business transfers with financial summaries, payback periods and industry tags.",
     statListings: "Active listings",
-    statPayback: "Avg. payback",
-    statPaybackValue: "14 mo",
+    statPayback: "Illustrative avg. payback",
+    statPaybackValue: "Sample",
     statFree: "Free inquiry",
     statFreeValue: "100%",
     filterIndustry: "By Industry",
@@ -202,7 +218,12 @@ export const en: Translations = {
     loading: "Loading...",
     empty: "No listings match your filters",
     months: "months",
-    footerNote: "Figures are pre-verified by BizHKEx. Full reports available free via WhatsApp.",
+    footerNote:
+      "Sample listings are illustrative placeholders, not verified accounts. Ask us for a real pack before you rely on any figure.",
+    sampleBadge: "Sample listing",
+    sellTitle: "Selling a business?",
+    sellBody: "Register your interest. We review every submission before anything goes live. Success commission is 5–10%.",
+    sellCta: "Sell your business",
     cta: "Request financial report (Free via WhatsApp)",
     viewDetails: "View details",
     newListing: "New",
@@ -269,6 +290,7 @@ export const en: Translations = {
     getInTouch: "Get in Touch",
     notFound: "Office not found",
     loading: "Loading...",
+    reviews: "reviews",
   },
   footer: {
     tagline: "Smart office matching & business transfer platform (PropTech & Business Advisory)",
@@ -283,7 +305,7 @@ export const en: Translations = {
     businessTrading: "Business Trading",
     howItWorks: "How It Works",
     faq: "FAQ",
-    forProviders: "Vendor Register",
+    forProviders: "List your centre",
     terms: "Terms of Service",
     privacy: "Privacy Policy",
     about: "About Us",

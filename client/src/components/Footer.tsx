@@ -19,7 +19,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
     { label: t.footer.knowledgeHub, href: path("/knowledge-hub") },
     { label: t.footer.howItWorks, href: `${homePath}#how-it-works` },
     { label: t.footer.faq, href: `${homePath}#faq` },
-    { label: t.footer.forProviders, href: path("/provider-signup") },
+    { label: t.footer.forProviders, href: path("/providers") },
   ];
 
   const districtLinks = t.footer.districtItems.map((item) => ({

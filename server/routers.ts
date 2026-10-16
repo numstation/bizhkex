@@ -34,6 +34,12 @@ export const appRouter = router({
               message: "This email is not registered yet. Please complete vendor registration first.",
             });
           }
+          if (error instanceof Error && error.message === "REGISTRATION_PENDING") {
+            throw new TRPCError({
+              code: "FORBIDDEN",
+              message: "REGISTRATION_PENDING",
+            });
+          }
           throw error;
         }
       }),
@@ -419,6 +425,13 @@ export const appRouter = router({
           throw new TRPCError({ code: 'NOT_FOUND', message: 'Provider not found' });
         }
 
+        if (await db.isVendorPublishBlocked(provider.email)) {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'REGISTRATION_PENDING',
+          });
+        }
+
         try {
           const office = await db.createOffice({
             name: input.name,
@@ -430,6 +443,7 @@ export const appRouter = router({
             providerId: provider.id,
             rating: 0,
             reviewCount: 0,
+            inventoryKind: 'partner',
           });
 
           return office;

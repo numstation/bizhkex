@@ -24,7 +24,7 @@ const CONTENT: Record<Locale, AboutContent> = {
   zh: {
     title: "關於 BizHKEx",
     intro:
-      "BizHKEx 係全港領先嘅商務中心配對平台，幫企業快速搵到最適合嘅靈活辦公空間，同時為業主帶來優質客戶詢盤。0% 佣金，100% 透明。",
+      "BizHKEx 配對香港商務中心同生意轉讓。租客 0% 佣金；中心營運商成功配對佣金 5–10%。我哋優先展示自家營運中心，並招募更多合作中心。",
     missionTitle: "我們的使命",
     missionP1: "革新香港商務中心行業，提供透明、高效、用戶友好嘅平台，連結企業同靈活辦公空間。",
     missionP2: "我們賦能商務中心業主展示優質盤源，同時幫助企業以最低成本搵到理想工作環境。",
@@ -55,7 +55,7 @@ const CONTENT: Record<Locale, AboutContent> = {
   en: {
     title: "About BizHKEx",
     intro:
-      "BizHKEx is Hong Kong's leading platform for serviced office matching and business transfers — helping companies find flexible workspace while connecting landlords with quality leads. Zero commission, full transparency.",
+      "BizHKEx matches Hong Kong serviced offices and business transfers. Tenants pay 0%. Centre operators pay a 5–10% success commission. Operator-run centres are shown first while we recruit partner centres.",
     missionTitle: "Our Mission",
     missionP1:
       "To transform Hong Kong's flexible workspace market with a transparent, efficient platform that connects businesses with the right offices.",

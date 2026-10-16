@@ -221,14 +221,14 @@ export async function sendVendorRegistrationConfirmation(input: {
     <p>Hi ${input.contactName}，</p>
     <p>多謝你透過 BizHKEx 提交<strong>${input.name}</strong>嘅登記申請。</p>
     <p>參考編號：<span style="font-family:monospace;">${input.referenceId}</span></p>
-    <p>我哋已收到你嘅資料，團隊會在 24 小時內覆核並聯絡你。你而家可以用同一個電郵前往業主後台，按「登入」收取登入連結。</p>
+    <p>你的申請已進入審核隊列，<strong>尚未上架</strong>，亦未有公開盤源。團隊覆核後先會聯絡你。成功配對佣金為 5–10%。審核通過前未能登入後台。</p>
     <p style="color:#6b7280;font-size:14px;">如有查詢，WhatsApp +852 3565 3138。</p>
   `
     : `
     <p>Hi ${input.contactName},</p>
     <p>Thank you for registering <strong>${input.name}</strong> on BizHKEx.</p>
     <p>Reference: <span style="font-family:monospace;">${input.referenceId}</span></p>
-    <p>We've received your submission and will review it within 24 hours. You can now go to the vendor dashboard and tap Sign in with the same email to receive a login link.</p>
+    <p>Your application is in the review queue and is <strong>not published</strong>. Nothing from this draft is live on BizHKEx. We will contact you after review. Success commission is 5–10%. Dashboard login opens only after approval.</p>
     <p style="color:#6b7280;font-size:14px;">Questions? WhatsApp +852 3565 3138.</p>
   `;
   return sendEmail({
@@ -280,8 +280,8 @@ export async function sendVendorRegistrationToTeam(input: {
       ? `<p><strong>Photos:</strong></p><ul>${input.photoUrls.map((u) => `<li><a href="${u}">${u}</a></li>`).join("")}</ul>`
       : "<p><em>No photos uploaded</em></p>";
   const body = `
-    <p><strong>New vendor registration (${input.type})</strong></p>
-    <p style="color:#6b7280;font-size:13px;">Ref: ${input.referenceId}</p>
+    <p><strong>Vendor intake (${input.type}) — pending review, not published</strong></p>
+    <p style="color:#6b7280;font-size:13px;">Ref: ${input.referenceId}. Approve by setting vendorRegistrations.status to approved before any public listing is created.</p>
     <div style="background:white;padding:15px;border-left:4px solid #059669;margin:16px 0;">
       <p><strong>Business:</strong> ${input.name}</p>
       <p><strong>Contact:</strong> ${input.contactName}</p>

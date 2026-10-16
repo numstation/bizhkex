@@ -95,15 +95,18 @@ export const vendorRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      const listing = generateVendorListing({
-        type: input.type,
-        name: input.name,
-        district: input.district,
-        industry: input.industry,
-        summary: input.summary,
-        referenceUrl: input.referenceUrl,
-        locale: input.locale,
-      });
+      const listing = {
+        ...generateVendorListing({
+          type: input.type,
+          name: input.name,
+          district: input.district,
+          industry: input.industry,
+          summary: input.summary,
+          referenceUrl: input.referenceUrl,
+          locale: input.locale,
+        }),
+        publishStatus: "draft" as const,
+      };
       const referenceId = `VND-${Date.now().toString(36).toUpperCase()}`;
       const photoUrls = input.photoUrls ?? [];
 
@@ -156,6 +159,12 @@ export const vendorRouter = router({
         teamEmail: getTeamInboxEmail(),
       }).catch((err) => console.warn("[Vendor] Team email failed:", err));
 
-      return { success: true as const, referenceId, listing, photoUrls };
+      return {
+        success: true as const,
+        referenceId,
+        status: "pending" as const,
+        published: false as const,
+        photoUrls,
+      };
     }),
 });

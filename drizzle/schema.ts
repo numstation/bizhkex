@@ -62,6 +62,14 @@ export const offices = mysqlTable("offices", {
 	amenitiesJson: json(),
 	isPromoted: tinyint().default(0),
 	discountPercentage: decimal({ precision: 5, scale: 2 }).default('0'),
+	/** operator = BizHKEx centre, partner = approved provider, sample = placeholder inventory */
+	inventoryKind: mysqlEnum(['operator','partner','sample']).default('sample').notNull(),
+	isFeatured: tinyint().default(0).notNull(),
+	isVerified: tinyint().default(0).notNull(),
+	awaitingPhotos: tinyint().default(0).notNull(),
+	priceOnRequest: tinyint().default(0).notNull(),
+	featuredOrder: int().default(100).notNull(),
+	occupancyNote: varchar({ length: 255 }),
 	createdAt: timestamp({ mode: 'string' }).defaultNow().notNull(),
 	updatedAt: timestamp({ mode: 'string' }).defaultNow().onUpdateNow().notNull(),
 });

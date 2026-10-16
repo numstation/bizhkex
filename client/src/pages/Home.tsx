@@ -108,27 +108,19 @@ export default function Home() {
             </div>
           </Link>
 
-          <div className={`${theme.glass} p-6 md:col-span-2 lg:col-span-2 overflow-hidden`}>
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className={`w-5 h-5 ${theme.accent}`} />
-              <h3 className={`font-bold ${theme.heading}`}>{t.home.tickerTitle}</h3>
-              <span className={`w-2 h-2 rounded-full ${theme.isDark ? "bg-emerald-400" : "bg-emerald-600"} animate-pulse`} />
+          <Link href={path("/providers")} className="md:col-span-2 lg:col-span-2">
+            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-all group cursor-pointer`}>
+              <div className="flex items-center gap-2 mb-4">
+                <TrendingUp className={`w-5 h-5 ${theme.accent}`} />
+                <h3 className={`font-bold ${theme.heading}`}>{t.home.partnerTitle}</h3>
+              </div>
+              <p className={`${theme.muted} text-sm mb-3`}>{t.home.partnerBody}</p>
+              <p className={`text-sm font-semibold ${theme.accent} mb-4`}>{t.home.partnerCommission}</p>
+              <span className={`${theme.accent} text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all`}>
+                {t.home.partnerCta} <ArrowRight className="w-4 h-4" />
+              </span>
             </div>
-            <div className="space-y-3">
-              {t.home.ticker.map((item) => (
-                <div
-                  key={item.label}
-                  className={`flex items-center justify-between py-2 border-b ${theme.dividerLight} last:border-0`}
-                >
-                  <span className={`${theme.muted} text-sm`}>{item.label}</span>
-                  <div className="text-right">
-                    <span className={`${theme.value} text-sm`}>{item.value}</span>
-                    <span className={`${theme.accent} text-xs ml-2`}>{item.change}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          </Link>
         </div>
 
         <div className={`${theme.glass} mt-4 md:mt-5 overflow-hidden`}>
@@ -207,6 +199,14 @@ export default function Home() {
                 className={`${theme.outlineBtn} font-bold py-6 px-8 text-lg w-full sm:w-auto`}
               >
                 {t.home.ctaBusiness}
+              </Button>
+            </Link>
+            <Link href={path("/providers")}>
+              <Button
+                variant="outline"
+                className={`${theme.outlineBtn} font-bold py-6 px-8 text-lg w-full sm:w-auto`}
+              >
+                {t.home.ctaProvider}
               </Button>
             </Link>
           </div>

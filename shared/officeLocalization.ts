@@ -16,11 +16,12 @@ const DISTRICT_EN: Record<number, string> = {
   11: "Kwun Tong",
   12: "Sha Tin",
   13: "Tsuen Wan",
+  14: "North Point",
 };
 
 const OFFICE_EN: Record<
   number,
-  { name: string; description: string; amenities?: string[] }
+  { name: string; description: string; amenities?: string[]; occupancyNote?: string }
 > = {
   1: {
     name: "IFC Harbour View Business Centre, Central",
@@ -73,9 +74,9 @@ const OFFICE_EN: Record<
       "Kowloon East hub near Kai Tak. Modern tech workspace with IT support and collaboration zones.",
   },
   11: {
-    name: "Kwun Tong APM Business Centre",
+    name: "Kwun Tong Millennium City Sample Desks",
     description:
-      "Kwun Tong core location above APM mall. Flexible plans for growing teams and e-commerce operators.",
+      "Sample listing that shows how a Kwun Tong coworking card looks. This is not the BizHKEx-operated APM centre. Rent, photos and ratings are placeholders.",
   },
   12: {
     name: "Sha Tin New Town Plaza Hub",
@@ -96,6 +97,18 @@ const OFFICE_EN: Record<
     name: "North Point City Centre",
     description:
       "Island East transport hub at competitive rates. Modern offices for trading and professional services.",
+  },
+  101: {
+    name: "AIA Tower Serviced Centre, North Point",
+    description:
+      "A real centre operated by BizHKEx at AIA Tower, 183 Electric Road, North Point. The rooms are fully let — join the waitlist. Real photos and confirmed prices are not on the site yet. WhatsApp the team for availability and a quote. The amenity list is a placeholder you can replace when the real pack is ready.",
+    occupancyNote: "Fully let — waitlist open",
+  },
+  102: {
+    name: "APM Serviced Centre, Kwun Tong",
+    description:
+      "A real centre operated by BizHKEx at APM, Millennium City 5, 418 Kwun Tong Road. About 35–40% occupied, with rooms still available to enquire. Real photos and confirmed prices are not on the site yet. WhatsApp the team for current availability and a quote. Swap in photos and prices on this same listing when they are ready.",
+    occupancyNote: "About 35–40% occupied — rooms available to enquire",
   },
 };
 
@@ -142,6 +155,7 @@ export function localizeOffice<
     name: string;
     description?: string | null;
     amenitiesJson?: string[];
+    occupancyNote?: string | null;
   },
 >(office: T, locale: Locale): T {
   if (locale === "zh") return office;
@@ -152,6 +166,7 @@ export function localizeOffice<
     ...office,
     name: en.name,
     description: en.description,
+    occupancyNote: en.occupancyNote ?? office.occupancyNote,
     amenitiesJson: en.amenities ?? amenities.map((a) => AMENITY_EN[a] ?? a),
   };
 }

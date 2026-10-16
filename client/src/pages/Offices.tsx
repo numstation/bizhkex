@@ -1,17 +1,17 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, MapPin, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
-import { PromotionBadge } from "@/components/PromotionBadge";
+import OfficeListingCard from "@/components/OfficeListingCard";
+import { Button } from "@/components/ui/button";
 import { useWhatsApp } from "@/contexts/WhatsAppContext";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePublicTheme } from "@/hooks/usePublicTheme";
 import { getDistrictName, localizeOffice } from "@shared/officeLocalization";
+import { getOfficeInventory } from "@shared/officeInventory";
 
 const REGION_KEYS = ["hong_kong_island", "kowloon", "new_territories"] as const;
 
@@ -38,8 +38,14 @@ export default function Offices() {
   );
 
   const filteredOffices = useMemo(() => {
-    return offices.filter((office: { id: number; name: string; address: string; districtId: number }) => {
-      const localized = localizeOffice(office, locale);
+    return offices.filter((office) => {
+      const localized = localizeOffice(
+        {
+          ...office,
+          amenitiesJson: Array.isArray(office.amenitiesJson) ? office.amenitiesJson : [],
+        },
+        locale
+      );
       const matchesKeyword =
         !searchKeyword ||
         localized.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
@@ -48,6 +54,10 @@ export default function Offices() {
       return matchesKeyword && matchesDistrict;
     });
   }, [offices, searchKeyword, selectedDistrictId, locale]);
+
+  const featuredOffices = filteredOffices.filter((office) => getOfficeInventory(office).isFeatured);
+  const partnerOffices = filteredOffices.filter((office) => getOfficeInventory(office).isPartner);
+  const sampleOffices = filteredOffices.filter((office) => getOfficeInventory(office).isSample);
 
   const sortLabels = {
     price: t.offices.sortPrice,
@@ -139,85 +149,63 @@ export default function Offices() {
           </Tabs>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredOffices.map((office: {
-            id: number;
-            name: string;
-            description: string;
-            address: string;
-            thumbnailUrl?: string;
-            rating: number;
-            reviewCount: number;
-            basePrice: number;
-            isPromoted: number;
-            discountPercentage: number;
-            amenitiesJson: string[];
-          }) => {
-            const localized = localizeOffice(office, locale);
-            return (
-              <Link key={office.id} href={path(`/office/${office.id}`)}>
-                <div className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-all h-full flex flex-col`}>
-                  <div className={`h-48 ${theme.glassInner} relative overflow-hidden`}>
-                    {office.thumbnailUrl ? (
-                      <img src={office.thumbnailUrl} alt={localized.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-600">🏢</div>
-                    )}
-                    <PromotionBadge
-                      isPromoted={office.isPromoted === 1}
-                      discountPercentage={Number(office.discountPercentage) || 0}
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className={`font-bold text-lg mb-2 ${theme.heading}`}>{localized.name}</h3>
-                    <div className={`flex items-center gap-2 mb-3 text-sm ${theme.muted}`}>
-                      <MapPin size={16} className="text-emerald-500" />
-                      <span className="line-clamp-1">{office.address}</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={14}
-                            className={
-                              i < Math.floor(office.rating)
-                                ? "fill-amber-400 text-amber-400"
-                                : "text-gray-600"
-                            }
-                          />
-                        ))}
-                      </div>
-                      <span className={`text-sm ${theme.muted}`}>
-                        {office.rating} ({office.reviewCount})
-                      </span>
-                    </div>
-                    <div className="mt-auto flex items-center justify-between">
-                      <span className={`font-bold ${theme.accent}`}>
-                        {t.common.hkd}
-                        {Number(office.basePrice).toLocaleString()}
-                        {t.offices.perMonth}
-                      </span>
-                      <span className={`${theme.accent} text-sm flex items-center gap-1`}>
-                        {t.offices.viewDetails} <ChevronRight size={14} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
+        {featuredOffices.length > 0 && (
+          <div className="mb-10">
+            <h2 className={`text-2xl font-black mb-2 ${theme.heading}`}>{t.offices.featuredTitle}</h2>
+            <p className={`${theme.muted} text-sm mb-5 max-w-2xl`}>{t.offices.featuredSubtitle}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredOffices.map((office) => (
+                <OfficeListingCard key={office.id} office={office} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {partnerOffices.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {partnerOffices.map((office) => (
+              <OfficeListingCard key={office.id} office={office} />
+            ))}
+          </div>
+        )}
+
+        {sampleOffices.length > 0 && (
+          <div>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
+              <div>
+                <h2 className={`text-2xl font-black mb-2 ${theme.heading}`}>{t.offices.sampleTitle}</h2>
+                <p className={`${theme.muted} text-sm max-w-2xl`}>{t.offices.sampleSubtitle}</p>
+              </div>
+              <Link href={path("/providers")}>
+                <Button variant="outline" className={theme.outlineBtn}>
+                  {t.offices.listCentreCta}
+                </Button>
               </Link>
-            );
-          })}
-        </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sampleOffices.map((office) => (
+                <OfficeListingCard key={office.id} office={office} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {filteredOffices.length === 0 && (
           <div className={`text-center py-16 ${theme.muted}`}>
             <p className="mb-4">{t.offices.emptyTitle}</p>
-            <Button
-              className="bg-emerald-600 hover:bg-emerald-500"
-              onClick={() => openWhatsApp(t.offices.whatsappQuery)}
-            >
-              {t.offices.emptyWhatsapp}
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-500"
+                onClick={() => openWhatsApp(t.offices.whatsappQuery)}
+              >
+                {t.offices.emptyWhatsapp}
+              </Button>
+              <Link href={path("/providers")}>
+                <Button variant="outline" className={theme.outlineBtn}>
+                  {t.offices.listCentreCta}
+                </Button>
+              </Link>
+            </div>
           </div>
         )}
       </section>
