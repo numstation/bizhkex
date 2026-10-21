@@ -9,133 +9,161 @@ type TermsContent = {
 const CONTENT: Record<Locale, TermsContent> = {
   en: {
     title: "Terms of Service",
-    updated: "Last updated: June 2026",
+    updated: "Last updated: 21 October 2026",
     sections: [
       {
-        title: "1. Agreement to Terms",
+        title: "1. Who you are contracting with",
         paragraphs: [
-          "By accessing and using the BizHKEx website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.",
+          "These terms govern use of the BizHKEx website. The registered legal entity is not stated on this page yet.",
+          "[Chris: insert the registered legal entity name, Business Registration (BR) number and registered office address. No BR number is invented here. Until then, contact BizHKEx at info@bizhkex.com or +852 3565 3138.]",
+          "By using the site you agree to these terms. If you do not agree, please stop using the service.",
         ],
       },
       {
-        title: "2. Use License",
+        title: "2. What the platform does",
         paragraphs: [
-          "Permission is granted to temporarily download one copy of the materials (information or software) on BizHKEx's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:",
+          "BizHKEx introduces serviced-office enquiries and business-transfer enquiries. We operate some centres ourselves, we may list partner centres after review, and we also show labelled sample listings so the layout can be browsed. A sample is not a live offer. Rents and financial figures on samples are placeholders until confirmed.",
+          "A match, a viewing or an introduction is not itself a lease or a sale. The contract is between you and the centre operator, landlord, seller or buyer, as the case may be.",
         ],
+      },
+      {
+        title: "3. Fees",
+        paragraphs: [
+          "Serviced offices and coworking: a success commission of about 5–10% is charged only to the landlord, operator or centre provider. The tenant or renter pays 0%. The exact percentage is confirmed in writing before a deal completes. Nothing is charged merely for browsing or for submitting an inquiry.",
+          "Business transfers (生意頂讓): both the buyer and the seller pay a success commission when a transfer completes. Unless a different figure is agreed in writing, the range is about 5–10%. Submitting an inquiry or asking for a financial pack has no extra fee. Sample figures are not verified accounts.",
+          "There is no fee before a deal completes, and an unapproved listing is not published.",
+        ],
+      },
+      {
+        title: "4. Listings and accuracy",
+        paragraphs: [
+          "Operator centres are described as operated by BizHKEx. Partner listings appear only after review. Sample listings are badged and must not be treated as available stock or as audited financials.",
+          "The site may contain technical, typographical or photographic errors. We do not warrant that every figure is complete or current. Confirmed office rents are given on request. You should verify licences, leases and accounts before you commit to a transfer.",
+        ],
+      },
+      {
+        title: "5. Your use of the site",
+        paragraphs: ["You may browse the site for your own genuine enquiry. You may not:"],
         listItems: [
-          "Modify or copy the materials",
-          "Use the materials for any commercial purpose or for any public display",
-          "Attempt to decompile or reverse engineer any software contained on the website",
-          "Remove any copyright or other proprietary notations from the materials",
-          'Transfer the materials to another person or "mirror" the materials on any other server',
-          "Violate any applicable laws or regulations",
+          "Copy the site for a competing service or public display",
+          "Attempt to decompile or reverse engineer the software",
+          "Remove copyright or proprietary notices",
+          "Misrepresent a sample listing as a verified offer",
+          "Break applicable Hong Kong law",
         ],
       },
       {
-        title: "3. Disclaimer",
+        title: "6. Personal data",
         paragraphs: [
-          "The materials on BizHKEx's website are provided on an 'as is' basis. BizHKEx makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.",
+          "Personal data is handled as described in the Privacy Policy, which is written with the Hong Kong Personal Data (Privacy) Ordinance (Cap. 486) in mind. The privacy policy names the same contact points and the same legal-entity placeholder.",
         ],
       },
       {
-        title: "4. Limitations",
+        title: "7. Disclaimer and liability",
         paragraphs: [
-          "In no event shall BizHKEx or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on BizHKEx's website, even if BizHKEx or an authorized representative has been notified orally or in writing of the possibility of such damage.",
+          "Materials are provided as they are. BizHKEx does not guarantee that a centre is available, that a business will perform as a sample figure suggests, or that a saving estimate equals your actual cost.",
+          "To the extent Hong Kong law allows, BizHKEx is not liable for loss of profit, data or business arising from use of the site or from a deal you sign with a third party.",
         ],
       },
       {
-        title: "5. Accuracy of Materials",
+        title: "8. Links",
         paragraphs: [
-          "The materials appearing on BizHKEx's website could include technical, typographical, or photographic errors. BizHKEx does not warrant that any of the materials on its website are accurate, complete, or current. BizHKEx may make changes to the materials contained on its website at any time without notice.",
+          "We have not reviewed every site linked from BizHKEx and we are not responsible for those sites. A link is not an endorsement.",
         ],
       },
       {
-        title: "6. Links",
+        title: "9. Changes",
         paragraphs: [
-          "BizHKEx has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by BizHKEx of the site. Use of any such linked website is at the user's own risk.",
+          "We may revise these terms by posting a new version on this page. Continuing to use the site means you accept the current version.",
         ],
       },
       {
-        title: "7. Modifications",
+        title: "10. Governing law",
         paragraphs: [
-          "BizHKEx may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.",
+          "These terms are governed by Hong Kong law. You submit to the exclusive jurisdiction of the Hong Kong courts.",
         ],
       },
       {
-        title: "8. Governing Law",
-        paragraphs: [
-          "These terms and conditions are governed by and construed in accordance with the laws of Hong Kong, and you irrevocably submit to the exclusive jurisdiction of the courts located in Hong Kong.",
-        ],
-      },
-      {
-        title: "9. Contact Information",
-        paragraphs: ["If you have any questions about these Terms of Service, please contact us at info@bizhkex.com or +852 3565 3138."],
+        title: "11. Contact",
+        paragraphs: ["Questions about these terms: info@bizhkex.com or +852 3565 3138. Centre operators may also write to providers@bizhkex.com."],
       },
     ],
   },
   zh: {
     title: "服務條款",
-    updated: "最後更新：2026年6月",
+    updated: "最後更新：2026年10月21日",
     sections: [
       {
-        title: "1. 條款同意",
+        title: "1. 合約對方（法律實體待填）",
         paragraphs: [
-          "當你使用 BizHKEx 網站及相關服務，即表示你同意受本條款約束。如不同意，請停止使用本服務。",
+          "本條款規管 BizHKEx 網站的使用。註冊法律實體尚未在本頁列明。",
+          "[Chris：請填入註冊法律實體全名、商業登記號碼（BR）及註冊地址。本頁沒有編造 BR 號碼。填入之前，請以 BizHKEx、info@bizhkex.com 或 +852 3565 3138 聯絡。]",
+          "使用本網站即表示你同意本條款。如不同意，請停止使用。",
         ],
       },
       {
-        title: "2. 使用授權",
+        title: "2. 平台做甚麼",
         paragraphs: [
-          "本網站內容僅供個人、非商業用途之暫時瀏覽。此為使用授權而非產權轉讓，你不得：",
+          "BizHKEx 轉介服務式辦公室查詢及生意頂讓查詢。部分中心由我們營運，合作中心經覆核後先上架，同時亦展示已標明的示範盤源，方便瀏覽版面。示範盤源不是在租或在售要約。示範盤上的租金及財務數字在確認前都是樣本。",
+          "配對、帶看或介紹本身不是租約或買賣合約。合約由你與中心營運商、業主、賣家或買家（視情況而定）簽訂。",
         ],
+      },
+      {
+        title: "3. 收費",
+        paragraphs: [
+          "服務式辦公室及共享空間：成功佣金約 5–10%，只向業主、營運商或中心收取。租客或承租人 0%。確實百分比會在成交前以書面確認。瀏覽或提交查詢本身不另收費。",
+          "生意頂讓：成交時買家與賣家雙方都要付成功佣金。除非另有書面約定，範圍約 5–10%。提交查詢或索取財務資料不另收費。示範盤上的數字並非已核實帳目。",
+          "未成交不收費。未獲審核的資料不會公開上架。",
+        ],
+      },
+      {
+        title: "4. 盤源及準確性",
+        paragraphs: [
+          "由 BizHKEx 營運的中心會如此標示。合作盤源只在覆核後出現。示範盤源有標籤，不應視為可即租貨盤或經審計的財務。",
+          "網站可能有技術、排版或相片錯誤。我們不保證每一項數字都完整或最新。寫字樓確認租金會在查詢時提供。決定頂讓前，請自行核實牌照、租約及帳目。",
+        ],
+      },
+      {
+        title: "5. 使用規範",
+        paragraphs: ["你可為真實查詢而瀏覽本網站。你不得："],
         listItems: [
-          "修改或複製網站內容",
-          "將內容用於商業用途或公開展示",
+          "複製網站內容以經營競爭服務或作公開展示",
           "嘗試反編譯或逆向工程網站軟件",
           "移除版權或其他專有標示",
-          "將內容轉移予他人或在其他伺服器鏡像",
-          "違反任何適用法律或法規",
+          "把示範盤源說成已核實的要約",
+          "違反香港適用法律",
         ],
       },
       {
-        title: "3. 免責聲明",
+        title: "6. 個人資料",
         paragraphs: [
-          "BizHKEx 網站內容按「現況」提供，不作任何明示或暗示保證，包括但不限於適銷性、特定用途適用性或知識產權不侵權等保證。",
+          "個人資料按私隱政策處理。該政策以香港《個人資料（私隱）條例》（第486章）為取向，並列明相同聯絡方式及相同的法律實體待填位置。",
         ],
       },
       {
-        title: "4. 責任限制",
+        title: "7. 免責及責任",
         paragraphs: [
-          "在任何情況下，BizHKEx 或其供應商均不對因使用或無法使用網站內容而引致之損失（包括數據或利潤損失、業務中斷等）承擔責任。",
+          "網站內容按現況提供。BizHKEx 不保證某中心一定有空置、某項生意會達到示範數字，亦不保證慳錢估算等於你的實際成本。",
+          "在香港法律允許的範圍內，BizHKEx 無須就使用網站或你與第三方簽訂的交易而引致的利潤、數據或業務損失負責。",
         ],
       },
       {
-        title: "5. 內容準確性",
+        title: "8. 外部連結",
+        paragraphs: ["我們未審查所有連結網站，對其內容不負責。連結並不代表認可。"],
+      },
+      {
+        title: "9. 條款修訂",
+        paragraphs: ["我們可於本頁刊登新版本以修訂條款。繼續使用網站即表示你接受當時有效的版本。"],
+      },
+      {
+        title: "10. 適用法律",
+        paragraphs: ["本條款受香港法律管轄。你同意接受香港法院的專屬司法管轄。"],
+      },
+      {
+        title: "11. 聯絡",
         paragraphs: [
-          "網站內容可能包含技術、排版或攝影錯誤。BizHKEx 不保證內容準確、完整或最新，並可隨時修改內容而不另行通知。",
+          "條款查詢：info@bizhkex.com 或 +852 3565 3138。中心營運商亦可電郵 providers@bizhkex.com。",
         ],
-      },
-      {
-        title: "6. 外部連結",
-        paragraphs: [
-          "BizHKEx 未審查所有連結網站，對其內容不承擔責任。連結並不代表 BizHKEx 認可該網站，使用風險由用戶自行承擔。",
-        ],
-      },
-      {
-        title: "7. 條款修訂",
-        paragraphs: [
-          "BizHKEx 可隨時修訂本服務條款。繼續使用網站即表示你同意當時有效之條款版本。",
-        ],
-      },
-      {
-        title: "8. 適用法律",
-        paragraphs: [
-          "本條款受香港法律管轄，你同意接受香港法院之專屬司法管轄。",
-        ],
-      },
-      {
-        title: "9. 聯絡方式",
-        paragraphs: ["如對本服務條款有任何疑問，請電郵至 info@bizhkex.com 或致電 +852 3565 3138。"],
       },
     ],
   },

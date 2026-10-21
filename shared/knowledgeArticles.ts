@@ -81,7 +81,7 @@ Check lift queues, noise levels and internet speed between 9–11am.
 ## 4. Compare districts
 Central commands prestige; Kwun Tong and Kowloon Bay offer value for product and ops teams.
 
-> **BizHKEx tip:** Use our savings calculator to estimate monthly OPEX vs a conventional lease before you sign.`,
+> **BizHKEx tip:** Use the savings estimate to compare monthly OPEX with a conventional lease before you sign. The result is illustrative, not a guaranteed saving.`,
       zh: `# 第一次租商務中心要知咩？
 
 香港辦公室市場節奏快，初創同中小企選 **商務中心** 往往比傳統租約更靈活、前期成本更低。
@@ -100,7 +100,7 @@ Central commands prestige; Kwun Tong and Kowloon Bay offer value for product and
 ## 4. 比較地區
 中環代表品牌形象；觀塘、九龍灣適合產品及營運團隊慳成本。
 
-> **BizHKEx 貼士：** 用平台慳錢計算器，先估算商務中心同傳統租約每月 OPEX 差價。`,
+> **BizHKEx 貼士：** 用平台慳錢估算，對照商務中心同傳統租約每月 OPEX。結果只供參考，並非保證節省。`,
     },
   },
   {
@@ -211,7 +211,7 @@ Always obtain a bilingual summary if your team signs in Chinese.`,
 
 **Day 6–7:** Site visit at lunch and dinner peak; observe foot traffic independently.
 
-BizHKEx listings include an AI-generated financial snapshot — always request the full report via WhatsApp.`,
+Figures shown on BizHKEx sample listings are illustrative only — request the full report and verify the accounts before you rely on them.`,
       zh: `# 餐飲頂讓 7 日清單
 
 **第 1–2 日：** 核實食物業牌照、酒牌（如有）及消防證明有效期。
@@ -224,7 +224,7 @@ BizHKEx listings include an AI-generated financial snapshot — always request t
 
 **第 6–7 日：** 午市及晚市高峰實地觀察，獨立評估人流。
 
-BizHKEx 盤源附有 AI 財務快照 — 請透過 WhatsApp 索取完整報告。`,
+BizHKEx 示範盤源上的數字只供版面參考 — 請透過 WhatsApp 索取完整報告，並自行核實帳目。`,
     },
   },
   {

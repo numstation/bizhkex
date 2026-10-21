@@ -50,7 +50,7 @@ export function getMonthlyProfit(listing: BusinessListing): number {
   return Math.round(listing.netProfit / 12);
 }
 
-export const DEMO_BUSINESS_LISTINGS: BusinessListing[] = [
+const DEMO_BUSINESS_SEED: BusinessListing[] = [
   {
     id: 1,
     title: "旺角精品咖啡店連品牌",
@@ -174,3 +174,10 @@ export const DEMO_BUSINESS_LISTINGS: BusinessListing[] = [
     transferReason: "東主移民，希望將客戶合約及團隊完整交接。",
   },
 ];
+
+/** Every seeded deal is a layout sample until a row is explicitly marked live and verified. */
+export const DEMO_BUSINESS_LISTINGS: BusinessListing[] = DEMO_BUSINESS_SEED.map((listing) => ({
+  ...listing,
+  listingKind: "sample",
+  financialsVerified: false,
+}));

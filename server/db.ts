@@ -24,7 +24,7 @@ import {
   searchDemoOffices,
   sortDemoOffices,
 } from "../shared/demoOffices";
-import { mergeOperatorShowcase, sortPublicOffices } from "../shared/officeInventory";
+import { applyOperatorShowcase, mergeOperatorShowcase, sortPublicOffices } from "../shared/officeInventory";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -158,16 +158,20 @@ export async function getOffices(limit?: number, offset?: number, sortBy?: strin
 }
 
 export async function getOfficeById(id: number) {
+  const fromDemo = () => {
+    const demo = getDemoOfficeById(id);
+    return demo ? applyOperatorShowcase(demo, DEMO_OFFICES) : undefined;
+  };
   const db = await getDb();
-  if (!db) return getDemoOfficeById(id);
+  if (!db) return fromDemo();
 
   try {
     const result = await db.select().from(offices).where(eq(offices.id, id)).limit(1);
-    if (result.length > 0) return result[0];
-    return getDemoOfficeById(id);
+    if (result.length > 0) return applyOperatorShowcase(result[0], DEMO_OFFICES);
+    return fromDemo();
   } catch (error) {
     console.warn("[Database] Failed to fetch office, using demo data:", error);
-    return getDemoOfficeById(id);
+    return fromDemo();
   }
 }
 
@@ -1159,6 +1163,8 @@ function normalizeBusinessListing(row: typeof businessListings.$inferSelect): Bu
     operationMode: demo?.operationMode ?? "全職",
     transferType: demo?.transferType ?? "生意轉讓",
     imageUrl: demo?.imageUrl,
+    listingKind: demo?.listingKind ?? "sample",
+    financialsVerified: demo?.financialsVerified ?? false,
   };
 }
 

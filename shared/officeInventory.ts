@@ -34,7 +34,7 @@ export function getOfficeInventory(office: OfficeInventoryFields) {
     isSample: kind === "sample",
     isVerified: flag(office.isVerified) || isOperatorOwned,
     awaitingPhotos: flag(office.awaitingPhotos),
-    priceOnRequest: flag(office.priceOnRequest),
+    priceOnRequest: flag(office.priceOnRequest) || kind === "sample",
     showReviews: kind !== "sample" && reviewCount > 0,
     featuredOrder: office.featuredOrder ?? (isFeatured ? 0 : 100),
   };
@@ -86,11 +86,22 @@ export function sortPublicOffices<T extends OfficeInventoryFields>(
   return [...offices].sort((a, b) => comparePublicOffices(a, b, sortBy, sortOrder));
 }
 
+/** Code-owned operator centres override a stale database row with the same id. */
+export function applyOperatorShowcase<T extends { id?: number }>(
+  row: T,
+  showcase: Array<{ id?: number; inventoryKind?: string | null }>
+): T {
+  const match = showcase.find((office) => office.id === row.id && office.inventoryKind === "operator");
+  if (!match) return row;
+  return { ...row, ...match };
+}
+
 /** Keep operator showcase rows on public lists even when the database only has sample seed rows. */
 export function mergeOperatorShowcase(rows: any[], showcase: any[]): any[] {
   const featured = showcase.filter((office) => office.inventoryKind === "operator");
-  const ids = new Set(rows.map((row) => row.id));
-  const names = new Set(rows.map((row) => row.name));
+  const overridden = rows.map((row) => applyOperatorShowcase(row, featured));
+  const ids = new Set(overridden.map((row) => row.id));
+  const names = new Set(overridden.map((row) => String(row.name ?? "")));
   const missing = featured.filter((office) => !ids.has(office.id) && !names.has(office.name));
-  return [...missing, ...rows];
+  return [...missing, ...overridden];
 }

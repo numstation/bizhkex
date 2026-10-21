@@ -43,8 +43,9 @@ export function useAuth(options?: UseAuthOptions) {
   }, [logoutMutation, utils]);
 
   const state = useMemo(() => {
+    localStorage.removeItem("manus-runtime-user-info");
     localStorage.setItem(
-      "manus-runtime-user-info",
+      "bizhkex-user-info",
       JSON.stringify(meQuery.data)
     );
     return {

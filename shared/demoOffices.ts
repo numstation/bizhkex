@@ -1,4 +1,5 @@
-import { sortPublicOffices } from "./officeInventory";
+import { getOfficeInventory, sortPublicOffices } from "./officeInventory";
+import { SAMPLE_DESCRIPTION_NOTE } from "./sampleNotes";
 
 export type DemoDistrict = {
   id: number;
@@ -72,7 +73,7 @@ export const DEMO_DISTRICTS: DemoDistrict[] = [
   { id: 14, name: "北角", region: "hong_kong_island", displayOrder: 6, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
 ];
 
-export const DEMO_OFFICES: DemoOffice[] = [
+const DEMO_OFFICE_SEED: DemoOffice[] = [
   {
     id: 1,
     providerId: 1,
@@ -362,13 +363,13 @@ export const DEMO_OFFICES: DemoOffice[] = [
   {
     id: 101,
     providerId: 1,
-    name: "北角 AIA Tower 商務中心",
+    name: "觀塘友邦九龍大樓商務中心",
     description:
-      "BizHKEx 自家營運中心，地址為北角電氣道 183 號 AIA Tower。現時房間已全部租出，歡迎登記候補。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 向團隊查詢候補及報價。",
-    districtId: 14,
-    address: "AIA Tower, 183 Electric Road, North Point, Hong Kong",
-    latitude: 22.2908,
-    longitude: 114.2002,
+      "BizHKEx 自家營運中心，位於觀塘巧明街100號 Landmark East 友邦九龍大樓（AIA Kowloon Tower）。現時房間已全部租出，歡迎登記候補。頁面相片為中心實景；正式租金仍待確認，請用 WhatsApp 向團隊查詢候補及報價。此中心並非觀塘道 418 號 APM（創紀之城五期）。",
+    districtId: 11,
+    address: "AIA Kowloon Tower, Landmark East, 100 How Ming Street, Kwun Tong, Hong Kong",
+    latitude: 22.31252,
+    longitude: 114.22237,
     thumbnailUrl: "/offices/aia/01-exterior.jpg",
     photoUrls: [
       "/offices/aia/01-exterior.jpg",
@@ -438,6 +439,20 @@ export const DEMO_OFFICES: DemoOffice[] = [
   },
 ];
 
+/** Sample rows stay in the catalogue, but rents, photos and ratings are labelled as placeholders. */
+export const DEMO_OFFICES: DemoOffice[] = DEMO_OFFICE_SEED.map((office) => {
+  if (office.inventoryKind === "operator") return office;
+  const description = office.description.includes("示範盤源")
+    ? office.description
+    : `${office.description} ${SAMPLE_DESCRIPTION_NOTE.zh}`;
+  return {
+    ...office,
+    description,
+    inventoryKind: "sample",
+    priceOnRequest: 1,
+  };
+});
+
 export const DEMO_PRICING_PACKAGES: DemoPricingPackage[] = [
   { id: 1, officeId: 1, deskType: "hot_desk", name: "靈活工位", description: "共享空間固定工位", price: 6800, currency: "HKD", billingCycle: "monthly", capacity: 1, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
   { id: 2, officeId: 1, deskType: "private_office", name: "獨立辦公室 (4人)", description: "海景獨立辦公室", price: 22000, currency: "HKD", billingCycle: "monthly", capacity: 4, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z" },
@@ -481,11 +496,11 @@ export function getDemoOfficePhotoRecords(officeId: number) {
 }
 
 export function getDemoPricingByOfficeId(officeId: number): DemoPricingPackage[] {
+  const office = getDemoOfficeById(officeId);
+  if (!office || getOfficeInventory(office).priceOnRequest) return [];
+
   const packages = DEMO_PRICING_PACKAGES.filter((pkg) => pkg.officeId === officeId);
   if (packages.length > 0) return packages;
-
-  const office = getDemoOfficeById(officeId);
-  if (!office || office.priceOnRequest) return [];
 
   return [
     {

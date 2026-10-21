@@ -1,4 +1,4 @@
-import type { DemoOffice } from "./demoOffices";
+import { SAMPLE_DESCRIPTION_NOTE } from "./sampleNotes";
 
 type Locale = "en" | "zh";
 
@@ -99,9 +99,9 @@ const OFFICE_EN: Record<
       "Island East transport hub at competitive rates. Modern offices for trading and professional services.",
   },
   101: {
-    name: "AIA Tower Serviced Centre, North Point",
+    name: "AIA Kowloon Tower Serviced Centre, Kwun Tong",
     description:
-      "A real centre operated by BizHKEx at AIA Tower, 183 Electric Road, North Point. The rooms are fully let — join the waitlist. Photos on this page are from the centre. Confirmed prices are not published yet — WhatsApp the team for the waitlist and a quote.",
+      "A real centre operated by BizHKEx at AIA Kowloon Tower (友邦九龍大樓), Landmark East, 100 How Ming Street, Kwun Tong. This is not the APM centre at 418 Kwun Tong Road. The rooms are fully let — join the waitlist. Photos on this page are from the centre. Confirmed prices are not published yet — WhatsApp the team for the waitlist and a quote.",
     occupancyNote: "Fully let — waitlist open",
   },
   102: {
@@ -149,6 +149,19 @@ export function getDistrictName(districtId: number, locale: Locale, fallback: st
   return DISTRICT_EN[districtId] ?? fallback;
 }
 
+function withSampleDisclaimer(
+  description: string | null | undefined,
+  locale: Locale,
+  isSample: boolean
+): string {
+  const text = description ?? "";
+  if (!isSample) return text;
+  const note = SAMPLE_DESCRIPTION_NOTE[locale];
+  if (locale === "zh" && text.includes("示範盤源")) return text;
+  if (locale === "en" && text.includes("Sample listing")) return text;
+  return text ? `${text} ${note}` : note;
+}
+
 export function localizeOffice<
   T extends {
     id: number;
@@ -156,16 +169,22 @@ export function localizeOffice<
     description?: string | null;
     amenitiesJson?: string[];
     occupancyNote?: string | null;
+    inventoryKind?: "operator" | "partner" | "sample" | null;
   },
 >(office: T, locale: Locale): T {
-  if (locale === "zh") return office;
+  const isSample = office.inventoryKind !== "operator" && office.inventoryKind !== "partner";
+  if (locale === "zh") {
+    return { ...office, description: withSampleDisclaimer(office.description, "zh", isSample) };
+  }
   const en = OFFICE_EN[office.id];
-  if (!en) return office;
+  if (!en) {
+    return { ...office, description: withSampleDisclaimer(office.description, "en", isSample) };
+  }
   const amenities = office.amenitiesJson ?? [];
   return {
     ...office,
     name: en.name,
-    description: en.description,
+    description: withSampleDisclaimer(en.description, "en", isSample),
     occupancyNote: en.occupancyNote ?? office.occupancyNote,
     amenitiesJson: en.amenities ?? amenities.map((a) => AMENITY_EN[a] ?? a),
   };

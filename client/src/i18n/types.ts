@@ -8,6 +8,7 @@ export type Translations = {
     siteName: string;
     tagline: string;
     documentTitle: string;
+    description: string;
   };
   nav: {
     findOffices: string;
@@ -137,6 +138,7 @@ export type Translations = {
     sampleBadge: string;
     awaitingPhotos: string;
     priceOnRequest: string;
+    samplePriceOnRequest: string;
     sampleNotice: string;
     amenityPlaceholder: string;
   };
@@ -165,6 +167,7 @@ export type Translations = {
     months: string;
     footerNote: string;
     sampleBadge: string;
+    unverifiedFigures: string;
     sellTitle: string;
     sellBody: string;
     sellCta: string;

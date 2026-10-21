@@ -45,9 +45,38 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
+    const meta = getTranslations(locale).meta;
     document.documentElement.lang = locale === "zh" ? "zh-Hant" : "en";
-    document.title = getTranslations(locale).meta.documentTitle;
-  }, [locale]);
+    document.title = meta.documentTitle;
+
+    const setNamed = (selector: string, attr: "name" | "property", key: string, content: string) => {
+      let el = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setNamed('meta[name="description"]', "name", "description", meta.description);
+    setNamed('meta[property="og:title"]', "property", "og:title", meta.documentTitle);
+    setNamed('meta[property="og:description"]', "property", "og:description", meta.description);
+    setNamed('meta[property="og:locale"]', "property", "og:locale", locale === "zh" ? "zh_HK" : "en_HK");
+    setNamed('meta[name="twitter:title"]', "name", "twitter:title", meta.documentTitle);
+    setNamed('meta[name="twitter:description"]', "name", "twitter:description", meta.description);
+
+    const path = location.startsWith("/") ? location : `/${location}`;
+    const canonicalUrl = `https://www.bizhkex.com${path === "/" ? "/" : path}`;
+    setNamed('meta[property="og:url"]', "property", "og:url", canonicalUrl);
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+  }, [locale, location]);
 
   const value = useMemo(
     () => ({
