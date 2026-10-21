@@ -4,8 +4,9 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Star, MapPin, Phone, ImageOff } from "lucide-react";
+import { Star, MapPin, Phone, ImageOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { getVendorSignupContent } from "@/i18n/pages/vendorSignupContent";
 import Footer from "@/components/Footer";
 import SiteNav from "@/components/SiteNav";
 import { useWhatsApp } from "@/contexts/WhatsAppContext";
@@ -21,6 +22,7 @@ export default function OfficeDetail() {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
   const { t, path, locale } = useLocale();
+  const companyLabel = getVendorSignupContent(locale).nameLabel;
   const officeId = id && !isNaN(parseInt(id)) ? parseInt(id) : 0;
 
   const [formData, setFormData] = useState({
@@ -38,11 +40,11 @@ export default function OfficeDetail() {
   const trackView = trpc.offices.trackView.useMutation();
   const createInquiry = trpc.inquiries.create.useMutation({
     onSuccess: () => {
-      toast.success("Inquiry submitted! We'll contact you soon.");
+      toast.success(t.business.inquirySuccess);
       setFormData({ name: "", email: "", phone: "", company: "", message: "" });
     },
-    onError: (error) => {
-      toast.error(error.message || "Failed to submit inquiry");
+    onError: () => {
+      toast.error(t.business.inquiryError);
     },
   });
 
@@ -153,7 +155,7 @@ export default function OfficeDetail() {
                 )}
               </div>
               <div className="flex items-start justify-between gap-4">
-                <h1 className="text-3xl md:text-4xl font-black text-gray-900">{displayOffice.name}</h1>
+                <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">{displayOffice.name}</h1>
                 {showPromo && (
                   <PromotionBadge isPromoted discountPercentage={Number(office.discountPercentage) || 0} />
                 )}
@@ -242,7 +244,7 @@ export default function OfficeDetail() {
 
             {pricing.length > 0 && !pricingPackages.length && !meta.priceOnRequest && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">Pricing Packages</h2>
+                <h2 className="text-2xl font-semibold text-gray-900">{t.officeDetail.pricing}</h2>
                 <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
                   <table className="data-table">
                     <thead>
@@ -274,13 +276,13 @@ export default function OfficeDetail() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 md:p-8 sticky top-24 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">{t.officeDetail.getInTouch}</h2>
+            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 md:p-8 sticky top-24">
+              <h2 className="text-xl font-semibold text-neutral-900 mb-6">{t.officeDetail.getInTouch}</h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Name *
+                  <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                    {t.business.inquiryName} *
                   </label>
                   <Input
                     type="text"
@@ -290,13 +292,13 @@ export default function OfficeDetail() {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     className="input-base"
-                    placeholder="Your name"
+                    placeholder={t.business.inquiryName}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Email *
+                  <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                    {t.business.inquiryEmail} *
                   </label>
                   <Input
                     type="email"
@@ -306,13 +308,13 @@ export default function OfficeDetail() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     className="input-base"
-                    placeholder="your@email.com"
+                    placeholder="name@email.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Phone
+                  <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                    {t.business.inquiryPhone}
                   </label>
                   <Input
                     type="tel"
@@ -321,13 +323,13 @@ export default function OfficeDetail() {
                       setFormData({ ...formData, phone: e.target.value })
                     }
                     className="input-base"
-                    placeholder="+852 1234 5678"
+                    placeholder="+852"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Company
+                  <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                    {companyLabel}
                   </label>
                   <Input
                     type="text"
@@ -336,13 +338,13 @@ export default function OfficeDetail() {
                       setFormData({ ...formData, company: e.target.value })
                     }
                     className="input-base"
-                    placeholder="Your company"
+                    placeholder={companyLabel}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Message *
+                  <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                    {t.business.inquiryMessage} *
                   </label>
                   <Textarea
                     required
@@ -351,7 +353,7 @@ export default function OfficeDetail() {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="input-base min-h-28"
-                    placeholder="Tell us about your space requirements..."
+                    placeholder={t.home.leadRequirementsPlaceholder}
                   />
                 </div>
 
@@ -360,7 +362,11 @@ export default function OfficeDetail() {
                   disabled={createInquiry.isPending}
                   className="btn-primary w-full"
                 >
-                  {createInquiry.isPending ? "Submitting..." : "Submit Inquiry"}
+                  {createInquiry.isPending ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    t.business.inquirySubmit
+                  )}
                 </Button>
               </form>
 

@@ -43,22 +43,22 @@ export default function Footer({ variant = "light" }: FooterProps) {
 
   if (isDark) {
     return (
-      <footer className="bg-[#050810] border-t border-white/[0.06] text-white">
+      <footer className="bg-card border-t border-border text-foreground">
         <div className="container max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
             <div className="lg:col-span-4 space-y-5">
-              <h3 className="text-2xl font-black tracking-tight">{t.meta.siteName}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
+              <h3 className="text-xl font-semibold tracking-tight">{t.meta.siteName}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
             </div>
             <div className="lg:col-span-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-500 mb-5">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
                 {t.footer.navigation}
               </h4>
               <ul className="space-y-3">
                 {navigationLinks.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}>
-                      <span className="text-gray-500 hover:text-white transition-colors text-sm">
+                      <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                         {link.label}
                       </span>
                     </Link>
@@ -67,23 +67,23 @@ export default function Footer({ variant = "light" }: FooterProps) {
               </ul>
             </div>
             <div className="lg:col-span-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-500 mb-5">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
                 {t.footer.contact}
               </h4>
-              <div className="space-y-2 text-sm text-gray-500">
-                <a href="tel:+85235653138" className="block hover:text-white transition-colors">
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <a href="tel:+85235653138" className="block hover:text-foreground transition-colors">
                   +852 3565 3138
                 </a>
-                <a href="mailto:info@bizhkex.com" className="block hover:text-white transition-colors">
+                <a href="mailto:info@bizhkex.com" className="block hover:text-foreground transition-colors">
                   info@bizhkex.com
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="border-t border-white/[0.06]">
+        <div className="border-t border-border">
           <div className="container max-w-7xl mx-auto px-6 lg:px-8 py-6">
-            <p className="text-gray-600 text-sm text-center">{copyright}</p>
+            <p className="text-muted-foreground text-sm text-center">{copyright}</p>
           </div>
         </div>
       </footer>
@@ -95,7 +95,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
       <div className="container max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           <div className="lg:col-span-4 space-y-5">
-            <h3 className="text-2xl font-black tracking-tight">{t.meta.siteName}</h3>
+            <h3 className="text-xl font-semibold tracking-tight">{t.meta.siteName}</h3>
             <p className="text-emerald-200/80 text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
             <div className="space-y-3 pt-1">
               <a

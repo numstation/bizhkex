@@ -72,75 +72,68 @@ export default function Home() {
     <div className={theme.page}>
       <SiteNav />
 
-      <section className="container py-12 md:py-20">
-        <div className="mb-10 max-w-4xl">
-          <p className={`${theme.kicker} text-sm font-semibold tracking-widest uppercase mb-4`}>
+      <section className="container pt-16 pb-14 md:pt-24 md:pb-20">
+        <div className="mb-12 md:mb-16 max-w-3xl">
+          <p className="text-primary text-xs font-medium tracking-[0.16em] uppercase mb-5">
             {t.home.heroKicker}
           </p>
-          <h1 className={`text-4xl md:text-6xl font-black leading-tight mb-6 ${theme.heading}`}>{t.home.heroTitle}</h1>
-          <p className={`text-lg md:text-xl ${theme.muted} leading-relaxed`}>{t.home.heroSubtitle}</p>
+          <h1 className={`text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-5 ${theme.heading}`}>
+            {t.home.heroTitle}
+          </h1>
+          <p className={`text-base md:text-lg ${theme.muted} leading-relaxed max-w-2xl`}>{t.home.heroSubtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link href={path("/offices")} className="md:col-span-1 lg:col-span-1">
-            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-all group cursor-pointer`}>
-              <div className="w-11 h-11 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center mb-4">
-                <Building2 className={`w-6 h-6 ${theme.accent}`} />
-              </div>
-              <h3 className={`text-xl font-bold mb-2 ${theme.heading}`}>{t.home.officesCardTitle}</h3>
-              <p className={`${theme.subtle} text-sm mb-4`}>{t.home.officesCardDesc}</p>
-              <span className={`${theme.accent} text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all`}>
+            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-colors`}>
+              <Building2 className="w-5 h-5 text-primary mb-5" strokeWidth={1.75} />
+              <h3 className={`text-lg font-semibold mb-2 ${theme.heading}`}>{t.home.officesCardTitle}</h3>
+              <p className={`${theme.subtle} text-sm leading-relaxed mb-5`}>{t.home.officesCardDesc}</p>
+              <span className="text-primary text-sm font-medium flex items-center gap-1">
                 {t.home.officesCardCta} <ArrowRight className="w-4 h-4" />
               </span>
             </div>
           </Link>
 
           <Link href={path("/business-marketplace")} className="md:col-span-1 lg:col-span-1">
-            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-all group cursor-pointer`}>
-              <div className="w-11 h-11 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center mb-4">
-                <Store className={`w-6 h-6 ${theme.accent}`} />
-              </div>
-              <h3 className={`text-xl font-bold mb-2 ${theme.heading}`}>{t.home.businessCardTitle}</h3>
-              <p className={`${theme.subtle} text-sm mb-4`}>{t.home.businessCardDesc}</p>
-              <span className={`${theme.accent} text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all`}>
+            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-colors`}>
+              <Store className="w-5 h-5 text-primary mb-5" strokeWidth={1.75} />
+              <h3 className={`text-lg font-semibold mb-2 ${theme.heading}`}>{t.home.businessCardTitle}</h3>
+              <p className={`${theme.subtle} text-sm leading-relaxed mb-5`}>{t.home.businessCardDesc}</p>
+              <span className="text-primary text-sm font-medium flex items-center gap-1">
                 {t.home.businessCardCta} <ArrowRight className="w-4 h-4" />
               </span>
             </div>
           </Link>
 
           <Link href={path("/providers")} className="md:col-span-2 lg:col-span-2">
-            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-all group cursor-pointer`}>
-              <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className={`w-5 h-5 ${theme.accent}`} />
-                <h3 className={`font-bold ${theme.heading}`}>{t.home.partnerTitle}</h3>
+            <div className={`${theme.glass} p-6 h-full ${theme.cardHover} transition-colors`}>
+              <div className="flex items-center gap-2 mb-3">
+                <TrendingUp className="w-4 h-4 text-primary" strokeWidth={1.75} />
+                <h3 className={`text-lg font-semibold ${theme.heading}`}>{t.home.partnerTitle}</h3>
               </div>
-              <p className={`${theme.muted} text-sm mb-3`}>{t.home.partnerBody}</p>
-              <p className={`text-sm font-semibold ${theme.accent} mb-4`}>{t.home.partnerCommission}</p>
-              <span className={`${theme.accent} text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all`}>
+              <p className={`${theme.muted} text-sm leading-relaxed mb-3`}>{t.home.partnerBody}</p>
+              <p className="text-sm font-medium text-primary mb-5">{t.home.partnerCommission}</p>
+              <span className="text-primary text-sm font-medium flex items-center gap-1">
                 {t.home.partnerCta} <ArrowRight className="w-4 h-4" />
               </span>
             </div>
           </Link>
         </div>
 
-        <div className={`${theme.glass} mt-4 md:mt-5 overflow-hidden`}>
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x ${theme.divider}`}
-          >
+        <div className={`${theme.glass} mt-4 overflow-hidden`}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
             {valueProps.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex items-start gap-4 p-5 md:p-6 min-w-0">
-                <div className="w-11 h-11 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center shrink-0">
-                  <Icon className={`w-6 h-6 ${theme.accent}`} />
+              <div key={title} className="p-6 md:p-7 min-w-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon className="w-4 h-4 text-primary shrink-0" strokeWidth={1.75} />
+                  <h4 className={`font-semibold text-base ${theme.heading}`}>{title}</h4>
                 </div>
-                <div className="min-w-0">
-                  <h4 className={`font-bold text-base mb-1 ${theme.heading}`}>{title}</h4>
-                  <p className={`${theme.subtle} text-sm leading-relaxed`}>{desc}</p>
-                </div>
+                <p className={`${theme.subtle} text-sm leading-relaxed`}>{desc}</p>
               </div>
             ))}
           </div>
         </div>
-
       </section>
 
       <section id="lead-form" className="container pb-16 md:pb-24">
@@ -155,26 +148,24 @@ export default function Home() {
       </section>
 
       <section id="how-it-works" className="container pb-16 md:pb-24">
-        <h2 className={`text-3xl font-black mb-8 text-center ${theme.heading}`}>{t.home.howTitle}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <h2 className={`text-2xl md:text-3xl font-semibold mb-10 ${theme.heading}`}>{t.home.howTitle}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {howSteps.map((item) => (
-            <div key={item.step} className={`${theme.glass} p-6`}>
-              <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center mb-4">
-                {item.step}
-              </div>
-              <h3 className={`text-lg font-bold mb-2 ${theme.heading}`}>{item.title}</h3>
-              <p className={`${theme.subtle} text-sm`}>{item.desc}</p>
+            <div key={item.step} className="border-t border-border pt-5">
+              <p className="text-sm font-semibold text-primary tabular-nums mb-3">{item.step.padStart(2, "0")}</p>
+              <h3 className={`text-lg font-semibold mb-2 ${theme.heading}`}>{item.title}</h3>
+              <p className={`${theme.subtle} text-sm leading-relaxed`}>{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section id="faq" className="container pb-16 md:pb-24 max-w-3xl">
-        <h2 className={`text-3xl font-black mb-8 text-center ${theme.heading}`}>{t.home.faqTitle}</h2>
+        <h2 className={`text-2xl md:text-3xl font-semibold mb-8 ${theme.heading}`}>{t.home.faqTitle}</h2>
         <Accordion type="single" collapsible className="space-y-3">
           {faqItems.map((faq: { id: number; question: string; answer: string }) => (
-            <AccordionItem key={faq.id} value={`faq-${faq.id}`} className={`${theme.glass} px-6 border-none`}>
-              <AccordionTrigger className={`hover:no-underline font-semibold text-left ${theme.heading}`}>
+            <AccordionItem key={faq.id} value={`faq-${faq.id}`} className={`${theme.glass} px-5`}>
+              <AccordionTrigger className={`hover:no-underline font-medium text-left ${theme.heading}`}>
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className={`${theme.accordionAnswer} pb-4`}>{faq.answer}</AccordionContent>
@@ -183,29 +174,23 @@ export default function Home() {
         </Accordion>
       </section>
 
-      <section className="container pb-20 text-center">
-        <div className={`${theme.glass} p-10 md:p-14`}>
-          <h2 className={`text-3xl md:text-4xl font-black mb-4 ${theme.heading}`}>{t.home.ctaTitle}</h2>
+      <section className="container pb-20">
+        <div className="border-t border-border pt-12 md:pt-16 text-center">
+          <h2 className={`text-2xl md:text-3xl font-semibold mb-3 ${theme.heading}`}>{t.home.ctaTitle}</h2>
           <p className={`${theme.muted} mb-8 max-w-xl mx-auto`}>{t.home.ctaSubtitle}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href={path("/offices")}>
-              <Button className="bg-emerald-600 hover:bg-emerald-500 font-bold py-6 px-8 text-lg w-full sm:w-auto">
+              <Button className={`${theme.primaryBtn} h-11 px-6 text-base w-full sm:w-auto`}>
                 {t.home.ctaOffices}
               </Button>
             </Link>
             <Link href={path("/business-marketplace")}>
-              <Button
-                variant="outline"
-                className={`${theme.outlineBtn} font-bold py-6 px-8 text-lg w-full sm:w-auto`}
-              >
+              <Button variant="outline" className={`${theme.outlineBtn} h-11 px-6 text-base font-semibold w-full sm:w-auto`}>
                 {t.home.ctaBusiness}
               </Button>
             </Link>
             <Link href={path("/providers")}>
-              <Button
-                variant="outline"
-                className={`${theme.outlineBtn} font-bold py-6 px-8 text-lg w-full sm:w-auto`}
-              >
+              <Button variant="outline" className={`${theme.outlineBtn} h-11 px-6 text-base font-semibold w-full sm:w-auto`}>
                 {t.home.ctaProvider}
               </Button>
             </Link>

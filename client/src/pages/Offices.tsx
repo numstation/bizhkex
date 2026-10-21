@@ -69,11 +69,11 @@ export default function Offices() {
     <div className={theme.page}>
       <SiteNav />
 
-      <section className="container py-12 md:py-16">
-        <p className={`${theme.kicker} text-sm font-semibold tracking-widest uppercase mb-3`}>
+      <section className="container pt-14 pb-10 md:pt-20 md:pb-12">
+        <p className="text-primary text-xs font-medium tracking-[0.16em] uppercase mb-4">
           {t.offices.kicker}
         </p>
-        <h1 className={`text-4xl md:text-5xl font-black mb-4 ${theme.heading}`}>{t.offices.title}</h1>
+        <h1 className={`text-3xl md:text-4xl font-semibold tracking-tight mb-4 ${theme.heading}`}>{t.offices.title}</h1>
         <p className={`${theme.muted} max-w-2xl`}>{t.offices.subtitle}</p>
       </section>
 
@@ -87,7 +87,7 @@ export default function Offices() {
               onChange={(e) => setSearchKeyword(e.target.value)}
               className={`flex-1 ${theme.input}`}
             />
-            <Button className="bg-emerald-600 hover:bg-emerald-500 font-bold px-8">{t.offices.search}</Button>
+            <Button className={`${theme.primaryBtn} px-6`}>{t.offices.search}</Button>
           </div>
 
           <div className="flex gap-2 flex-wrap mb-6">
@@ -96,10 +96,8 @@ export default function Offices() {
               <button
                 key={key}
                 onClick={() => setSortBy(sortBy === key ? undefined : key)}
-                className={`px-4 py-2 text-sm rounded-lg border transition-all ${
-                  sortBy === key
-                    ? "border-emerald-500 bg-emerald-100 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-400"
-                    : theme.filterInactive
+                className={`px-3.5 py-1.5 text-sm rounded-lg border transition-colors ${
+                  sortBy === key ? theme.filterActive : theme.filterInactive
                 }`}
               >
                 {sortLabels[key]}
@@ -151,7 +149,7 @@ export default function Offices() {
 
         {featuredOffices.length > 0 && (
           <div className="mb-10">
-            <h2 className={`text-2xl font-black mb-2 ${theme.heading}`}>{t.offices.featuredTitle}</h2>
+            <h2 className={`text-xl md:text-2xl font-semibold mb-2 ${theme.heading}`}>{t.offices.featuredTitle}</h2>
             <p className={`${theme.muted} text-sm mb-5 max-w-2xl`}>{t.offices.featuredSubtitle}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredOffices.map((office) => (
@@ -173,7 +171,7 @@ export default function Offices() {
           <div>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
               <div>
-                <h2 className={`text-2xl font-black mb-2 ${theme.heading}`}>{t.offices.sampleTitle}</h2>
+                <h2 className={`text-xl md:text-2xl font-semibold mb-2 ${theme.heading}`}>{t.offices.sampleTitle}</h2>
                 <p className={`${theme.muted} text-sm max-w-2xl`}>{t.offices.sampleSubtitle}</p>
               </div>
               <Link href={path("/providers")}>
@@ -195,7 +193,7 @@ export default function Offices() {
             <p className="mb-4">{t.offices.emptyTitle}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                className="bg-emerald-600 hover:bg-emerald-500"
+                className={theme.primaryBtn}
                 onClick={() => openWhatsApp(t.offices.whatsappQuery)}
               >
                 {t.offices.emptyWhatsapp}

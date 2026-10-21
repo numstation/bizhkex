@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Calculator, Sparkles } from "lucide-react";
+import { Calculator } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -120,17 +120,12 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
 
   return (
     <div className={`${theme.glass} p-5 md:p-6 h-full min-w-0 overflow-hidden ${className}`}>
-      <div className="flex items-start gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center shrink-0">
-          <Calculator className={`w-5 h-5 ${theme.accent}`} />
+      <div className="mb-5 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <Calculator className="w-4 h-4 text-primary shrink-0" strokeWidth={1.75} />
+          <h3 className={`text-lg font-semibold ${theme.heading}`}>{t.home.calculatorTitle}</h3>
         </div>
-        <div className="min-w-0">
-          <h3 className={`text-lg font-bold flex flex-wrap items-center gap-2 ${theme.heading}`}>
-            {t.home.calculatorTitle}
-            <Sparkles className={`w-4 h-4 shrink-0 ${theme.accent}`} />
-          </h3>
-          <p className={`${theme.subtle} text-xs leading-relaxed break-words`}>{t.home.calculatorSubtitle}</p>
-        </div>
+        <p className={`${theme.subtle} text-xs leading-relaxed break-words`}>{t.home.calculatorSubtitle}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-5">
@@ -221,11 +216,11 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
                   </div>
                   <div className="flex gap-2 h-2">
                     <div
-                      className="bg-red-500/40 rounded-full transition-all duration-500"
+                      className="bg-destructive/40 rounded-full transition-all duration-500"
                       style={{ width: `${(row.traditional / result.maxBar) * 100}%` }}
                     />
                     <div
-                      className="bg-emerald-500/60 rounded-full transition-all duration-500"
+                      className="bg-primary/70 rounded-full transition-all duration-500"
                       style={{ width: `${(row.serviced / result.maxBar) * 100}%` }}
                     />
                   </div>
@@ -236,11 +231,11 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
 
           <div className="flex flex-wrap gap-3 text-xs pt-1">
             <span className={`flex items-center gap-1.5 ${theme.subtle}`}>
-              <span className="w-3 h-3 rounded-full bg-red-500/40 shrink-0" />
+              <span className="w-3 h-3 rounded-full bg-destructive/40 shrink-0" />
               {t.home.calcTraditional}
             </span>
             <span className={`flex items-center gap-1.5 ${theme.subtle}`}>
-              <span className="w-3 h-3 rounded-full bg-emerald-500/60 shrink-0" />
+              <span className="w-3 h-3 rounded-full bg-primary/70 shrink-0" />
               {t.home.calcServiced}
             </span>
           </div>
@@ -266,7 +261,7 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
 
           <div className={`${theme.savingsHighlight} p-4 min-w-0`}>
             <p className={`text-xs sm:text-sm ${theme.muted}`}>{t.home.estimatedSaving}</p>
-            <p className={`text-2xl sm:text-3xl font-black tabular-nums break-all ${theme.accent} mt-1`}>
+            <p className={`text-2xl sm:text-3xl font-semibold tabular-nums break-all ${theme.accent} mt-1`}>
               {isCalculating ? "—" : formatHKD(result.monthlySaving)}
             </p>
             <p className={`text-[11px] ${theme.subtle} mt-1.5 leading-relaxed`}>{t.home.savingHint}</p>

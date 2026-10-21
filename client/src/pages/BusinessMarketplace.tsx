@@ -59,10 +59,10 @@ export default function BusinessMarketplace() {
         <div className="container py-12 md:py-16">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div className="max-w-3xl">
-              <p className={`${theme.kicker} text-sm font-semibold tracking-widest uppercase mb-3`}>
+              <p className="text-primary text-xs font-medium tracking-[0.16em] uppercase mb-4">
                 {t.business.kicker}
               </p>
-              <h1 className={`text-4xl md:text-5xl font-black tracking-tight mb-4 ${theme.heading}`}>
+              <h1 className={`text-3xl md:text-4xl font-semibold tracking-tight mb-4 ${theme.heading}`}>
                 {t.business.title}
               </h1>
               <p className={`${theme.muted} text-lg leading-relaxed`}>{t.business.subtitle}</p>
@@ -167,7 +167,7 @@ export default function BusinessMarketplace() {
               </div>
             </div>
             <Link href={path("/provider-signup")}>
-              <Button className="bg-emerald-600 hover:bg-emerald-500 font-bold">
+              <Button className={theme.primaryBtn}>
                 {t.business.sellCta}
               </Button>
             </Link>
@@ -179,7 +179,7 @@ export default function BusinessMarketplace() {
             <div className={`text-center py-16 ${theme.muted}`}>
               <p className="mb-4">{t.business.empty}</p>
               <Link href={path("/provider-signup")}>
-                <Button className="bg-emerald-600 hover:bg-emerald-500">{t.business.sellCta}</Button>
+                <Button className={theme.primaryBtn}>{t.business.sellCta}</Button>
               </Link>
             </div>
           ) : (

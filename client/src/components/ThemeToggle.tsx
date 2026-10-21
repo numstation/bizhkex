@@ -1,9 +1,8 @@
 import { Moon, Sun, Monitor } from "lucide-react";
 import { useTheme, type ThemePreference } from "@/contexts/ThemeContext";
 
-export default function ThemeToggle({ theme: surface = "dark" }: { theme?: "light" | "dark" }) {
+export default function ThemeToggle({ theme: _surface = "dark" }: { theme?: "light" | "dark" }) {
   const { preference, setPreference } = useTheme();
-  const isDarkSurface = surface === "dark";
 
   const options: { value: ThemePreference; icon: typeof Sun; label: string }[] = [
     { value: "light", icon: Sun, label: "Light" },
@@ -13,11 +12,7 @@ export default function ThemeToggle({ theme: surface = "dark" }: { theme?: "ligh
 
   return (
     <div
-      className={`flex items-center gap-0.5 rounded-lg p-0.5 ${
-        isDarkSurface
-          ? "bg-white/[0.04] border border-white/[0.08]"
-          : "bg-gray-100 border border-gray-200"
-      }`}
+      className="flex items-center gap-0.5 rounded-lg border border-border bg-muted p-0.5"
       title="Theme"
     >
       {options.map(({ value, icon: Icon, label }) => (
@@ -28,10 +23,8 @@ export default function ThemeToggle({ theme: surface = "dark" }: { theme?: "ligh
           onClick={() => setPreference(value)}
           className={`p-1.5 rounded-md transition-colors ${
             preference === value
-              ? "bg-emerald-600 text-white"
-              : isDarkSurface
-                ? "text-gray-400 hover:text-white"
-                : "text-gray-500 hover:text-gray-900"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Icon className="w-3.5 h-3.5" />

@@ -3,11 +3,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* System UI only — Inter is named nowhere and not loaded.
+   Latin: ui-sans-serif / system-ui. Traditional Chinese: PingFang HK,
+   then Noto Sans TC, then Microsoft JhengHei. */
 @theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK", "PingFang TC", "Noto Sans TC", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --shadow-sm: 0 1px 2px rgb(16 24 20 / 0.04);
+  --shadow-md: 0 8px 20px rgb(16 24 20 / 0.06);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -53,64 +59,64 @@
   --chart-4: oklch(0.42 0.14 155);
   --chart-5: oklch(0.32 0.12 155);
   --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0.01 155);
+  --background: oklch(0.984 0.003 155);
+  --foreground: oklch(0.2 0.015 155);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 155);
+  --card-foreground: oklch(0.2 0.015 155);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 155);
-  --secondary: oklch(0.97 0.01 155);
-  --secondary-foreground: oklch(0.3 0.02 155);
-  --muted: oklch(0.96 0.01 155);
-  --muted-foreground: oklch(0.45 0.02 155);
-  --accent: oklch(0.52 0.14 155);
-  --accent-foreground: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.015 155);
+  --secondary: oklch(0.97 0.006 155);
+  --secondary-foreground: oklch(0.28 0.02 155);
+  --muted: oklch(0.965 0.005 155);
+  --muted-foreground: oklch(0.46 0.02 155);
+  --accent: oklch(0.96 0.018 155);
+  --accent-foreground: oklch(0.32 0.05 155);
   --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.90 0.01 155);
-  --input: oklch(1 0 0);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.006 155);
+  --input: oklch(0.92 0.006 155);
   --ring: oklch(0.52 0.14 155);
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.15 0.01 155);
-  --sidebar-accent: oklch(0.52 0.14 155);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.90 0.01 155);
+  --sidebar: oklch(0.99 0.003 155);
+  --sidebar-foreground: oklch(0.2 0.015 155);
+  --sidebar-accent: oklch(0.95 0.02 155);
+  --sidebar-accent-foreground: oklch(0.28 0.05 155);
+  --sidebar-border: oklch(0.92 0.006 155);
   --sidebar-ring: oklch(0.52 0.14 155);
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --primary: oklch(0.74 0.13 155);
+  --primary-foreground: oklch(0.18 0.04 155);
+  --sidebar-primary: oklch(0.74 0.13 155);
+  --sidebar-primary-foreground: oklch(0.18 0.04 155);
+  --background: oklch(0.17 0.01 155);
+  --foreground: oklch(0.95 0.008 155);
+  --card: oklch(0.21 0.012 155);
+  --card-foreground: oklch(0.95 0.008 155);
+  --popover: oklch(0.21 0.012 155);
+  --popover-foreground: oklch(0.95 0.008 155);
+  --secondary: oklch(0.25 0.012 155);
+  --secondary-foreground: oklch(0.92 0.008 155);
+  --muted: oklch(0.25 0.012 155);
+  --muted-foreground: oklch(0.72 0.015 155);
+  --accent: oklch(0.28 0.025 155);
+  --accent-foreground: oklch(0.95 0.008 155);
+  --destructive: oklch(0.68 0.17 22);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.74 0.13 155);
+  --chart-1: oklch(0.74 0.13 155);
+  --chart-2: oklch(0.64 0.12 155);
+  --chart-3: oklch(0.54 0.12 155);
+  --chart-4: oklch(0.44 0.1 155);
+  --chart-5: oklch(0.36 0.08 155);
+  --sidebar: oklch(0.19 0.012 155);
+  --sidebar-foreground: oklch(0.95 0.008 155);
+  --sidebar-accent: oklch(0.28 0.025 155);
+  --sidebar-accent-foreground: oklch(0.95 0.008 155);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.74 0.13 155);
 }
 
 @layer base {
@@ -118,20 +124,19 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-background text-foreground font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-semibold tracking-tight;
   }
-  h1 { @apply text-5xl md:text-6xl; }
-  h2 { @apply text-4xl md:text-5xl; }
-  h3 { @apply text-3xl md:text-4xl; }
-  h4 { @apply text-2xl md:text-3xl; }
-  h5 { @apply text-xl md:text-2xl; }
-  h6 { @apply text-lg md:text-xl; }
+  h1 { @apply text-3xl md:text-4xl; }
+  h2 { @apply text-2xl md:text-3xl; }
+  h3 { @apply text-xl md:text-2xl; }
+  h4 { @apply text-lg md:text-xl; }
+  h5 { @apply text-base md:text-lg; }
+  h6 { @apply text-sm md:text-base; }
   p { @apply text-base leading-relaxed; }
-  a { @apply text-foreground no-underline hover:opacity-80 transition-opacity; }
+  a { @apply text-foreground no-underline; }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -146,19 +151,6 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
@@ -188,46 +180,43 @@
   }
 }
 
-/* ============ INTERNATIONAL TYPOGRAPHIC STYLE COMPONENTS ============ */
-
 @layer components {
-  /* Button styles - clean and functional */
   .btn-primary {
-    @apply bg-emerald-600 text-white px-8 py-3 font-semibold hover:bg-emerald-700 transition-colors rounded-lg;
+    @apply bg-primary text-primary-foreground px-6 py-2.5 font-semibold hover:bg-primary/90 transition-colors rounded-lg;
   }
 
   .btn-primary-red {
-    @apply bg-emerald-600 text-white px-8 py-3 font-semibold hover:bg-emerald-700 transition-colors rounded-lg;
+    @apply bg-primary text-primary-foreground px-6 py-2.5 font-semibold hover:bg-primary/90 transition-colors rounded-lg;
   }
 
   .btn-secondary {
-    @apply bg-white text-gray-900 border border-gray-300 px-8 py-3 font-semibold hover:bg-gray-50 transition-colors rounded-lg;
+    @apply bg-background text-foreground border border-border px-6 py-2.5 font-semibold hover:bg-muted transition-colors rounded-lg;
   }
 
   .btn-ghost {
-    @apply text-gray-900 hover:bg-gray-100 px-4 py-2 transition-colors;
+    @apply text-foreground hover:bg-muted px-4 py-2 transition-colors rounded-lg;
   }
 
-  /* Input styles */
+  /* Light-locked fields. Office detail still paints a white page, so these
+     stay neutral instead of tracking .dark surfaces. */
   .input-base {
-    @apply w-full px-4 py-3 border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 rounded-lg;
+    @apply w-full px-3.5 py-2.5 border border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400 shadow-none focus:outline-none focus:ring-2 focus:ring-emerald-700/25 focus:border-emerald-700 rounded-lg dark:border-neutral-200 dark:bg-white dark:text-neutral-900;
   }
 
-  /* Professional data table */
   .data-table {
-    @apply w-full text-sm border border-gray-200 rounded-xl overflow-hidden;
+    @apply w-full text-sm border border-neutral-200 rounded-lg overflow-hidden;
   }
 
   .data-table thead {
-    @apply bg-gray-50 border-b border-gray-200;
+    @apply bg-neutral-50 border-b border-neutral-200;
   }
 
   .data-table th {
-    @apply px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500;
+    @apply px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-neutral-500;
   }
 
   .data-table td {
-    @apply px-5 py-4 text-gray-700 border-b border-gray-100;
+    @apply px-5 py-4 text-neutral-700 border-b border-neutral-100;
   }
 
   .data-table tbody tr:last-child td {
@@ -235,16 +224,15 @@
   }
 
   .data-table tbody tr:hover {
-    @apply bg-emerald-50/40;
+    @apply bg-neutral-50;
   }
 
-  /* Typography utilities */
   .text-display {
-    @apply text-5xl md:text-6xl font-bold tracking-tighter;
+    @apply text-4xl md:text-5xl font-semibold tracking-tight;
   }
 
   .text-headline {
-    @apply text-3xl md:text-4xl font-bold;
+    @apply text-2xl md:text-3xl font-semibold;
   }
 
   .text-subheading {
@@ -256,17 +244,15 @@
   }
 
   .text-caption {
-    @apply text-sm text-gray-600;
+    @apply text-sm text-muted-foreground;
   }
 
-  /* Fine divider */
   .fine-divider {
-    @apply h-px bg-black;
+    @apply h-px bg-border;
   }
 
-  /* Green accent square - signature element */
   .accent-square {
-    @apply bg-emerald-600 absolute;
+    @apply bg-primary absolute;
   }
 
   /* Section spacing - generous negative space */
@@ -278,12 +264,10 @@
     @apply py-8 md:py-12;
   }
 
-  /* Grid system - mathematical precision */
   .grid-base {
     @apply grid gap-8 md:gap-12;
   }
 
-  /* Asymmetric layout */
   .asymmetric-grid {
     @apply grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12;
   }
@@ -304,20 +288,6 @@
     @apply py-8 md:py-12 lg:py-16;
   }
 
-  /* Color utilities */
-  .text-primary {
-    @apply text-black;
-  }
-
-  .text-accent {
-    @apply text-emerald-600;
-  }
-
-  .bg-accent {
-    @apply bg-emerald-600;
-  }
-
-  /* Opacity utilities for hover states */
   .hover-opacity {
     @apply hover:opacity-75 transition-opacity;
   }

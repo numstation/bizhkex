@@ -1,6 +1,6 @@
 import { useTheme } from "@/contexts/ThemeContext";
 
-/** Shared light/dark surface tokens for public fintech pages. */
+/** Shared light/dark surface tokens for public marketing and listing pages. */
 export function usePublicTheme() {
   const { theme, preference } = useTheme();
   const isDark = theme === "dark";
@@ -8,50 +8,43 @@ export function usePublicTheme() {
   return {
     isDark,
     preference,
-    page: "min-h-screen bg-gray-50 text-gray-900 dark:bg-[#070A13] dark:text-white",
+    page: "min-h-screen bg-background text-foreground",
     glass:
-      "bg-white border border-gray-200 shadow-sm rounded-2xl dark:bg-white/[0.03] dark:backdrop-blur-md dark:border-white/[0.08] dark:shadow-none",
-    glassInner:
-      "bg-gray-50 border border-gray-100 rounded-xl dark:bg-white/[0.02] dark:border-white/[0.05]",
-    statCard:
-      "bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-white/[0.03] dark:border-white/[0.08]",
-    metricBox:
-      "bg-gray-50 border border-gray-200 rounded-xl dark:bg-white/[0.04] dark:border-white/[0.06]",
-    metricBoxAccent:
-      "bg-emerald-50 border border-emerald-200 rounded-xl dark:bg-emerald-500/10 dark:border-emerald-500/20",
-    savingsHighlight:
-      "bg-gradient-to-br from-emerald-50 to-emerald-100/80 border border-emerald-200 rounded-xl dark:from-emerald-600/20 dark:to-emerald-900/10 dark:border-emerald-500/25",
-    heading: "text-gray-900 dark:text-white",
-    body: "text-gray-700 dark:text-gray-300",
-    muted: "text-gray-600 dark:text-gray-400",
-    subtle: "text-gray-500 dark:text-gray-500",
-    label: "text-gray-600 dark:text-gray-500",
-    kicker: "text-emerald-700 dark:text-emerald-400",
-    accent: "text-emerald-700 dark:text-emerald-400",
-    accentSolid: "text-emerald-700 dark:text-emerald-400",
-    value: "text-gray-900 font-medium dark:text-white",
+      "bg-card text-card-foreground border border-border shadow-sm rounded-xl dark:shadow-none",
+    glassInner: "bg-muted/70 border border-border rounded-lg",
+    statCard: "bg-card border border-border shadow-sm rounded-lg dark:shadow-none",
+    metricBox: "bg-muted/60 border border-border rounded-lg",
+    metricBoxAccent: "bg-primary/10 border border-primary/20 rounded-lg",
+    savingsHighlight: "bg-primary/10 border border-primary/15 rounded-lg",
+    heading: "text-foreground",
+    body: "text-foreground/80",
+    muted: "text-muted-foreground",
+    subtle: "text-muted-foreground",
+    label: "text-muted-foreground",
+    kicker: "text-primary",
+    accent: "text-primary",
+    accentSolid: "text-primary",
+    value: "text-foreground font-medium",
     input:
-      "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 dark:bg-white/[0.04] dark:border-white/[0.08] dark:text-white dark:placeholder:text-gray-500",
-    cardHover:
-      "hover:border-emerald-300 hover:shadow-md dark:hover:border-emerald-500/30 dark:hover:shadow-none",
-    divider: "border-gray-200 dark:border-white/[0.06]",
-    dividerLight: "border-gray-100 dark:border-white/[0.05]",
+      "bg-background border-input text-foreground placeholder:text-muted-foreground shadow-none",
+    cardHover: "hover:border-primary/35",
+    divider: "border-border",
+    dividerLight: "border-border",
     filterInactive:
-      "border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-700 dark:border-white/[0.08] dark:text-gray-400 dark:hover:text-white",
-    filterActive: "border-emerald-500 bg-emerald-600 text-white",
+      "border-border text-muted-foreground hover:border-primary/40 hover:text-primary",
+    filterActive: "border-primary bg-primary text-primary-foreground",
     filterPillInactive:
-      "bg-gray-100 border border-gray-200 text-gray-700 hover:border-emerald-300 dark:bg-white/[0.02] dark:border-white/[0.05] dark:text-gray-400 dark:hover:text-white dark:hover:border-white/[0.12]",
-    tabsList:
-      "bg-gray-100 border border-gray-200 dark:bg-white/[0.02] dark:border-white/[0.05]",
+      "bg-muted border border-border text-foreground/80 hover:border-primary/40 hover:text-foreground",
+    tabsList: "bg-muted border border-border",
     tabsTrigger:
-      "text-gray-600 data-[state=active]:bg-emerald-600 data-[state=active]:text-white dark:text-gray-400",
-    tableHead: "text-gray-500 dark:text-gray-500",
-    tableRow: "border-gray-100 hover:bg-gray-50 dark:border-white/[0.05] dark:hover:bg-white/[0.02]",
-    tableBorder: "border-gray-200 dark:border-white/[0.05]",
-    outlineBtn:
-      "border-gray-300 text-gray-800 hover:bg-gray-100 dark:border-white/[0.12] dark:text-white dark:hover:bg-white/[0.05]",
-    accordionAnswer: "text-gray-600 dark:text-gray-400",
-    redValue: "text-red-600 dark:text-red-400/90",
+      "text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+    tableHead: "text-muted-foreground",
+    tableRow: "border-border hover:bg-muted/60",
+    tableBorder: "border-border",
+    outlineBtn: "border-border bg-transparent text-foreground shadow-none hover:bg-muted",
+    primaryBtn: "bg-primary text-primary-foreground shadow-none hover:bg-primary/90 font-semibold",
+    accordionAnswer: "text-muted-foreground",
+    redValue: "text-destructive",
     navTheme: isDark ? ("dark" as const) : ("light" as const),
     footerVariant: isDark ? ("dark" as const) : ("light" as const),
   };

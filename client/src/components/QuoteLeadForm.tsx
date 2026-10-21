@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CheckCircle, MessageCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,26 +66,21 @@ export default function QuoteLeadForm({ calcValues, className = "" }: Props) {
 
   return (
     <div
-      className={`${theme.glass} border-emerald-200 dark:border-emerald-500/25 flex flex-col h-full min-w-0 overflow-hidden p-5 md:p-6 ${className}`}
+      className={`${theme.glass} flex flex-col h-full min-w-0 overflow-hidden p-5 md:p-6 ${className}`}
     >
-      <div className="flex items-start gap-3 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0">
-          <MessageCircle className="w-5 h-5 text-white" />
-        </div>
-        <div className="min-w-0">
-          <h2 className={`text-lg sm:text-xl font-black leading-tight break-words ${theme.heading}`}>
-            {t.home.leadTitle}
-          </h2>
-          <p className={`${theme.subtle} text-xs sm:text-sm mt-1 leading-relaxed break-words`}>
-            {t.home.leadSubtitle}
-          </p>
-        </div>
+      <div className="mb-4 min-w-0">
+        <h2 className={`text-lg sm:text-xl font-semibold leading-tight break-words ${theme.heading}`}>
+          {t.home.leadTitle}
+        </h2>
+        <p className={`${theme.subtle} text-xs sm:text-sm mt-1 leading-relaxed break-words`}>
+          {t.home.leadSubtitle}
+        </p>
       </div>
 
       {monthlySaving > 0 && (
         <div className={`${theme.savingsHighlight} p-3.5 mb-4 min-w-0`}>
           <p className={`text-[11px] ${theme.subtle}`}>{t.home.leadSavingsHint}</p>
-          <p className={`text-xl sm:text-2xl font-black tabular-nums break-all ${theme.accent} mt-0.5`}>
+          <p className={`text-xl sm:text-2xl font-semibold tabular-nums break-all ${theme.accent} mt-0.5`}>
             {formatHKD(monthlySaving)}
           </p>
           <p className={`text-[11px] ${theme.subtle} mt-1 leading-relaxed`}>{t.home.savingHint}</p>
@@ -152,7 +147,7 @@ export default function QuoteLeadForm({ calcValues, className = "" }: Props) {
           <Input type="tel" placeholder={t.home.phone} className={theme.input} />
           <Button
             type="submit"
-            className="w-full bg-emerald-600 hover:bg-emerald-500 font-bold py-5 text-base mt-auto"
+            className={`${theme.primaryBtn} w-full h-11 text-base mt-auto`}
           >
             {t.home.leadSubmit}
           </Button>
