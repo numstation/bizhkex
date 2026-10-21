@@ -24,24 +24,24 @@ const CONTENT: Record<Locale, AboutContent> = {
   zh: {
     title: "關於 BizHKEx",
     intro:
-      "BizHKEx 配對香港商務中心同生意轉讓。租客 0% 佣金；中心營運商成功配對佣金 5–10%。我哋優先展示自家營運中心，並招募更多合作中心。",
+      "BizHKEx 配對香港商務中心同生意轉讓。寫字樓只向業主、營運商或中心收取約 5–10% 成功佣金，租客 0%。生意頂讓成交時買家同賣家雙方都要付約 5–10%。我哋優先展示自家營運中心；合作盤源經覆核後先上架；示範盤源會標明。",
     missionTitle: "我們的使命",
-    missionP1: "革新香港商務中心行業，提供透明、高效、用戶友好嘅平台，連結企業同靈活辦公空間。",
-    missionP2: "我們賦能商務中心業主展示優質盤源，同時幫助企業以最低成本搵到理想工作環境。",
+    missionP1: "為香港靈活辦公同生意轉讓提供清楚、可核對嘅配對平台，連結企業同合適空間或業務。",
+    missionP2: "我們幫商務中心業主展示經覆核嘅盤源，同時幫企業了解邊啲係自家中心、邊啲係示範版面。",
     valuesTitle: "核心價值",
     values: [
       { title: "以客為本", description: "我們專注連結商務中心業主同尋找辦公空間嘅企業，建立互信共贏嘅生態圈。" },
       { title: "國際標準", description: "以國際級服務質素為標準，確保每一個盤源同每一次配對都透明可靠。" },
-      { title: "追求卓越", description: "從搜尋到成交，我們致力提供流暢、專業、零佣金嘅配對體驗。" },
+      { title: "追求卓越", description: "從搜尋到成交，我們致力提供清楚、專業嘅配對，並標明邊啲係示範盤源。" },
     ],
     whyTitle: "點解揀 BizHKEx？",
     whyItems: [
       "精選全港優質商務中心，覆蓋中環、灣仔、尖沙咀、觀塘等主要商業區",
-      "透明定價，完整盤源資訊，無隱藏費用",
+      "自家營運中心優先展示；合作盤源經覆核後先上架；示範盤源會標明，租金以實價確認為準",
       "專人跟進，為租客同業主提供雙向支援",
       "智能搜尋同篩選，快速配對最適合方案",
       "安全可靠嘅詢盤同預約流程",
-      "0% 租客佣金，彈性合約條款",
+      "寫字樓租客 0% 佣金；生意頂讓成交時買賣雙方收費",
     ],
     teamTitle: "我們的團隊",
     teamP1: "BizHKEx 由具備地產、科技同客戶服務深厚經驗嘅專業團隊打造，致力改變香港企業搵辦公室嘅方式。",
@@ -55,26 +55,26 @@ const CONTENT: Record<Locale, AboutContent> = {
   en: {
     title: "About BizHKEx",
     intro:
-      "BizHKEx matches Hong Kong serviced offices and business transfers. Tenants pay 0%. Centre operators pay a 5–10% success commission. Operator-run centres are shown first while we recruit partner centres.",
+      "BizHKEx matches Hong Kong serviced offices and business transfers. Office success fees of about 5–10% are charged only to the landlord, operator or centre — tenants pay 0%. A completed business transfer is charged to both buyer and seller, about 5–10% each side. Operator centres are shown first; partner listings go up after review; samples are labelled.",
     missionTitle: "Our Mission",
     missionP1:
-      "To transform Hong Kong's flexible workspace market with a transparent, efficient platform that connects businesses with the right offices.",
+      "To give Hong Kong businesses a clear matching platform for flexible offices and business transfers.",
     missionP2:
-      "We empower workspace providers to showcase premium listings while helping companies secure ideal environments at the lowest cost.",
+      "We help centre operators present reviewed listings, and we label which centres we operate and which cards are samples.",
     valuesTitle: "Core Values",
     values: [
       { title: "Client-first", description: "We connect workspace providers with businesses seeking offices — building a trusted, win-win ecosystem." },
       { title: "International standards", description: "Every listing and every match is held to transparent, professional service standards." },
-      { title: "Excellence", description: "From search to deal completion, we deliver a smooth, professional, zero-commission experience." },
+      { title: "Excellence", description: "From search to completion, we keep the process clear and label sample inventory." },
     ],
     whyTitle: "Why BizHKEx?",
     whyItems: [
       "Curated serviced offices across Central, Wan Chai, TST, Kwun Tong and major business districts",
-      "Transparent pricing with complete listing details — no hidden fees",
+      "Operator centres are featured first; partner listings go live after review; samples are labelled and rents are confirmed on request",
       "Dedicated support for both tenants and providers",
       "Smart search and filters for faster matching",
       "Secure inquiry and viewing workflows",
-      "0% tenant commission with flexible contract terms",
+      "Office tenants pay 0%; business transfers charge both buyer and seller on completion",
     ],
     teamTitle: "Our Team",
     teamP1:

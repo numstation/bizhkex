@@ -24,7 +24,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
   zh: {
     pageTitle: "購入生意程序",
     pageSubtitle:
-      "參考香港領先生意買賣平台流程，BizHKEx 為買家提供透明、免佣的頂讓配對及盡職支援。",
+      "BizHKEx 為買家提供頂讓配對及盡職支援。提交查詢不另收費；成交時買家同賣家雙方都要付約 5–10% 成功佣金。",
     ctaMarketplace: "瀏覽頂讓項目",
     ctaRegister: "我是賣家，我要放盤",
     stepsTitle: "五步完成收購",
@@ -39,7 +39,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
         step: "2",
         title: "提交查詢",
         desc: "在項目頁填寫查詢表格或透過 WhatsApp 索取內部財務報表。",
-        bullets: ["免費查詢，0% 買家佣金", "1–2 個工作天內回覆", "收到電郵確認編號"],
+        bullets: ["提交查詢不另收費", "成交時買家同賣家各付約 5–10%", "1–2 個工作天內回覆"],
       },
       {
         step: "3",
@@ -64,7 +64,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
     faqs: [
       {
         q: "買家需要付佣金嗎？",
-        a: "不需要。BizHKEx 向買家收取 0% 佣金，查詢及索取財務報表均免費。",
+        a: "需要。生意頂讓成功後，買家同賣家雙方都要付約 5–10% 成功佣金。提交查詢或索取資料本身不另收費。",
       },
       {
         q: "財務數字可靠嗎？",
@@ -86,7 +86,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
   en: {
     pageTitle: "How to Buy a Business",
     pageSubtitle:
-      "Inspired by leading HK transfer platforms — BizHKEx offers transparent, zero-buyer-commission matching and due-diligence support.",
+      "BizHKEx supports buyers through transfer matching and due diligence. Submitting an inquiry has no extra fee. When a transfer completes, both buyer and seller pay a success commission of about 5–10%.",
     ctaMarketplace: "Browse listings",
     ctaRegister: "I'm a seller — list my business",
     stepsTitle: "Five steps to acquisition",
@@ -101,7 +101,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
         step: "2",
         title: "Submit inquiry",
         desc: "Use the listing inquiry form or WhatsApp to request the internal financial pack.",
-        bullets: ["Free inquiry — 0% buyer commission", "Reply within 1–2 business days", "Email confirmation with reference ID"],
+        bullets: ["Submitting an inquiry has no extra fee", "Both buyer and seller pay about 5–10% on completion", "Reply within 1–2 business days"],
       },
       {
         step: "3",
@@ -126,7 +126,7 @@ const CONTENT: Record<Locale, BuyerGuideContent> = {
     faqs: [
       {
         q: "Do buyers pay commission?",
-        a: "No. BizHKEx charges buyers 0% commission. Inquiries and financial packs are free.",
+        a: "Yes. When a business transfer completes, both the buyer and the seller pay a success commission of about 5–10%. Submitting an inquiry or requesting a pack has no extra fee.",
       },
       {
         q: "How reliable are the financial figures?",

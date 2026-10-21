@@ -5,6 +5,8 @@ export const en: Translations = {
     siteName: "BizHKEx",
     tagline: "PropTech & Business Advisory Platform",
     documentTitle: "BizHKEx — Hong Kong Office Matching & Business Transfer",
+    description:
+      "BizHKEx matches Hong Kong serviced offices and business transfers. Office tenants pay 0%; landlords, operators and centres pay about 5–10% on success. Business transfers charge both buyer and seller. Operator centres are shown first, and sample listings are labelled.",
   },
   nav: {
     findOffices: "Find Offices",
@@ -23,37 +25,41 @@ export const en: Translations = {
   },
   home: {
     heroKicker: "BizHKEx — Smart Office Matching & Business Transfer Platform",
-    heroTitle: "PropTech & Business Advisory Platform",
+    heroTitle: "Hong Kong Office Matching & Business Transfer",
     heroSubtitle:
-      "0% commission office matching · Curated business transfers · AI savings insights · Dedicated WhatsApp support",
+      "Office tenants pay 0% · Business transfers charge both sides · Savings estimate · WhatsApp follow-up in office hours",
     officesCardTitle: "Serviced Offices",
     officesCardDesc:
-      "BizHKEx-operated centres shown first, with sample listings while we recruit more partners. Tenants pay 0%.",
+      "BizHKEx-operated centres are shown first. Other cards are labelled samples. Office fees are charged to the landlord, operator or centre — tenants pay 0%.",
     officesCardCta: "Browse listings",
     partnerTitle: "List your centre",
     partnerBody:
       "BizHKEx matches tenants to serviced centres. We operate our own floors and recruit partner centres so the marketplace can grow.",
-    partnerCommission: "Success commission 5–10%. No fee until a deal completes.",
+    partnerCommission:
+      "Serviced-office success fees of about 5–10% are charged to the landlord, operator or centre only. Tenants pay 0%. No fee before a completed deal.",
     partnerCta: "List your centre",
     businessCardTitle: "Business Transfer",
-    businessCardDesc: "F&B, education, e-commerce and more — with financial summaries and payback periods.",
+    businessCardDesc:
+      "F&B, education, e-commerce and more — with financial summaries and payback periods. On a completed transfer, both buyer and seller pay a success commission of about 5–10%.",
     businessCardCta: "Enter marketplace",
-    calculatorTitle: "AI Savings Calculator",
-    calculatorSubtitle: "Multi-factor OPEX model — rent, fit-out, utilities, deposit lock-up vs. all-in serviced",
+    calculatorTitle: "Savings estimate",
+    calculatorSubtitle:
+      "An estimate of rent, fit-out, utilities and deposit lock-up versus an all-in serviced office. Illustrative only — not a quote or a guaranteed saving.",
     teamSize: "Team size",
     targetDistrict: "Target district",
     estimatedSaving: "Est. monthly savings",
-    savingHint: "vs. traditional leases — average 40% OPEX reduction",
-    value1Title: "True 0% Commission",
-    value1Desc: "Tenants pay nothing. Partner centres pay a 5–10% success fee when a deal completes.",
+    savingHint: "Illustrative gap versus a traditional lease. Actual savings depend on the building and the terms.",
+    value1Title: "Tenants pay 0%",
+    value1Desc:
+      "For serviced offices, only the landlord, operator or centre pays a success fee of about 5–10%. The tenant pays 0%. Business transfers charge both buyer and seller.",
     value2Title: "Flexible Terms",
     value2Desc: "Monthly, quarterly or annual — scale up or down without long lock-ins.",
     value3Title: "Move-In Ready",
     value3Desc: "Desks, meeting rooms and enterprise WiFi included. Start working day one.",
     financialReport: "Request financials →",
     leadTitle: "Get a free quote in 30 seconds",
-    leadSubtitle: "Tell us your needs — we reply on WhatsApp within 5 minutes",
-    leadSuccess: "WhatsApp opened — we'll reply shortly!",
+    leadSubtitle: "Tell us what you need. We follow up on WhatsApp during office hours, usually within 1–2 working days.",
+    leadSuccess: "WhatsApp opened. We'll reply during office hours.",
     district: "District",
     headcount: "Headcount",
     phone: "WhatsApp / Phone",
@@ -62,20 +68,20 @@ export const en: Translations = {
     leadRequirementsPlaceholder: "e.g. meeting rooms, near MTR, budget cap, move-in date…",
     leadSavingsHint: "Est. monthly savings from calculator",
     leadTrustPoints: [
-      "Dedicated WhatsApp reply within 5 minutes",
-      "0% commission — free matching for tenants",
-      "Operator centres first, plus sample listings while partner centres join",
+      "Office-hours follow-up, usually within 1–2 working days",
+      "Office tenants pay 0%; business transfers charge both sides on success",
+      "Operator centres first, with sample listings clearly labelled",
     ],
     howTitle: "How it works",
     step1Title: "Share your requirements",
     step1Desc: "30 seconds to specify district, team size and budget — or browse transfer listings.",
     step2Title: "Receive curated options",
-    step2Desc: "Within an hour we compare Hong Kong's best options. No hidden fees.",
+    step2Desc: "A comparable shortlist usually follows within 1–2 working days.",
     step3Title: "Viewings & negotiation",
     step3Desc: "Free viewings and due diligence support. We help secure the best terms.",
     faqTitle: "Frequently asked questions",
-    ctaTitle: "Ready to cut operating costs by 40%?",
-    ctaSubtitle: "Office matching · Business transfer · 0% commission · Free WhatsApp advisory",
+    ctaTitle: "Want to compare a serviced office with a traditional lease?",
+    ctaSubtitle: "Office tenants pay 0% · Business transfers charge both sides · WhatsApp follow-up in office hours",
     ctaOffices: "Find Offices",
     ctaBusiness: "Browse transfers",
     ctaProvider: "List your centre",
@@ -95,16 +101,17 @@ export const en: Translations = {
       {
         question: "What is BizHKEx?",
         answer:
-          "A Hong Kong platform for smart office matching and curated business transfers — 0% tenant commission.",
+          "A Hong Kong platform for serviced-office matching and business transfers. Office tenants pay 0%. A completed business transfer is charged to both buyer and seller.",
       },
       {
         question: "Do you charge commission?",
         answer:
-          "Tenants and buyers pay nothing. Workspace operators and sellers pay a success commission of 5–10% when a deal completes.",
+          "Serviced offices: about 5–10% is charged only to the landlord, operator or centre, and the tenant pays 0%. Business transfers: both buyer and seller pay about 5–10%. Nothing is charged before a deal completes, and submitting an inquiry has no extra fee.",
       },
       {
         question: "How do I request financial reports for transfers?",
-        answer: 'Click "Request financial report" on any listing — we send details free via WhatsApp.',
+        answer:
+          'Use "Request financial report" on a listing. Asking for the pack has no extra fee. If a transfer completes, both buyer and seller pay a success commission. Figures on sample listings are not verified.',
       },
       {
         question: "How long does office matching take?",
@@ -114,7 +121,7 @@ export const en: Translations = {
       {
         question: "Can I list my serviced office or business for free?",
         answer:
-          'Yes. Open "List your centre", then submit details for review. A draft may be prepared for our team, but it stays off the public site until we approve it. Success commission is 5–10%.',
+          'Submitting a listing has no extra fee, and nothing goes public before review. After a serviced-office deal, about 5–10% is charged only to the centre, landlord or operator. After a business transfer, both buyer and seller pay about 5–10%.',
       },
       {
         question: "What's the difference between a business transfer and a franchise?",
@@ -141,13 +148,13 @@ export const en: Translations = {
     calcCompare: "OPEX breakdown",
     calcHeads: "people",
     calcSqftUnit: "sq ft total",
-    calcRunning: "Running AI cost model…",
+    calcRunning: "Estimating…",
     calcTraditional: "Traditional lease",
     calcServiced: "Serviced office",
     calcTraditionalTotal: "Traditional total",
     calcServicedTotal: "Serviced total",
     calcPerMonth: "/ month",
-    calcOpexCut: "OPEX cut",
+    calcOpexCut: "Illustrative gap",
     calcAnnual: "Annual savings",
     calcDeposit: "Deposit freed",
     calcBreakdown: {
@@ -161,7 +168,8 @@ export const en: Translations = {
   offices: {
     kicker: "Serviced Offices",
     title: "Find your perfect office",
-    subtitle: "Flexible workspaces across Hong Kong — zero commission, smart search, expert support.",
+    subtitle:
+      "Serviced and flexible workspaces across Hong Kong. Tenants pay 0% — the success fee is paid by the landlord, operator or centre. We follow up in office hours.",
     searchPlaceholder: "Search by name or address...",
     search: "Search",
     sort: "Sort",
@@ -191,6 +199,7 @@ export const en: Translations = {
     sampleBadge: "Sample listing",
     awaitingPhotos: "Awaiting real photos",
     priceOnRequest: "Price on request",
+    samplePriceOnRequest: "Sample — price on request",
     sampleNotice: "Sample listing for layout only. Figures and photos are not a live centre.",
     amenityPlaceholder: "Amenity list is a placeholder until the operator confirms it.",
   },
@@ -202,8 +211,8 @@ export const en: Translations = {
     statListings: "Active listings",
     statPayback: "Illustrative avg. payback",
     statPaybackValue: "Sample",
-    statFree: "Free inquiry",
-    statFreeValue: "100%",
+    statFree: "Inquiry",
+    statFreeValue: "No extra fee",
     filterIndustry: "By Industry",
     filterDistrict: "By District",
     allIndustries: "All industries",
@@ -221,8 +230,10 @@ export const en: Translations = {
     footerNote:
       "Sample listings are illustrative placeholders, not verified accounts. Ask us for a real pack before you rely on any figure.",
     sampleBadge: "Sample listing",
+    unverifiedFigures: "Unverified — layout sample",
     sellTitle: "Selling a business?",
-    sellBody: "Register your interest. We review every submission before anything goes live. Success commission is 5–10%.",
+    sellBody:
+      "Register your interest. We review every submission before anything goes live. On a completed business transfer, both buyer and seller pay a success commission of about 5–10%.",
     sellCta: "Sell your business",
     cta: "Request financial report (Free via WhatsApp)",
     viewDetails: "View details",

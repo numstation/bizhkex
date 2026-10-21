@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { DEMO_OFFICES, searchDemoOffices } from "../shared/demoOffices";
-import { getOfficeInventory, sortPublicOffices } from "../shared/officeInventory";
-import { publicBusinessBadges } from "../shared/businessListings";
+import { DEMO_OFFICES, getDemoPricingByOfficeId, searchDemoOffices } from "../shared/demoOffices";
+import { getOfficeInventory, mergeOperatorShowcase, sortPublicOffices } from "../shared/officeInventory";
+import { DEMO_BUSINESS_LISTINGS, publicBusinessBadges } from "../shared/businessListings";
+import { localizeOffice } from "../shared/officeLocalization";
 import { generateVendorListing } from "../shared/vendorListingGenerator";
 
 describe("operator showcase inventory", () => {
@@ -37,6 +38,63 @@ describe("operator showcase inventory", () => {
     expect(getOfficeInventory(sample ?? {}).showReviews).toBe(false);
   });
 
+  it("places AIA Kowloon Tower in Kwun Tong, separate from APM", () => {
+    const aia = DEMO_OFFICES.find((office) => office.id === 101);
+    const apm = DEMO_OFFICES.find((office) => office.id === 102);
+    expect(aia?.name).toContain("友邦九龍大樓");
+    expect(aia?.name).not.toContain("北角");
+    expect(aia?.districtId).toBe(11);
+    expect(aia?.address).toContain("100 How Ming Street");
+    expect(aia?.address).toContain("Kwun Tong");
+    expect(aia?.address).not.toMatch(/Electric Road|North Point/i);
+    expect(aia?.description).toContain("巧明街100號");
+    expect(aia?.description).not.toContain("電氣道");
+    expect(aia?.latitude).toBeCloseTo(22.31252, 4);
+    expect(aia?.longitude).toBeCloseTo(114.22237, 4);
+    expect(apm?.address).toContain("418 Kwun Tong Road");
+    expect(apm?.longitude).toBeGreaterThan((aia?.longitude ?? 0) + 0.002);
+    const en = localizeOffice(aia!, "en");
+    expect(en.name).toContain("AIA Kowloon Tower");
+    expect(en.name).not.toMatch(/North Point/i);
+    expect(en.description).toContain("How Ming Street");
+    expect(en.description).not.toMatch(/Electric Road/i);
+  });
+
+  it("replaces a stale North Point AIA database row with the Kwun Tong showcase", () => {
+    const merged = mergeOperatorShowcase(
+      [
+        {
+          id: 101,
+          name: "北角 AIA Tower 商務中心",
+          address: "AIA Tower, 183 Electric Road, North Point, Hong Kong",
+          districtId: 14,
+          latitude: 22.2908,
+          longitude: 114.2002,
+          inventoryKind: "operator",
+        },
+      ],
+      DEMO_OFFICES
+    );
+    const aiaRows = merged.filter((office) => office.id === 101);
+    expect(aiaRows).toHaveLength(1);
+    expect(aiaRows[0]?.address).toContain("How Ming Street");
+    expect(aiaRows[0]?.districtId).toBe(11);
+    expect(String(aiaRows[0]?.address)).not.toMatch(/Electric Road/i);
+    expect(merged.some((office) => office.id === 102)).toBe(true);
+  });
+
+  it("hides sample rents and labels every demo office that is not operator-run", () => {
+    const samples = DEMO_OFFICES.filter((office) => office.inventoryKind !== "operator");
+    expect(samples.length).toBeGreaterThan(10);
+    for (const office of samples) {
+      expect(getOfficeInventory(office).isSample).toBe(true);
+      expect(getOfficeInventory(office).priceOnRequest).toBe(true);
+      expect(office.description).toContain("示範盤源");
+      expect(getDemoPricingByOfficeId(office.id)).toEqual([]);
+      expect(localizeOffice(office, "en").description).toContain("Sample listing");
+    }
+  });
+
   it("finds the operator APM centre by search and keeps it first", () => {
     const results = searchDemoOffices("APM");
     expect(results[0]?.id).toBe(102);
@@ -45,6 +103,14 @@ describe("operator showcase inventory", () => {
 });
 
 describe("business sample trust", () => {
+  it("marks every demo transfer as an unverified sample", () => {
+    expect(DEMO_BUSINESS_LISTINGS.length).toBeGreaterThan(0);
+    for (const listing of DEMO_BUSINESS_LISTINGS) {
+      expect(listing.listingKind).toBe("sample");
+      expect(listing.financialsVerified).toBe(false);
+    }
+  });
+
   it("strips verified-finance badges unless the row is explicitly verified", () => {
     expect(
       publicBusinessBadges({

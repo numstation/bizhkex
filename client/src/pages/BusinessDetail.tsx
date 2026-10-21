@@ -147,6 +147,11 @@ export default function BusinessDetail() {
                 {t.business.newListing}
               </span>
             )}
+            {isSample && (
+              <span className="px-2.5 py-1 rounded text-xs font-semibold bg-black/55 text-white">
+                {t.business.sampleBadge}
+              </span>
+            )}
             <span className="px-2.5 py-1 rounded text-xs bg-emerald-600/90 text-white">{item.industry}</span>
             <span className="px-2.5 py-1 rounded text-xs bg-black/40 text-white flex items-center gap-1">
               <MapPin className="w-3 h-3" />
@@ -176,7 +181,10 @@ export default function BusinessDetail() {
             ))}
           </div>
           {isSample && (
-            <p className={`text-sm mt-4 ${theme.muted}`}>{t.trust.sampleNotice}</p>
+            <p className={`text-sm mt-4 font-medium text-amber-700 dark:text-amber-300`}>
+              {t.business.unverifiedFigures}
+              <span className={`font-normal ${theme.muted}`}> — {t.trust.sampleNotice}</span>
+            </p>
           )}
           <div className="flex flex-wrap gap-2 mt-4">
             {badges.map((badge) => (
@@ -195,10 +203,15 @@ export default function BusinessDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className={`${theme.glass} p-6 md:p-8`}>
-              <h2 className={`text-lg font-bold mb-4 flex items-center gap-2 ${theme.heading}`}>
+              <h2 className={`text-lg font-bold ${isSample ? "mb-2" : "mb-4"} flex items-center gap-2 ${theme.heading}`}>
                 <BarChart3 className={`w-5 h-5 ${theme.accent}`} />
                 {t.businessDetail.financialSnapshot}
               </h2>
+              {isSample && (
+                <p className="text-xs font-medium text-amber-700 dark:text-amber-300 mb-4">
+                  {t.business.unverifiedFigures}
+                </p>
+              )}
               <div className="space-y-4 mb-8">
                 <MetricBar
                   label={t.businessDetail.chartTurnover}
@@ -268,7 +281,12 @@ export default function BusinessDetail() {
             <div className={`${theme.glass} p-6 sticky top-24`}>
               <p className={`text-xs font-mono mb-1 ${theme.subtle}`}>{formatBusinessCode(item.id)}</p>
               <p className={`text-3xl font-black mb-1 ${theme.accent}`}>{formatCurrency(item.askingPrice)}</p>
-              <p className={`text-xs mb-5 ${theme.subtle}`}>{t.businessDetail.askingPrice}</p>
+              <p className={`text-xs ${isSample ? "mb-1" : "mb-5"} ${theme.subtle}`}>{t.businessDetail.askingPrice}</p>
+              {isSample && (
+                <p className="text-[11px] font-medium text-amber-700 dark:text-amber-300 mb-5">
+                  {t.business.unverifiedFigures}
+                </p>
+              )}
 
               <button
                 type="button"

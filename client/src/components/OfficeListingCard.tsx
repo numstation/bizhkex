@@ -81,7 +81,9 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
           <div className="mt-auto flex items-center justify-between gap-3">
             <span className={`font-bold ${theme.accent}`}>
               {meta.priceOnRequest
-                ? t.trust.priceOnRequest
+                ? meta.isSample
+                  ? t.trust.samplePriceOnRequest
+                  : t.trust.priceOnRequest
                 : `${t.common.hkd}${Number(office.basePrice).toLocaleString()}${t.offices.perMonth}`}
             </span>
             <span className={`${theme.accent} text-sm flex items-center gap-1 shrink-0`}>

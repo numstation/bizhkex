@@ -112,8 +112,8 @@ export function generateVendorListing(intake: VendorIntake): GeneratedListing {
       basePrice: price,
       amenities,
       highlights: isEn
-        ? ["Draft — not live", "Success commission 5–10% after approval", "Team review required"]
-        : ["草稿，未上架", "審核通過後成功佣金 5–10%", "須經團隊覆核"],
+        ? ["Draft — not live", "Tenants pay 0%. Centre pays about 5–10% only after a completed deal", "Team review required"]
+        : ["草稿，未上架", "租客 0%；成功後只向中心收取約 5–10%", "須經團隊覆核"],
       publishStatus: "draft",
     };
   }
@@ -131,8 +131,8 @@ export function generateVendorListing(intake: VendorIntake): GeneratedListing {
       ? `${intake.name} — ${industry} Transfer, ${intake.district}`
       : `${intake.name} — ${intake.district}${industry}頂讓`,
     description: isEn
-      ? `Draft for review only — not published. ${intake.summary.trim()} Figures below are estimates, not verified financials.`
-      : `僅供審核的草稿，尚未上架。${intake.summary.trim()} 以下數字為估算，並非已核實財報。`,
+      ? `Draft for review only — not published. ${intake.summary.trim()} Figures below are estimates, not verified financials. If a transfer completes, both buyer and seller pay a success commission of about 5–10%.`
+      : `僅供審核的草稿，尚未上架。${intake.summary.trim()} 以下數字為估算，並非已核實財報。若頂讓成交，買家同賣家雙方都要付約 5–10% 成功佣金。`,
     transferReason: isEn
       ? "Owner restructuring — seeking qualified buyer for smooth handover."
       : "東主業務重組，希望交接予合適買家。",

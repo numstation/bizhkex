@@ -84,6 +84,12 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
             </div>
           </div>
 
+          {isSample && (
+            <p className="text-[11px] font-medium text-amber-700 dark:text-amber-300 mb-3">
+              {t.business.unverifiedFigures}
+            </p>
+          )}
+
           <div className="mt-auto flex items-center justify-between pt-2 border-t border-gray-100 dark:border-white/[0.06]">
             <span className={`text-[11px] ${theme.subtle}`}>{item.operationMode}</span>
             <span className={`inline-flex items-center gap-1 text-xs font-semibold ${theme.accent}`}>

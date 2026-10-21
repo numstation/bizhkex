@@ -221,14 +221,14 @@ export async function sendVendorRegistrationConfirmation(input: {
     <p>Hi ${input.contactName}，</p>
     <p>多謝你透過 BizHKEx 提交<strong>${input.name}</strong>嘅登記申請。</p>
     <p>參考編號：<span style="font-family:monospace;">${input.referenceId}</span></p>
-    <p>你的申請已進入審核隊列，<strong>尚未上架</strong>，亦未有公開盤源。團隊覆核後先會聯絡你。成功配對佣金為 5–10%。審核通過前未能登入後台。</p>
+    <p>你的申請已進入審核隊列，<strong>尚未上架</strong>，亦未有公開盤源。團隊覆核後先會聯絡你。寫字樓成功佣金約 5–10%，只向中心、業主或營運商收取，租客 0%。生意頂讓成交時買家同賣家雙方都要付約 5–10%。審核通過前未能登入後台。</p>
     <p style="color:#6b7280;font-size:14px;">如有查詢，WhatsApp +852 3565 3138。</p>
   `
     : `
     <p>Hi ${input.contactName},</p>
     <p>Thank you for registering <strong>${input.name}</strong> on BizHKEx.</p>
     <p>Reference: <span style="font-family:monospace;">${input.referenceId}</span></p>
-    <p>Your application is in the review queue and is <strong>not published</strong>. Nothing from this draft is live on BizHKEx. We will contact you after review. Success commission is 5–10%. Dashboard login opens only after approval.</p>
+    <p>Your application is in the review queue and is <strong>not published</strong>. Nothing from this draft is live on BizHKEx. We will contact you after review. Serviced-office success fees of about 5–10% are charged to the centre, landlord or operator only — tenants pay 0%. Business transfers are charged to both buyer and seller. Dashboard login opens only after approval.</p>
     <p style="color:#6b7280;font-size:14px;">Questions? WhatsApp +852 3565 3138.</p>
   `;
   return sendEmail({

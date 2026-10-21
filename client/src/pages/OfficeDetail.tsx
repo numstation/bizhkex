@@ -192,7 +192,9 @@ export default function OfficeDetail() {
               )}
 
               {meta.priceOnRequest && (
-                <p className="text-lg font-bold text-emerald-700">{t.trust.priceOnRequest}</p>
+                <p className="text-lg font-bold text-emerald-700">
+                  {meta.isSample ? t.trust.samplePriceOnRequest : t.trust.priceOnRequest}
+                </p>
               )}
               {meta.awaitingPhotos && (
                 <p className="text-sm text-gray-500">{t.trust.amenityPlaceholder}</p>
@@ -215,7 +217,7 @@ export default function OfficeDetail() {
               </div>
             )}
 
-            {pricingPackages.length > 0 && (
+            {pricingPackages.length > 0 && !meta.priceOnRequest && (
               <DeskTypePricing packages={pricingPackages} />
             )}
 
@@ -238,7 +240,7 @@ export default function OfficeDetail() {
               </div>
             )}
 
-            {pricing.length > 0 && !pricingPackages.length && (
+            {pricing.length > 0 && !pricingPackages.length && !meta.priceOnRequest && (
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold text-gray-900">Pricing Packages</h2>
                 <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
