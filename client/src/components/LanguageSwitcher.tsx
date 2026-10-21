@@ -12,7 +12,7 @@ export default function LanguageSwitcher({ theme: _theme = "dark" }: { theme?: "
   };
 
   const itemClass = (code: Locale) =>
-    `text-sm transition-colors ${
+    `text-[13px] transition-colors ${
       locale === code ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
     }`;
 

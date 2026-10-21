@@ -42,7 +42,7 @@ export function usePublicTheme() {
     tableRow: "border-border hover:bg-muted/60",
     tableBorder: "border-border",
     outlineBtn: "border-border bg-transparent text-foreground shadow-none hover:bg-muted",
-    primaryBtn: "bg-primary text-primary-foreground shadow-none hover:bg-primary/90 font-semibold",
+    primaryBtn: "bg-primary text-primary-foreground shadow-none hover:bg-primary/90 font-medium",
     accordionAnswer: "text-muted-foreground",
     redValue: "text-destructive",
     navTheme: isDark ? ("dark" as const) : ("light" as const),

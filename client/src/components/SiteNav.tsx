@@ -23,8 +23,8 @@ export default function SiteNav({
   const resolvedBackLabel = backLabel ?? t.nav.backHome;
 
   const navClass = "border-b border-border sticky top-0 bg-background z-50";
-  const logoClass = "text-lg font-semibold tracking-tight text-primary";
-  const linkClass = "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap";
+  const logoClass = "text-[15px] font-medium tracking-tight text-primary";
+  const linkClass = "text-[13px] font-normal text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap";
 
   const primaryLinks = [
     { href: path("/offices"), label: t.nav.findOffices },

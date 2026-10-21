@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,6 @@ import {
 import { Link, useLocation } from "wouter";
 import Footer from "@/components/Footer";
 import SiteNav from "@/components/SiteNav";
-import SavingsCalculator from "@/components/SavingsCalculator";
-import QuoteLeadForm, { type CalcSnapshot } from "@/components/QuoteLeadForm";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePublicTheme } from "@/hooks/usePublicTheme";
 import { localizeOffice } from "@shared/officeLocalization";
@@ -22,11 +20,6 @@ export default function Home() {
   const [, navigate] = useLocation();
   const { t, path, locale } = useLocale();
   const theme = usePublicTheme();
-  const [calcSnapshot, setCalcSnapshot] = useState<CalcSnapshot>({
-    teamSize: "3-5",
-    district: "central",
-    monthlySaving: 0,
-  });
 
   const { data: faqs = [] } = trpc.faqs.list.useQuery();
 
@@ -84,24 +77,24 @@ export default function Home() {
     <div className={theme.page}>
       <SiteNav />
 
-      <section className="container pt-16 pb-14 md:pt-24 md:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="max-w-xl">
-            <p className="text-xs tracking-[0.14em] uppercase text-muted-foreground mb-5">
+      <section className="container pt-20 pb-16 md:pt-32 md:pb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,28rem)_minmax(0,1fr)] gap-14 lg:gap-20 items-center">
+          <div>
+            <p className="text-[13px] tracking-normal text-muted-foreground mb-6">
               {t.home.heroKicker}
             </p>
-            <h1 className="text-4xl md:text-[3.25rem] font-bold tracking-tight leading-[1.15] text-foreground mb-5">
+            <h1 className="text-[2.5rem] md:text-[3.25rem] font-normal tracking-[-0.02em] leading-[1.12] text-foreground mb-6">
               {t.home.heroTitle}
             </h1>
-            <p className="text-base text-muted-foreground leading-relaxed mb-8">{t.home.heroSubtitle}</p>
-            <div className="flex flex-wrap gap-3">
+            <p className="text-[15px] text-muted-foreground leading-relaxed mb-9 max-w-md">{t.home.heroSubtitle}</p>
+            <div className="flex flex-wrap items-center gap-3">
               <Link href={path("/offices")}>
-                <Button className={`${theme.primaryBtn} h-11 px-5`}>
+                <Button className={`${theme.primaryBtn} h-12 px-6 text-[15px] font-medium shadow-[0_1px_1px_rgba(16,24,40,0.04),0_6px_14px_rgba(16,24,40,0.08)]`}>
                   {t.home.officesCardCta}
                 </Button>
               </Link>
               <a href="#how-it-works">
-                <Button variant="outline" className={`${theme.outlineBtn} h-11 px-5 font-medium`}>
+                <Button variant="outline" className={`${theme.outlineBtn} h-12 px-6 text-[15px] font-medium`}>
                   {t.nav.howItWorks}
                 </Button>
               </a>
@@ -111,84 +104,76 @@ export default function Home() {
             <img
               src="/offices/aia/03-lobby.jpg"
               alt={heroOffice.name}
-              className="w-full aspect-[4/3] object-cover rounded-md"
+              className="w-full aspect-[4/3] object-cover rounded-[8px] border border-border"
             />
-            <p className="mt-2 text-xs text-muted-foreground">{heroOffice.name}</p>
+            <p className="mt-3 text-xs text-muted-foreground">{heroOffice.name}</p>
           </Link>
         </div>
       </section>
 
-      <section className="container pb-16 md:pb-24">
+      <section className="container pb-20 md:pb-28">
         <div className="grid grid-cols-1 md:grid-cols-3 border-t border-border">
           {paths.map((item, index) => (
             <Link
               key={item.n}
               href={item.href}
-              className={`block py-8 md:py-10 ${index === 0 ? "md:pr-8" : "border-t md:border-t-0 md:border-l border-border md:px-8"}`}
+              className={`block py-10 md:py-12 ${index === 0 ? "md:pr-10" : "border-t md:border-t-0 md:border-l border-border md:px-10"}`}
             >
-              <p className="text-3xl font-semibold tabular-nums text-foreground mb-4">{item.n}</p>
-              <h2 className="text-lg font-semibold text-foreground mb-2">{item.title}</h2>
+              <p className="text-[2rem] font-normal tabular-nums text-foreground mb-5">{item.n}</p>
+              <h2 className="text-base font-medium text-foreground mb-2">{item.title}</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      <section id="lead-form" className="container pb-16 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 items-stretch">
-          <div className="min-w-0">
-            <SavingsCalculator onValuesChange={setCalcSnapshot} />
-          </div>
-          <div className="min-w-0 lg:sticky lg:top-24 self-start">
-            <QuoteLeadForm calcValues={calcSnapshot} />
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="container pb-16 md:pb-24">
-        <h2 className={`text-2xl md:text-3xl font-semibold mb-10 ${theme.heading}`}>{t.home.howTitle}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-          {howSteps.map((item) => (
-            <div key={item.step} className="border-t border-border pt-5">
-              <p className="text-sm font-semibold text-foreground tabular-nums mb-3">{item.step.padStart(2, "0")}</p>
-              <h3 className={`text-lg font-semibold mb-2 ${theme.heading}`}>{item.title}</h3>
-              <p className={`${theme.subtle} text-sm leading-relaxed`}>{item.desc}</p>
+      <section id="how-it-works" className="container pb-20 md:pb-28">
+        <h2 className="text-2xl font-medium tracking-[-0.02em] mb-10 text-foreground">{t.home.howTitle}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {howSteps.map((item, index) => (
+            <div
+              key={item.step}
+              className={`border-t border-border py-8 ${index === 0 ? "md:pr-10" : "md:border-l md:px-10"}`}
+            >
+              <p className="text-[2rem] font-normal tabular-nums text-foreground mb-4">{item.step.padStart(2, "0")}</p>
+              <h3 className="text-base font-medium mb-2 text-foreground">{item.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="faq" className="container pb-16 md:pb-24 max-w-3xl">
-        <h2 className={`text-2xl md:text-3xl font-semibold mb-8 ${theme.heading}`}>{t.home.faqTitle}</h2>
-        <Accordion type="single" collapsible className="space-y-3">
+      <section id="faq" className="container pb-20 md:pb-28 max-w-3xl">
+        <h2 className="text-2xl font-medium tracking-[-0.02em] mb-2 text-foreground">{t.home.faqTitle}</h2>
+        <Accordion type="single" collapsible>
           {faqItems.map((faq: { id: number; question: string; answer: string }) => (
-            <AccordionItem key={faq.id} value={`faq-${faq.id}`} className={`${theme.glass} px-5`}>
-              <AccordionTrigger className={`hover:no-underline font-medium text-left ${theme.heading}`}>
+            <AccordionItem key={faq.id} value={`faq-${faq.id}`} className="border-b border-border">
+              <AccordionTrigger className="hover:no-underline font-medium text-left text-foreground py-5">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className={`${theme.accordionAnswer} pb-4`}>{faq.answer}</AccordionContent>
+              <AccordionContent className="text-muted-foreground pb-5">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
       </section>
 
-      <section className="container pb-20">
-        <div className="border-t border-border pt-12 md:pt-16 text-center">
-          <h2 className={`text-2xl md:text-3xl font-semibold mb-3 ${theme.heading}`}>{t.home.ctaTitle}</h2>
-          <p className={`${theme.muted} mb-8 max-w-xl mx-auto`}>{t.home.ctaSubtitle}</p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+      <section className="container pb-24">
+        <div className="border-t border-border pt-16 md:pt-20">
+          <h2 className="text-2xl font-medium tracking-[-0.02em] mb-3 text-foreground">{t.home.ctaTitle}</h2>
+          <p className="text-muted-foreground mb-8 max-w-xl">{t.home.ctaSubtitle}</p>
+          <div className="flex flex-col sm:flex-row gap-3">
             <Link href={path("/offices")}>
-              <Button className={`${theme.primaryBtn} h-11 px-6 text-base w-full sm:w-auto`}>
+              <Button className={`${theme.primaryBtn} h-12 px-6 text-[15px] font-medium w-full sm:w-auto shadow-[0_1px_1px_rgba(16,24,40,0.04),0_6px_14px_rgba(16,24,40,0.08)]`}>
                 {t.home.ctaOffices}
               </Button>
             </Link>
             <Link href={path("/business-marketplace")}>
-              <Button variant="outline" className={`${theme.outlineBtn} h-11 px-6 text-base font-semibold w-full sm:w-auto`}>
+              <Button variant="outline" className={`${theme.outlineBtn} h-12 px-6 text-[15px] font-medium w-full sm:w-auto`}>
                 {t.home.ctaBusiness}
               </Button>
             </Link>
             <Link href={path("/providers")}>
-              <Button variant="outline" className={`${theme.outlineBtn} h-11 px-6 text-base font-semibold w-full sm:w-auto`}>
+              <Button variant="outline" className={`${theme.outlineBtn} h-12 px-6 text-[15px] font-medium w-full sm:w-auto`}>
                 {t.home.ctaProvider}
               </Button>
             </Link>
