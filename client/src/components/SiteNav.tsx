@@ -1,6 +1,4 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
@@ -25,9 +23,14 @@ export default function SiteNav({
   const resolvedBackLabel = backLabel ?? t.nav.backHome;
 
   const navClass = "border-b border-border sticky top-0 bg-background z-50";
-  const logoClass =
-    "text-lg font-semibold tracking-tight text-foreground cursor-pointer hover:text-primary transition-colors";
-  const linkClass = "text-muted-foreground hover:text-foreground transition-colors font-medium text-sm";
+  const logoClass = "text-lg font-semibold tracking-tight text-primary";
+  const linkClass = "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap";
+
+  const primaryLinks = [
+    { href: path("/offices"), label: t.nav.findOffices },
+    { href: path("/business-marketplace"), label: t.nav.businessTrading },
+    { href: path("/providers"), label: t.nav.providerSignup },
+  ];
 
   if (variant === "minimal") {
     return (
@@ -50,51 +53,29 @@ export default function SiteNav({
 
   return (
     <nav className={navClass}>
-      <div className="container flex items-center justify-between py-4">
-        <Link href={homeHref}>
-          <span className={logoClass}>{t.meta.siteName}</span>
-        </Link>
-        <div className="hidden md:flex items-center gap-6">
-          <Link href={path("/offices")}>
-            <span className={linkClass}>{t.nav.findOffices}</span>
+      <div className="container py-4">
+        <div className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-x-6">
+          <Link href={homeHref} className="justify-self-start">
+            <span className={logoClass}>{t.meta.siteName}</span>
           </Link>
-          <Link href={path("/business-marketplace")}>
-            <span className={linkClass}>{t.nav.businessTrading}</span>
-          </Link>
-          <Link href={path("/knowledge-hub")}>
-            <span className={linkClass}>{t.nav.knowledgeHub}</span>
-          </Link>
-          <a href={`${homeHref}#how-it-works`} className={linkClass}>
-            {t.nav.howItWorks}
-          </a>
-          <a href={`${homeHref}#faq`} className={linkClass}>
-            {t.nav.faq}
-          </a>
-          <a href="tel:+85235653138" className={`${linkClass} flex items-center gap-1.5`}>
-            <Phone className="w-4 h-4" />
-            +852 3565 3138
-          </a>
-          <LanguageSwitcher theme={surface} />
-          <ThemeToggle theme={surface} />
-          <Link href={path("/providers")}>
-            <span className="inline-flex items-center px-3.5 py-1.5 text-sm font-medium rounded-lg border border-border text-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer">
-              {t.nav.providerSignup}
-            </span>
-          </Link>
+          <div className="hidden md:flex items-center justify-center gap-8">
+            {primaryLinks.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <span className={linkClass}>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+          <div className="justify-self-end flex items-center gap-4">
+            <ThemeToggle theme={surface} />
+            <LanguageSwitcher theme={surface} />
+          </div>
         </div>
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle theme={surface} />
-          <LanguageSwitcher theme={surface} />
-          <Link href={path("/providers")}>
-            <span className="text-xs font-medium text-muted-foreground hover:text-primary px-2 cursor-pointer">
-              {t.nav.providerSignup}
-            </span>
-          </Link>
-          <Link href={path("/offices")}>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg text-sm">
-              {t.nav.browse}
-            </Button>
-          </Link>
+        <div className="md:hidden mt-3 flex gap-5 overflow-x-auto">
+          {primaryLinks.map((item) => (
+            <Link key={item.href} href={item.href}>
+              <span className={linkClass}>{item.label}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </nav>

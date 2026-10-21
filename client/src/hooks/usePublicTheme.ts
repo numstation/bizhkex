@@ -10,9 +10,9 @@ export function usePublicTheme() {
     preference,
     page: "min-h-screen bg-background text-foreground",
     glass:
-      "bg-card text-card-foreground border border-border shadow-sm rounded-xl dark:shadow-none",
-    glassInner: "bg-muted/70 border border-border rounded-lg",
-    statCard: "bg-card border border-border shadow-sm rounded-lg dark:shadow-none",
+      "bg-card text-card-foreground border border-border rounded-lg shadow-none",
+    glassInner: "bg-muted border border-border rounded-lg",
+    statCard: "bg-card border border-border rounded-lg shadow-none",
     metricBox: "bg-muted/60 border border-border rounded-lg",
     metricBoxAccent: "bg-primary/10 border border-primary/20 rounded-lg",
     savingsHighlight: "bg-primary/10 border border-primary/15 rounded-lg",
@@ -27,7 +27,7 @@ export function usePublicTheme() {
     value: "text-foreground font-medium",
     input:
       "bg-background border-input text-foreground placeholder:text-muted-foreground shadow-none",
-    cardHover: "hover:border-primary/35",
+    cardHover: "hover:border-foreground/20",
     divider: "border-border",
     dividerLight: "border-border",
     filterInactive:

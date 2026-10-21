@@ -11,25 +11,22 @@ export default function LanguageSwitcher({ theme: _theme = "dark" }: { theme?: "
     navigate(switchLocalePath(target));
   };
 
+  const itemClass = (code: Locale) =>
+    `text-sm transition-colors ${
+      locale === code ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+    }`;
+
   return (
-    <div
-      className="flex items-center gap-0.5 rounded-lg border border-border bg-muted p-0.5"
-      aria-label={t.lang.switchTo}
-    >
-      {(["zh", "en"] as const).map((code) => (
-        <button
-          key={code}
-          type="button"
-          onClick={() => handleSwitch(code)}
-          className={`text-xs font-medium px-2.5 py-1 rounded-md transition-colors ${
-            locale === code
-              ? "bg-primary text-primary-foreground"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          {code === "zh" ? "繁" : "EN"}
-        </button>
-      ))}
+    <div className="flex items-center gap-2" aria-label={t.lang.switchTo}>
+      <button type="button" onClick={() => handleSwitch("zh")} className={itemClass("zh")}>
+        繁
+      </button>
+      <span className="text-border select-none" aria-hidden="true">
+        |
+      </span>
+      <button type="button" onClick={() => handleSwitch("en")} className={itemClass("en")}>
+        EN
+      </button>
     </div>
   );
 }

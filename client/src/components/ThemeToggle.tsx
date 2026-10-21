@@ -11,23 +11,18 @@ export default function ThemeToggle({ theme: _surface = "dark" }: { theme?: "lig
   ];
 
   return (
-    <div
-      className="flex items-center gap-0.5 rounded-lg border border-border bg-muted p-0.5"
-      title="Theme"
-    >
+    <div className="flex items-center gap-0.5" title="Theme">
       {options.map(({ value, icon: Icon, label }) => (
         <button
           key={value}
           type="button"
           aria-label={label}
           onClick={() => setPreference(value)}
-          className={`p-1.5 rounded-md transition-colors ${
-            preference === value
-              ? "bg-primary text-primary-foreground"
-              : "text-muted-foreground hover:text-foreground"
+          className={`p-1.5 transition-colors ${
+            preference === value ? "text-foreground" : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          <Icon className="w-3.5 h-3.5" />
+          <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
         </button>
       ))}
     </div>

@@ -30,8 +30,8 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
 
   return (
     <Link href={path(`/office/${office.id}`)}>
-      <div className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-all h-full flex flex-col`}>
-        <div className={`h-48 ${theme.glassInner} relative overflow-hidden`}>
+      <div className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-colors h-full flex flex-col`}>
+        <div className="h-48 bg-muted relative overflow-hidden">
           {office.thumbnailUrl ? (
             <img src={office.thumbnailUrl} alt={localized.name} className="w-full h-full object-cover" />
           ) : (

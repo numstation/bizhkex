@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { MapPin, ChevronRight } from "lucide-react";
-import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing, isSampleBusinessListing, publicBusinessBadges, type BusinessListing } from "@shared/businessListings";
+import { formatBusinessCode, getMonthlyProfit, isNewBusinessListing, isSampleBusinessListing, type BusinessListing } from "@shared/businessListings";
 import { getBusinessImageUrl } from "@shared/businessImages";
 import { localizeBusinessListing } from "@shared/businessLocalization";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -22,7 +22,7 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
   return (
     <Link href={path(`/business/${listing.id}`)}>
       <article
-        className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-all h-full flex flex-col cursor-pointer group`}
+        className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-colors h-full flex flex-col cursor-pointer group`}
       >
         <div className="relative h-44 sm:h-48 overflow-hidden bg-muted">
           <img
@@ -31,7 +31,6 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
             className="w-full h-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
             {isNew && (
               <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white shadow">
@@ -47,12 +46,10 @@ export default function BusinessListingCard({ listing }: { listing: BusinessList
               </span>
             )}
           </div>
-          <span className="absolute bottom-3 left-3 text-[10px] font-mono text-white/90 bg-black/40 px-2 py-0.5 rounded">
-            {formatBusinessCode(listing.id)}
-          </span>
         </div>
 
         <div className="p-4 sm:p-5 flex flex-col flex-1">
+          <p className={`text-[11px] font-mono mb-2 ${theme.subtle}`}>{formatBusinessCode(listing.id)}</p>
           <p className={`flex items-center gap-1 text-xs ${theme.subtle} mb-2`}>
             <MapPin className="w-3 h-3 shrink-0" />
             {item.district}

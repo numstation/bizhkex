@@ -19,7 +19,7 @@ export function WhatsAppWidget({ className = "" }: { className?: string }) {
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-20 right-0 bg-card text-card-foreground border border-border rounded-xl shadow-md p-4 w-72 animate-in fade-in slide-in-from-bottom-2">
+        <div className="absolute bottom-20 right-0 bg-card text-card-foreground border border-border rounded-lg shadow-none p-4 w-72 animate-in fade-in slide-in-from-bottom-2">
           <div className="space-y-3">
             <h3 className="text-base font-semibold text-foreground">{t.whatsapp.widgetTitle}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{t.whatsapp.widgetDesc}</p>
