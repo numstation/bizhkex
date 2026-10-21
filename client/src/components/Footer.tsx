@@ -43,22 +43,22 @@ export default function Footer({ variant = "light" }: FooterProps) {
 
   if (isDark) {
     return (
-      <footer className="bg-[#050810] border-t border-white/[0.06] text-white">
+      <footer className="bg-card border-t border-border text-foreground">
         <div className="container max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
             <div className="lg:col-span-4 space-y-5">
-              <h3 className="text-2xl font-black tracking-tight">{t.meta.siteName}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
+              <h3 className="text-xl font-semibold tracking-tight">{t.meta.siteName}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
             </div>
             <div className="lg:col-span-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-500 mb-5">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
                 {t.footer.navigation}
               </h4>
               <ul className="space-y-3">
                 {navigationLinks.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}>
-                      <span className="text-gray-500 hover:text-white transition-colors text-sm">
+                      <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                         {link.label}
                       </span>
                     </Link>
@@ -67,75 +67,62 @@ export default function Footer({ variant = "light" }: FooterProps) {
               </ul>
             </div>
             <div className="lg:col-span-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-500 mb-5">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
                 {t.footer.contact}
               </h4>
-              <div className="space-y-2 text-sm text-gray-500">
-                <a href="tel:+85235653138" className="block hover:text-white transition-colors">
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <a href="tel:+85235653138" className="block hover:text-foreground transition-colors">
                   +852 3565 3138
                 </a>
-                <a href="mailto:info@bizhkex.com" className="block hover:text-white transition-colors">
+                <a href="mailto:info@bizhkex.com" className="block hover:text-foreground transition-colors">
                   info@bizhkex.com
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="border-t border-white/[0.06]">
+        <div className="border-t border-border">
           <div className="container max-w-7xl mx-auto px-6 lg:px-8 py-6">
-            <p className="text-gray-600 text-sm text-center">{copyright}</p>
+            <p className="text-muted-foreground text-sm text-center">{copyright}</p>
           </div>
         </div>
       </footer>
     );
   }
 
+  const headingClass = "text-xs font-medium text-muted-foreground mb-4";
+  const itemClass = "text-sm text-muted-foreground hover:text-foreground transition-colors";
+
   return (
-    <footer className="bg-emerald-950 text-white">
-      <div className="container max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
+    <footer className="bg-background text-foreground border-t border-border">
+      <div className="container max-w-7xl mx-auto px-6 lg:px-8 pt-14 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          <div className="lg:col-span-4 space-y-5">
-            <h3 className="text-2xl font-black tracking-tight">{t.meta.siteName}</h3>
-            <p className="text-emerald-200/80 text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
-            <div className="space-y-3 pt-1">
-              <a
-                href="tel:+85235653138"
-                className="flex items-center gap-3 text-emerald-200/70 hover:text-white transition-colors text-sm group"
-              >
-                <span className="w-8 h-8 rounded-lg bg-emerald-900/60 flex items-center justify-center group-hover:bg-emerald-800 transition-colors">
-                  <Phone className="w-4 h-4" />
-                </span>
+          <div className="lg:col-span-4 space-y-4">
+            <h3 className="text-base font-medium tracking-tight text-foreground">{t.meta.siteName}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">{t.footer.tagline}</p>
+            <div className="space-y-2 pt-1 text-sm text-muted-foreground">
+              <a href="tel:+85235653138" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <Phone className="w-3.5 h-3.5" />
                 +852 3565 3138
               </a>
-              <a
-                href="mailto:info@bizhkex.com"
-                className="flex items-center gap-3 text-emerald-200/70 hover:text-white transition-colors text-sm group"
-              >
-                <span className="w-8 h-8 rounded-lg bg-emerald-900/60 flex items-center justify-center group-hover:bg-emerald-800 transition-colors">
-                  <Mail className="w-4 h-4" />
-                </span>
+              <a href="mailto:info@bizhkex.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <Mail className="w-3.5 h-3.5" />
                 info@bizhkex.com
               </a>
-              <div className="flex items-center gap-3 text-emerald-200/70 text-sm">
-                <span className="w-8 h-8 rounded-lg bg-emerald-900/60 flex items-center justify-center">
-                  <MapPin className="w-4 h-4" />
-                </span>
+              <p className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5" />
                 {t.footer.location}
-              </div>
+              </p>
             </div>
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-5">
-              {t.footer.navigation}
-            </h4>
-            <ul className="space-y-3">
+            <h4 className={headingClass}>{t.footer.navigation}</h4>
+            <ul className="space-y-2.5">
               {navigationLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>
-                    <span className="text-emerald-200/70 hover:text-white transition-colors text-sm">
-                      {link.label}
-                    </span>
+                    <span className={itemClass}>{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -143,16 +130,12 @@ export default function Footer({ variant = "light" }: FooterProps) {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-5">
-              {t.footer.districts}
-            </h4>
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
+            <h4 className={headingClass}>{t.footer.districts}</h4>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
               {districtLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>
-                    <span className="text-emerald-200/70 hover:text-white transition-colors text-sm">
-                      {link.label}
-                    </span>
+                    <span className={itemClass}>{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -160,25 +143,18 @@ export default function Footer({ variant = "light" }: FooterProps) {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-5">
-              {t.footer.legal}
-            </h4>
-            <ul className="space-y-3 mb-8">
+            <h4 className={headingClass}>{t.footer.legal}</h4>
+            <ul className="space-y-2.5 mb-8">
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>
-                    <span className="text-emerald-200/70 hover:text-white transition-colors text-sm">
-                      {link.label}
-                    </span>
+                    <span className={itemClass}>{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-4">
-              {t.footer.follow}
-            </h4>
-            <div className="flex gap-3">
+            <h4 className={headingClass}>{t.footer.follow}</h4>
+            <div className="flex gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -186,7 +162,7 @@ export default function Footer({ variant = "light" }: FooterProps) {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-9 h-9 rounded-lg bg-emerald-900/60 flex items-center justify-center hover:bg-emerald-600 transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -197,20 +173,9 @@ export default function Footer({ variant = "light" }: FooterProps) {
         </div>
       </div>
 
-      <div className="border-t border-emerald-900/60">
-        <div className="container max-w-7xl mx-auto px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-emerald-300/60 text-sm">{copyright}</p>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              {legalLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <span className="text-emerald-300/60 hover:text-white transition-colors text-sm">
-                    {link.label}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
+      <div className="border-t border-border">
+        <div className="container max-w-7xl mx-auto px-6 lg:px-8 py-5">
+          <p className="text-muted-foreground text-sm">{copyright}</p>
         </div>
       </div>
     </footer>

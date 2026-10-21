@@ -30,8 +30,8 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
 
   return (
     <Link href={path(`/office/${office.id}`)}>
-      <div className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-all h-full flex flex-col`}>
-        <div className={`h-48 ${theme.glassInner} relative overflow-hidden`}>
+      <div className={`${theme.glass} overflow-hidden ${theme.cardHover} transition-colors h-full flex flex-col`}>
+        <div className="h-48 bg-muted relative overflow-hidden">
           {office.thumbnailUrl ? (
             <img src={office.thumbnailUrl} alt={localized.name} className="w-full h-full object-cover" />
           ) : (
@@ -42,7 +42,7 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
           )}
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 max-w-[85%]">
             {meta.isOperatorOwned && (
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white shadow">
+              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-primary text-primary-foreground">
                 {t.trust.operatedBy}
               </span>
             )}
@@ -65,9 +65,9 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
           )}
         </div>
         <div className="p-6 flex-1 flex flex-col">
-          <h3 className={`font-bold text-lg mb-2 ${theme.heading}`}>{localized.name}</h3>
+          <h3 className={`font-semibold text-lg mb-2 ${theme.heading}`}>{localized.name}</h3>
           <div className={`flex items-center gap-2 mb-3 text-sm ${theme.muted}`}>
-            <MapPin size={16} className="text-emerald-500 shrink-0" />
+            <MapPin size={15} className="text-primary shrink-0" />
             <span className="line-clamp-1">{office.address}</span>
           </div>
           {localized.occupancyNote && (
@@ -79,7 +79,7 @@ export default function OfficeListingCard({ office }: { office: OfficeCardData }
             </p>
           )}
           <div className="mt-auto flex items-center justify-between gap-3">
-            <span className={`font-bold ${theme.accent}`}>
+            <span className={`font-semibold ${theme.accent}`}>
               {meta.priceOnRequest
                 ? meta.isSample
                   ? t.trust.samplePriceOnRequest

@@ -125,7 +125,7 @@ export default function BusinessInquiryForm({ listingId, listingTitle, compact =
       <Button
         type="submit"
         disabled={mutation.isPending}
-        className="w-full bg-emerald-600 hover:bg-emerald-500 font-bold"
+        className={`${theme.primaryBtn} w-full`}
       >
         {mutation.isPending ? (
           <Loader2 className="w-4 h-4 animate-spin" />
