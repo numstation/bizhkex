@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { Calculator } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -119,20 +118,19 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
   }, [teamSize, district, result.monthlySaving, isCalculating, showResult, onValuesChange]);
 
   return (
-    <div className={`${theme.glass} p-5 md:p-6 h-full min-w-0 overflow-hidden ${className}`}>
-      <div className="mb-5 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <Calculator className="w-4 h-4 text-primary shrink-0" strokeWidth={1.75} />
-          <h3 className={`text-lg font-semibold ${theme.heading}`}>{t.home.calculatorTitle}</h3>
-        </div>
-        <p className={`${theme.subtle} text-xs leading-relaxed break-words`}>{t.home.calculatorSubtitle}</p>
+    <div className={`h-full min-w-0 ${className}`}>
+      <div className="mb-8 min-w-0">
+        <h2 className="text-2xl font-medium tracking-[-0.02em] text-foreground mb-2">
+          {t.home.calculatorTitle}
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">{t.home.calculatorSubtitle}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 mb-5">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-4 mb-8">
         <div className="min-w-0">
-          <label className={`text-xs ${theme.label} mb-1.5 block truncate`}>{t.home.teamSize}</label>
+          <label className="text-xs text-muted-foreground mb-1.5 block">{t.home.teamSize}</label>
           <Select value={teamSize} onValueChange={setTeamSize}>
-            <SelectTrigger className={`${theme.input} w-full min-w-0`}>
+            <SelectTrigger className={`${theme.input} h-11 w-full min-w-0`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -145,9 +143,9 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
           </Select>
         </div>
         <div className="min-w-0">
-          <label className={`text-xs ${theme.label} mb-1.5 block truncate`}>{t.home.targetDistrict}</label>
+          <label className="text-xs text-muted-foreground mb-1.5 block">{t.home.targetDistrict}</label>
           <Select value={district} onValueChange={setDistrict}>
-            <SelectTrigger className={`${theme.input} w-full min-w-0`}>
+            <SelectTrigger className={`${theme.input} h-11 w-full min-w-0`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -160,9 +158,9 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
           </Select>
         </div>
         <div className="min-w-0">
-          <label className={`text-xs ${theme.label} mb-1.5 block truncate`}>{t.home.calcSqft}</label>
+          <label className="text-xs text-muted-foreground mb-1.5 block">{t.home.calcSqft}</label>
           <Select value={sqftPerPerson} onValueChange={setSqftPerPerson}>
-            <SelectTrigger className={`${theme.input} w-full min-w-0`}>
+            <SelectTrigger className={`${theme.input} h-11 w-full min-w-0`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -175,9 +173,9 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
           </Select>
         </div>
         <div className="min-w-0">
-          <label className={`text-xs ${theme.label} mb-1.5 block truncate`}>{t.home.calcLease}</label>
+          <label className="text-xs text-muted-foreground mb-1.5 block">{t.home.calcLease}</label>
           <Select value={leaseMonths} onValueChange={setLeaseMonths}>
-            <SelectTrigger className={`${theme.input} w-full min-w-0`}>
+            <SelectTrigger className={`${theme.input} h-11 w-full min-w-0`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -191,102 +189,96 @@ export default function SavingsCalculator({ className = "", onValuesChange }: Pr
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-5">
-        <div className="space-y-3 min-w-0">
-          <div className={`flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs ${theme.subtle} uppercase tracking-wider`}>
-            <span className="shrink-0">{t.home.calcCompare}</span>
-            <span className="tabular-nums">
-              {result.heads} {t.home.calcHeads} · {result.sqft} {t.home.calcSqftUnit}
-            </span>
-          </div>
-
-          {isCalculating ? (
-            <div className={`h-48 flex items-center justify-center ${theme.accent} text-sm animate-pulse`}>
-              {t.home.calcRunning}
-            </div>
-          ) : (
-            <div className={`space-y-3 transition-opacity duration-300 ${showResult ? "opacity-100" : "opacity-0"}`}>
-              {result.breakdown.map((row) => (
-                <div key={row.label} className="min-w-0">
-                  <div className={`flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5 text-xs ${theme.subtle} mb-1`}>
-                    <span className="shrink-0">{row.label}</span>
-                    <span className="tabular-nums text-right break-all">
-                      {formatHKD(row.traditional)} → {formatHKD(row.serviced)}
-                    </span>
-                  </div>
-                  <div className="flex gap-2 h-2">
-                    <div
-                      className="bg-destructive/40 rounded-full transition-all duration-500"
-                      style={{ width: `${(row.traditional / result.maxBar) * 100}%` }}
-                    />
-                    <div
-                      className="bg-primary/70 rounded-full transition-all duration-500"
-                      style={{ width: `${(row.serviced / result.maxBar) * 100}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="flex flex-wrap gap-3 text-xs pt-1">
-            <span className={`flex items-center gap-1.5 ${theme.subtle}`}>
-              <span className="w-3 h-3 rounded-full bg-destructive/40 shrink-0" />
-              {t.home.calcTraditional}
-            </span>
-            <span className={`flex items-center gap-1.5 ${theme.subtle}`}>
-              <span className="w-3 h-3 rounded-full bg-primary/70 shrink-0" />
-              {t.home.calcServiced}
-            </span>
-          </div>
+      <div className="border-t border-border pt-6 min-w-0">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-[13px] text-muted-foreground mb-5">
+          <span>{t.home.calcCompare}</span>
+          <span className="tabular-nums">
+            {result.heads} {t.home.calcHeads} · {result.sqft} {t.home.calcSqftUnit}
+          </span>
         </div>
 
-        <div className="space-y-3 min-w-0">
-          <div className="grid grid-cols-2 gap-2">
-            <div className={`${theme.metricBox} p-3 min-w-0`}>
-              <p className={`text-[11px] ${theme.subtle} mb-1 leading-tight`}>{t.home.calcTraditionalTotal}</p>
-              <p className={`text-base sm:text-lg font-bold tabular-nums break-all ${theme.redValue}`}>
-                {formatHKD(result.traditional)}
-              </p>
-              <p className={`text-[10px] ${theme.subtle} mt-0.5`}>{t.home.calcPerMonth}</p>
-            </div>
-            <div className={`${theme.metricBoxAccent} p-3 min-w-0`}>
-              <p className={`text-[11px] ${theme.subtle} mb-1 leading-tight`}>{t.home.calcServicedTotal}</p>
-              <p className={`text-base sm:text-lg font-bold tabular-nums break-all ${theme.accent}`}>
-                {formatHKD(result.serviced)}
-              </p>
-              <p className={`text-[10px] ${theme.subtle} mt-0.5`}>{t.home.calcPerMonth}</p>
-            </div>
+        {isCalculating ? (
+          <div className="h-40 flex items-center text-sm text-primary">{t.home.calcRunning}</div>
+        ) : (
+          <div className={`space-y-4 transition-opacity duration-300 ${showResult ? "opacity-100" : "opacity-0"}`}>
+            {result.breakdown.map((row) => (
+              <div key={row.label} className="min-w-0">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-[13px] text-muted-foreground mb-1.5">
+                  <span>{row.label}</span>
+                  <span className="tabular-nums text-right">
+                    {formatHKD(row.traditional)} → {formatHKD(row.serviced)}
+                  </span>
+                </div>
+                <div className="flex h-1 gap-1.5">
+                  <div
+                    className="bg-foreground/20 transition-all duration-500"
+                    style={{ width: `${(row.traditional / result.maxBar) * 100}%` }}
+                  />
+                  <div
+                    className="bg-primary transition-all duration-500"
+                    style={{ width: `${(row.serviced / result.maxBar) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
+        )}
 
-          <div className={`${theme.savingsHighlight} p-4 min-w-0`}>
-            <p className={`text-xs sm:text-sm ${theme.muted}`}>{t.home.estimatedSaving}</p>
-            <p className={`text-2xl sm:text-3xl font-semibold tabular-nums break-all ${theme.accent} mt-1`}>
-              {isCalculating ? "—" : formatHKD(result.monthlySaving)}
-            </p>
-            <p className={`text-[11px] ${theme.subtle} mt-1.5 leading-relaxed`}>{t.home.savingHint}</p>
-          </div>
+        <div className="flex flex-wrap gap-4 pt-4 text-[13px] text-muted-foreground">
+          <span className="flex items-center gap-2">
+            <span className="size-2 bg-foreground/20 shrink-0" />
+            {t.home.calcTraditional}
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="size-2 bg-primary shrink-0" />
+            {t.home.calcServiced}
+          </span>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-3 gap-2 text-center">
-            <div className={`${theme.glassInner} rounded-lg p-2 min-w-0`}>
-              <p className={`text-sm sm:text-base font-bold tabular-nums ${theme.heading}`}>
-                {isCalculating ? "—" : `${result.opexReduction}%`}
-              </p>
-              <p className={`text-[10px] ${theme.subtle} leading-tight mt-0.5`}>{t.home.calcOpexCut}</p>
-            </div>
-            <div className={`${theme.glassInner} rounded-lg p-2 min-w-0`}>
-              <p className={`text-xs sm:text-sm font-bold tabular-nums break-all ${theme.heading}`}>
-                {isCalculating ? "—" : formatHKD(result.annualSaving)}
-              </p>
-              <p className={`text-[10px] ${theme.subtle} leading-tight mt-0.5`}>{t.home.calcAnnual}</p>
-            </div>
-            <div className={`${theme.glassInner} rounded-lg p-2 min-w-0`}>
-              <p className={`text-xs sm:text-sm font-bold tabular-nums break-all ${theme.heading}`}>
-                {isCalculating ? "—" : formatHKD(result.depositFreed)}
-              </p>
-              <p className={`text-[10px] ${theme.subtle} leading-tight mt-0.5`}>{t.home.calcDeposit}</p>
-            </div>
-          </div>
+      <div className="mt-6 grid grid-cols-2 border-t border-border">
+        <div className="min-w-0 py-5 pr-4">
+          <p className="mb-1 text-[13px] text-muted-foreground">{t.home.calcTraditionalTotal}</p>
+          <p className="break-all text-xl font-normal tabular-nums text-foreground">
+            {formatHKD(result.traditional)}
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{t.home.calcPerMonth}</p>
+        </div>
+        <div className="min-w-0 border-l border-border py-5 pl-4">
+          <p className="mb-1 text-[13px] text-muted-foreground">{t.home.calcServicedTotal}</p>
+          <p className="break-all text-xl font-normal tabular-nums text-primary">
+            {formatHKD(result.serviced)}
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{t.home.calcPerMonth}</p>
+        </div>
+      </div>
+
+      <div className="min-w-0 border-t border-border py-5">
+        <p className="text-sm text-muted-foreground">{t.home.estimatedSaving}</p>
+        <p className="mt-1 break-all text-[2rem] font-normal tabular-nums tracking-[-0.02em] text-primary md:text-[2.5rem]">
+          {isCalculating ? "—" : formatHKD(result.monthlySaving)}
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t.home.savingHint}</p>
+      </div>
+
+      <div className="grid grid-cols-3 border-t border-border">
+        <div className="min-w-0 py-4 pr-3">
+          <p className="text-base font-normal tabular-nums text-foreground">
+            {isCalculating ? "—" : `${result.opexReduction}%`}
+          </p>
+          <p className="mt-1 text-[11px] leading-tight text-muted-foreground">{t.home.calcOpexCut}</p>
+        </div>
+        <div className="min-w-0 border-l border-border px-3 py-4">
+          <p className="break-all text-sm font-normal tabular-nums text-foreground">
+            {isCalculating ? "—" : formatHKD(result.annualSaving)}
+          </p>
+          <p className="mt-1 text-[11px] leading-tight text-muted-foreground">{t.home.calcAnnual}</p>
+        </div>
+        <div className="min-w-0 border-l border-border py-4 pl-3">
+          <p className="break-all text-sm font-normal tabular-nums text-foreground">
+            {isCalculating ? "—" : formatHKD(result.depositFreed)}
+          </p>
+          <p className="mt-1 text-[11px] leading-tight text-muted-foreground">{t.home.calcDeposit}</p>
         </div>
       </div>
     </div>
