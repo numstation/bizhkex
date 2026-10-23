@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import {
 import { Link, useLocation } from "wouter";
 import Footer from "@/components/Footer";
 import SiteNav from "@/components/SiteNav";
+import SavingsCalculator from "@/components/SavingsCalculator";
+import QuoteLeadForm, { type CalcSnapshot } from "@/components/QuoteLeadForm";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePublicTheme } from "@/hooks/usePublicTheme";
 import { localizeOffice } from "@shared/officeLocalization";
@@ -20,6 +22,11 @@ export default function Home() {
   const [, navigate] = useLocation();
   const { t, path, locale } = useLocale();
   const theme = usePublicTheme();
+  const [calcSnapshot, setCalcSnapshot] = useState<CalcSnapshot>({
+    teamSize: "3-5",
+    district: "central",
+    monthlySaving: 0,
+  });
 
   const { data: faqs = [] } = trpc.faqs.list.useQuery();
 
@@ -108,6 +115,17 @@ export default function Home() {
             />
             <p className="mt-3 text-xs text-muted-foreground">{heroOffice.name}</p>
           </Link>
+        </div>
+      </section>
+
+      <section id="lead-form" className="container pb-20 md:pb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 border-t border-border">
+          <div className="min-w-0 py-10 md:py-12 lg:pr-12 lg:border-r border-border">
+            <SavingsCalculator onValuesChange={setCalcSnapshot} />
+          </div>
+          <div className="min-w-0 py-10 md:py-12 border-t lg:border-t-0 lg:pl-12">
+            <QuoteLeadForm calcValues={calcSnapshot} />
+          </div>
         </div>
       </section>
 
